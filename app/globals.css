@@ -1,26 +1,182 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FCFAFF;
+  --foreground: #1E1B4B;
+  --muted: #6B7280;
+  --purple: #8333EB;
+  --purple-dark: #6A1FD1;
+  --purple-mid: #9B59F0;
+  --pink: #FF80AE;
+  --purple-light: #E8DBFD;
+  --pink-light: #FFF0F5;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-purple: var(--purple);
+  --color-purple-dark: var(--purple-dark);
+  --color-purple-mid: var(--purple-mid);
+  --color-pink: var(--pink);
+  --color-purple-light: var(--purple-light);
+  --color-pink-light: var(--pink-light);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--purple-light);
+  color: var(--purple);
+}
+
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -50px) scale(1.1); }
+  50% { transform: translate(-20px, 20px) scale(0.9); }
+  75% { transform: translate(20px, 40px) scale(1.05); }
+}
+
+.animate-blob {
+  animation: blob 8s ease-in-out infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes gradient-x {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 3s ease infinite;
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.02); }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes gradient-text {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+.animate-gradient-text {
+  animation: gradient-text 4s ease infinite;
+}
+
+@keyframes border-spin {
+  to { rotate: 360deg; }
+}
+
+.glow-border {
+  overflow: hidden;
+}
+
+.glow-border .glow-line {
+  position: absolute;
+  inset: -200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    transparent 70%,
+    var(--purple) 78%,
+    var(--pink) 85%,
+    var(--purple-mid) 90%,
+    transparent 95%
+  );
+  animation: border-spin 3s linear infinite;
+  z-index: 0;
+}
+
+.glow-border .glow-line-blur {
+  position: absolute;
+  inset: -200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    transparent 70%,
+    var(--purple) 78%,
+    var(--pink) 85%,
+    var(--purple-mid) 90%,
+    transparent 95%
+  );
+  animation: border-spin 3s linear infinite;
+  filter: blur(6px);
+  opacity: 0.5;
+  z-index: 0;
+}
+
+/* Gallery lightbox */
+@keyframes lightbox-in {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-lightbox-in {
+  animation: lightbox-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Noise/grain texture overlay */
+.grain-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Horizontal rule with gradient */
+.gradient-rule {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--purple-light), var(--pink), var(--purple-light), transparent);
+}
+
+/* Sleek card hover */
+@keyframes subtle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-subtle-float {
+  animation: subtle-float 6s ease-in-out infinite;
 }
