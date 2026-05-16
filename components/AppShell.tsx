@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Loader from './Loader';
-import Cursor from './Cursor';
 import Nav from './Nav';
 import Hero from './Hero';
 import Marquee from './Marquee';
@@ -13,8 +12,8 @@ import Stats from './Stats';
 import Team from './Team';
 import Testimonials from './Testimonials';
 import Pricing from './Pricing';
-import Blog from './Blog';
 import Contact from './Contact';
+import type { ReactNode } from 'react';
 import Footer from './Footer';
 import BackToTop from './BackToTop';
 import FloatingCTA from './FloatingCTA';
@@ -22,6 +21,9 @@ import FloatingCTA from './FloatingCTA';
 function useSmoothScroll(enabled: boolean) {
   useEffect(() => {
     if (!enabled) return;
+    const isTouch =
+      window.matchMedia?.('(hover: none), (pointer: coarse)').matches ?? false;
+    if (isTouch) return;
     let target = window.scrollY, current = window.scrollY;
     let raf: number;
 
@@ -46,7 +48,7 @@ function useSmoothScroll(enabled: boolean) {
   }, [enabled]);
 }
 
-export default function AppShell() {
+export default function AppShell({ blogSection }: { blogSection: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useSmoothScroll(!loading);
@@ -54,7 +56,6 @@ export default function AppShell() {
   return (
     <>
       {loading && <Loader done={() => setLoading(false)} />}
-      <Cursor />
       <BackToTop />
       <FloatingCTA />
       <Nav />
@@ -69,7 +70,7 @@ export default function AppShell() {
         <Team />
         <Testimonials />
         <Pricing />
-        <Blog />
+        {blogSection}
         <Contact />
         <Footer />
       </main>

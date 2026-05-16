@@ -13,11 +13,14 @@ function HeroClock() {
   );
   const hh = String(dhaka.getHours()).padStart(2, "0");
   const mm = String(dhaka.getMinutes()).padStart(2, "0");
+  const ss = String(dhaka.getSeconds()).padStart(2, "0");
   return (
     <span className="cf-meta-time">
       {hh}
       <span className="cf-meta-colon">:</span>
       {mm}
+      <span className="cf-meta-colon">:</span>
+      {ss}
     </span>
   );
 }
@@ -174,7 +177,7 @@ export default function Hero() {
             <span className="cf-meta-sep" />
             <span className="cf-meta-val">23.74°N · 90.38°E</span>
           </div>
-          <div className="cf-meta-item">
+          <div className="cf-meta-item cf-meta-item-time">
             <span className="cf-meta-key">TIME</span>
             <span className="cf-meta-sep" />
             <HeroClock />

@@ -8,6 +8,13 @@ export default function Cursor() {
   const wrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const isTouch =
+      window.matchMedia?.('(hover: none), (pointer: coarse)').matches ?? false;
+    if (isTouch) {
+      document.body.classList.add('cf-default-cursor');
+      return;
+    }
+
     let mx = window.innerWidth / 2, my = window.innerHeight / 2;
     let rx = mx, ry = my, dx = mx, dy = my;
     let raf: number;

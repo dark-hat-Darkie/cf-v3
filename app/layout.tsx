@@ -1,5 +1,6 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
+import Cursor from '@/components/Cursor';
 import './globals.css';
 
 const monaSans = localFont({
@@ -24,15 +25,29 @@ const creatoDisplay = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.SITE_URL ?? 'http://localhost:4020'),
   title: 'CodeFlee — Digital Studio · Dhaka',
   description: 'A senior engineering & design studio in Dhaka. From product thinking to launch-day comms — we sweat the details so your team can move.',
   icons: { icon: '/assets/logo-head.svg' },
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#F8F4EE' },
+    { media: '(prefers-color-scheme: dark)', color: '#0B0B0B' },
+  ],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${monaSans.variable} ${creatoDisplay.variable}`}>
-      <body className="cf-dark" suppressHydrationWarning>{children}</body>
+      <body className="cf-dark" suppressHydrationWarning>
+        <Cursor />
+        {children}
+      </body>
     </html>
   );
 }
