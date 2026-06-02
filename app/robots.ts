@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 function siteUrl() {
-  return (process.env.SITE_URL ?? "https://example.com").replace(/\/$/, "");
+  return (process.env.SITE_URL ?? "https://codeflee.com").replace(/\/$/, "");
 }
 
 export default function robots(): MetadataRoute.Robots {
@@ -10,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/api"],
+        disallow: ["/admin", "/api", "/preview"],
       },
     ],
     sitemap: `${siteUrl()}/sitemap.xml`,

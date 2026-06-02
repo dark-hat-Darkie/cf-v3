@@ -18,11 +18,11 @@ import { blogIndexJsonLd, breadcrumbJsonLd } from "@/lib/seo/schema/jsonld";
 const PAGE_SIZE = 12;
 
 function siteUrl() {
-  return (process.env.SITE_URL ?? "https://example.com").replace(/\/$/, "");
+  return (process.env.SITE_URL ?? "https://codeflee.com").replace(/\/$/, "");
 }
 
 function siteName() {
-  return process.env.SITE_NAME ?? "Codeflee";
+  return process.env.SITE_NAME ?? "CodeFlee";
 }
 
 async function loadIndex(tag: string | undefined, offset: number, limit: number) {

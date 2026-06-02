@@ -215,6 +215,11 @@ body.cf-light { background: var(--cf-bg); color: var(--cf-fg); }
   pointer-events: none;
 }
 
+.cf-nav-logo-link {
+  display: inline-flex; align-items: center; flex-shrink: 0;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+
 .cf-nav-logo {
   height: 22px; width: auto; margin: 0 14px 0 16px;
   filter: drop-shadow(0 0 8px rgba(131,51,235,0.45));
@@ -699,10 +704,15 @@ body.cf-light { background: var(--cf-bg); color: var(--cf-fg); }
   color: rgba(11,11,11,.85);
   box-shadow: 0 4px 16px rgba(11,11,11,.08);
 }
-.cf-vis-orbit-tag.t1 { top: 8%; right: 8%; animation-delay: 0s; }
-.cf-vis-orbit-tag.t2 { bottom: 14%; left: 6%; animation-delay: 1.2s; }
-.cf-vis-orbit-tag.t3 { top: 50%; right: -2%; animation-delay: .6s; }
-.cf-vis-orbit-tag.t4 { bottom: 2%; right: 28%; animation-delay: 1.8s; }
+/* Distributed around the sphere: 3 right, 3 left, 1 bottom-center — with
+   slight jitter so the ring reads organic rather than mirrored. */
+.cf-vis-orbit-tag.t1 { top: 5%; right: 12%; animation-delay: 0s; }    /* TypeScript — upper right */
+.cf-vis-orbit-tag.t3 { top: 48%; right: -4%; animation-delay: 1.4s; } /* React Native — mid right */
+.cf-vis-orbit-tag.t7 { bottom: 16%; right: 6%; animation-delay: 4.2s; } /* Nest.js — lower right */
+.cf-vis-orbit-tag.t6 { top: 9%; left: 14%; animation-delay: 3.5s; }   /* MongoDB — upper left */
+.cf-vis-orbit-tag.t5 { top: 54%; left: -3%; animation-delay: 2.8s; }  /* Node.js — mid left */
+.cf-vis-orbit-tag.t2 { bottom: 20%; left: 2%; animation-delay: .7s; } /* Next.js — lower left */
+.cf-vis-orbit-tag.t4 { bottom: 0%; right: 38%; animation-delay: 2.1s; } /* Figma — bottom center */
 
 /* Meta chips on visual corners */
 .cf-vis-chip {
@@ -1065,6 +1075,27 @@ body.cf-light { background: var(--cf-bg); color: var(--cf-fg); }
   display: inline-flex; align-items: center; gap: 8px;
 }
 @keyframes cfFadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+
+/* 16:9 top-crop variant for the Selected work cards (full-page screenshots) */
+.cf-work-card.is-16x9 {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+}
+.cf-work-card.is-16x9 img {
+  object-position: top center;
+  position: relative;
+  z-index: 1;
+}
+.cf-card-lqip {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: top center;
+  transition: opacity .6s ease;
+}
+.cf-work-card.is-loaded .cf-card-lqip { opacity: 0; }
 
 /* ========= Process timeline ========= */
 .cf-process-list { display: flex; flex-direction: column; border-top: 1px solid rgba(0,0,0,.08); }
@@ -3171,6 +3202,7 @@ body.cf-light { background: var(--cf-bg); color: var(--cf-fg); }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
   display: block;
 }
 .cf-cs-hero-stats-strip {
@@ -3721,6 +3753,291 @@ body.cf-light { background: var(--cf-bg); color: var(--cf-fg); }
   line-height: 1.3;
   max-width: 60ch;
 }
+
+/* ===== Full-page screenshot showcase + scrollable lightbox ===== */
+
+/* Showcase tile grid on the case study "In the wild" section */
+.cf-fp-showcase-hint {
+  margin: -32px 0 36px;
+  max-width: 60ch;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--cf-muted);
+}
+.cf-fp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+.cf-fp-tile {
+  position: relative;
+  display: block;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  border: 1px solid rgba(11, 11, 11, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #f3f0f7;
+  cursor: none;
+  box-shadow: 0 18px 40px -28px rgba(36, 19, 63, 0.5);
+  transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s;
+}
+.cf-fp-tile:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -28px rgba(36, 19, 63, 0.55); }
+.cf-fp-tile:focus-visible { outline: 2px solid var(--cf-primary); outline-offset: 2px; }
+.cf-fp-tile-crop {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.cf-fp-tile-crop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  position: relative;
+  z-index: 1;
+  transition: transform 1s cubic-bezier(.2,.7,.2,1);
+}
+.cf-fp-tile:hover .cf-fp-tile-crop img { transform: scale(1.04); }
+.cf-fp-tile-lqip,
+.cf-fp-page-lqip {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: top center;
+  transition: opacity .6s ease;
+}
+.cf-fp-tile-crop.is-loaded .cf-fp-tile-lqip { opacity: 0; }
+.cf-fp-tile-num {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  font-family: var(--font-creato-display), sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .18em;
+  color: #fff;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: rgba(8, 6, 14, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.cf-fp-tile-cap {
+  display: block;
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cf-ink);
+  background: #fff;
+}
+.cf-fp-tile-zoom {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  color: #fff;
+  background: rgba(8, 6, 14, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity .3s, transform .3s;
+}
+.cf-fp-tile:hover .cf-fp-tile-zoom { opacity: 1; transform: none; }
+
+/* Scrollable full-page lightbox */
+.cf-fp {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  display: flex;
+  flex-direction: column;
+  animation: cfCsLightboxIn .32s cubic-bezier(.22,.61,.36,1);
+}
+.cf-fp-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(8, 6, 14, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.cf-fp-header {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  color: #fff;
+  background: linear-gradient(to bottom, rgba(8, 6, 14, 0.92), rgba(8, 6, 14, 0));
+}
+.cf-fp-title {
+  font-family: var(--font-creato-display), system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cf-fp-spacer { flex: 1; }
+.cf-fp-counter {
+  font-family: var(--font-creato-display), system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .18em;
+  color: #FF80AE;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.cf-fp-counter span { color: rgba(255, 255, 255, 0.4); margin: 0 4px; }
+.cf-fp-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  cursor: none;
+  flex-shrink: 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background .25s, border-color .25s;
+}
+.cf-fp-close:hover {
+  background: linear-gradient(120deg, var(--cf-primary), #FF80AE);
+  border-color: transparent;
+}
+.cf-fp-scroll {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 16px 110px;
+}
+.cf-fp-page {
+  position: relative;
+  flex: 0 0 auto;            /* never let flexbox squish the tall pages — keep natural height so the container scrolls */
+  width: min(100%, 1040px);
+  margin: 18px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f3f0f7;
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.7);
+}
+.cf-fp-page img {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+}
+.cf-fp-page.is-loaded .cf-fp-page-lqip { opacity: 0; }
+.cf-fp-page-label {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 2;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(8, 6, 14, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.cf-fp-rail {
+  position: fixed;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 82vh;
+  overflow-y: auto;
+  padding: 6px;
+  border-radius: 12px;
+  background: rgba(8, 6, 14, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.cf-fp-thumb {
+  width: 52px;
+  aspect-ratio: 16 / 9;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #1a1a1a;
+  cursor: none;
+  opacity: .5;
+  transition: opacity .25s, border-color .25s, transform .25s;
+}
+.cf-fp-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.cf-fp-thumb:hover { opacity: .85; transform: translateX(-2px); }
+.cf-fp-thumb.is-active { opacity: 1; border-color: var(--cf-primary); }
+
+@media (max-width: 768px) {
+  .cf-fp-rail {
+    right: 0;
+    left: 0;
+    bottom: 0;
+    top: auto;
+    transform: none;
+    flex-direction: row;
+    width: 100%;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 0;
+    justify-content: flex-start;
+  }
+  .cf-fp-thumb { width: 64px; transform: none; }
+  .cf-fp-thumb:hover { transform: none; }
+  .cf-fp-scroll { padding-bottom: 92px; }
+  .cf-fp-page { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-fp { animation: none; }
+  .cf-fp-scroll { scroll-behavior: auto; }
+  .cf-fp-tile:hover { transform: none; }
+  .cf-fp-tile:hover .cf-fp-tile-crop img { transform: none; }
+}
+body.cf-reduced-motion .cf-fp { animation: none; }
+body.cf-reduced-motion .cf-fp-scroll { scroll-behavior: auto; }
 
 /* ── Scoreboard (ledger-style outcome) ── */
 .cf-cs-scoreboard {
@@ -5827,6 +6144,7 @@ body.cf-light { background: var(--cf-bg); color: var(--cf-fg); }
   .cf-vis-chip-value { font-size: 14px; }
   .cf-vis-orbit-tag { padding: 5px 10px; font-size: 9px; letter-spacing: .15em; }
   .cf-vis-orbit-tag.t3 { right: 0; }
+  .cf-vis-orbit-tag.t5 { left: 0; }
   .cf-hero-v2-bottom { flex-direction: column; gap: 16px; align-items: flex-start; }
   .cf-hero-v2-scroll { flex-direction: row; align-self: flex-start; }
   .cf-hero-v2-scroll-line { width: 32px; height: 1px; }
@@ -5867,9 +6185,12 @@ body.cf-light { background: var(--cf-bg); color: var(--cf-fg); }
   .cf-vis-chip-bl { bottom: 6px; left: 0; }
   .cf-vis-chip-grid { gap: 12px; }
 
-  /* Hide the lower-density orbit/chip elements that crowd a tiny screen */
+  /* Thin the ring to a balanced trio (t1 top-right, t2 lower-left,
+     t4 bottom-center) so a tiny sphere isn't crowded */
   .cf-vis-orbit-tag.t3,
-  .cf-vis-orbit-tag.t4 { display: none; }
+  .cf-vis-orbit-tag.t5,
+  .cf-vis-orbit-tag.t6,
+  .cf-vis-orbit-tag.t7 { display: none; }
 
   /* Loader */
   .cf-loader { padding: 28px; }

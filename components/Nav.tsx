@@ -1,7 +1,9 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { MagneticButton } from './MagneticButton';
+import { smoothScrollTo } from '@/lib/smooth-scroll';
 
 const TABS = [
   { id: 'work', label: 'Work' },
@@ -54,13 +56,21 @@ export default function Nav() {
     e.preventDefault();
     setMobileOpen(false);
     const el = document.getElementById(id);
-    if (el) window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
+    if (el) smoothScrollTo(el.offsetTop - 60);
+  };
+
+  const goTop = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setMobileOpen(false);
+    smoothScrollTo(0);
   };
 
   return (
     <>
       <nav className={`cf-nav${hidden ? ' hidden' : ''}${scrolled ? ' scrolled' : ''}`}>
-        <Image src="/assets/logo-white.svg" className="cf-nav-logo" alt="CodeFlee" width={120} height={24} />
+        <Link href="/" className="cf-nav-logo-link" onClick={goTop} aria-label="CodeFlee — back to top">
+          <Image src="/assets/logo-white.svg" className="cf-nav-logo" alt="CodeFlee" width={120} height={24} />
+        </Link>
 
         <div className="cf-nav-tabs" ref={tabsRef}>
           <span

@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { MagneticButton } from './MagneticButton';
+import { smoothScrollTo } from '@/lib/smooth-scroll';
 
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
@@ -18,7 +19,7 @@ export default function FloatingCTA() {
 
   const go = () => {
     const el = document.getElementById('contact');
-    if (el) window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
+    if (el) smoothScrollTo(el.offsetTop - 60);
   };
 
   return (

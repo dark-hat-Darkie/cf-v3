@@ -1,9 +1,10 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import type { CaseStudyData } from '@/lib/case-studies-data';
+import type { CaseStudyData, CaseGalleryItem, CaseScreenshotPage } from '@/lib/case-studies-data';
 import { CASE_STUDIES, getNextCaseStudy } from '@/lib/case-studies-data';
 import Cursor from './Cursor';
+import FullPageLightbox from './FullPageLightbox';
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 
@@ -498,7 +499,7 @@ function Lightbox({
   onPrev,
   onNext,
 }: {
-  items: CaseStudyData['gallery'];
+  items: CaseGalleryItem[];
   index: number;
   onClose: () => void;
   onPrev: () => void;
@@ -590,16 +591,84 @@ function Lightbox({
   );
 }
 
-/* ── Showcase: bento grid with click-to-preview lightbox ── */
-function CaseStudyShowcase({ c }: { c: CaseStudyData }) {
+/* ── Showcase ──
+   Full-page screenshots → scrollable FullPageLightbox (the 16:9-card → expand
+   experience). Falls back to the legacy bento + fit-to-viewport Lightbox for any
+   study without screenshots. */
+function CaseStudyShowcase({ c, screenshots }: { c: CaseStudyData; screenshots: CaseScreenshotPage[] }) {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
-  const total = c.gallery.length;
+
+  if (screenshots.length > 0) {
+    return (
+      <section className="cf-cs-showcase">
+        <div className="cf-wrap">
+          <ChapterMark roman="III" label="In the wild" />
+          <h2 className="cf-cs-showcase-headline" data-reveal>
+            See the <em>whole thing.</em>
+          </h2>
+          <p className="cf-fp-showcase-hint" data-reveal>
+            Each screen is the full page, top to bottom — tap any one to open it and scroll the entire design.
+          </p>
+
+          <div className="cf-fp-grid" data-reveal>
+            {screenshots.map((s, i) => (
+              <button
+                key={s.src}
+                type="button"
+                className="cf-fp-tile"
+                onClick={() => setOpenIdx(i)}
+                data-cursor="Expand"
+                aria-label={`Open full page: ${s.label ?? `page ${i + 1}`}`}
+              >
+                <div className="cf-fp-tile-crop">
+                  <div
+                    className="cf-fp-tile-lqip"
+                    aria-hidden="true"
+                    style={s.blurDataURL ? { backgroundImage: `url(${s.blurDataURL})` } : undefined}
+                  />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={s.src}
+                    alt={`${c.client} — ${s.label ?? `page ${i + 1}`}`}
+                    width={s.width}
+                    height={s.height}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    onLoad={(e) => e.currentTarget.parentElement?.classList.add('is-loaded')}
+                  />
+                </div>
+                <span className="cf-fp-tile-num">{String(i + 1).padStart(2, '0')}</span>
+                {s.label && <span className="cf-fp-tile-cap">{s.label}</span>}
+                <span className="cf-fp-tile-zoom" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M8 3H3v5M16 3h5v5M16 21h5v-5M8 21H3v-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {openIdx !== null && (
+          <FullPageLightbox
+            pages={screenshots}
+            startIndex={openIdx}
+            title={c.client}
+            onClose={() => setOpenIdx(null)}
+          />
+        )}
+      </section>
+    );
+  }
+
+  // ── Legacy bento fallback (no full-page screenshots) ──
+  const gallery = c.gallery ?? [];
+  const total = gallery.length;
+  if (total === 0) return null;
 
   const close = () => setOpenIdx(null);
-  const prev = () =>
-    setOpenIdx((i) => (i === null ? null : (i - 1 + total) % total));
-  const next = () =>
-    setOpenIdx((i) => (i === null ? null : (i + 1) % total));
+  const prev = () => setOpenIdx((i) => (i === null ? null : (i - 1 + total) % total));
+  const next = () => setOpenIdx((i) => (i === null ? null : (i + 1) % total));
 
   return (
     <section className="cf-cs-showcase">
@@ -609,12 +678,8 @@ function CaseStudyShowcase({ c }: { c: CaseStudyData }) {
           What it <em>looks like.</em>
         </h2>
 
-        <div
-          className="cf-cs-bento"
-          data-count={total}
-          data-reveal
-        >
-          {c.gallery.map((g, i) => (
+        <div className="cf-cs-bento" data-count={total} data-reveal>
+          {gallery.map((g, i) => (
             <button
               key={i}
               type="button"
@@ -628,9 +693,7 @@ function CaseStudyShowcase({ c }: { c: CaseStudyData }) {
                 <img src={g.src} alt={g.alt} loading={i === 0 ? 'eager' : 'lazy'} />
               </div>
               <span className="cf-cs-bento-num">{String(i + 1).padStart(2, '0')}</span>
-              {g.caption && (
-                <span className="cf-cs-bento-cap">{g.caption}</span>
-              )}
+              {g.caption && <span className="cf-cs-bento-cap">{g.caption}</span>}
               <span className="cf-cs-bento-zoom" aria-hidden="true">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                   <path d="M8 3H3v5M16 3h5v5M16 21h5v-5M8 21H3v-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -642,20 +705,27 @@ function CaseStudyShowcase({ c }: { c: CaseStudyData }) {
       </div>
 
       {openIdx !== null && (
-        <Lightbox
-          items={c.gallery}
-          index={openIdx}
-          onClose={close}
-          onPrev={prev}
-          onNext={next}
-        />
+        <Lightbox items={gallery} index={openIdx} onClose={close} onPrev={prev} onNext={next} />
       )}
     </section>
   );
 }
 
+/* A stat is a placeholder when the owner hasn't filled in a real value yet
+   (see lib/case-studies-data.ts TODO markers). Never render these to users. */
+function isPlaceholderStat(s: { value: string; label: string }) {
+  return s.value.trim() === '—' || s.value.trim() === '' || /^TODO/i.test(s.label.trim());
+}
+
 /* ── Scoreboard (ledger-style outcome) ── */
 function CaseStudyScoreboard({ c }: { c: CaseStudyData }) {
+  const stats = c.outcome.stats.filter(s => !isPlaceholderStat(s));
+  const heroStat = c.outcome.heroStat;
+  const hasHero = !!heroStat && !isPlaceholderStat(heroStat);
+
+  // Nothing verified to show — hide the section rather than print placeholders.
+  if (!hasHero && stats.length === 0) return null;
+
   return (
     <section className="cf-cs-scoreboard">
       <div className="cf-wrap">
@@ -670,13 +740,15 @@ function CaseStudyScoreboard({ c }: { c: CaseStudyData }) {
           </p>
         </div>
 
-        <div className="cf-cs-scoreboard-hero" data-reveal>
-          <AnimatedNumber value={c.outcome.heroStat.value} className="cf-cs-scoreboard-hero-val" />
-          <span className="cf-cs-scoreboard-hero-lbl">{c.outcome.heroStat.label}</span>
-        </div>
+        {hasHero && heroStat && (
+          <div className="cf-cs-scoreboard-hero" data-reveal>
+            <AnimatedNumber value={heroStat.value} className="cf-cs-scoreboard-hero-val" />
+            <span className="cf-cs-scoreboard-hero-lbl">{heroStat.label}</span>
+          </div>
+        )}
 
         <ol className="cf-cs-ledger" aria-label="Outcome metrics">
-          {c.outcome.stats.map((s, i) => (
+          {stats.map((s, i) => (
             <li
               key={i}
               className="cf-cs-ledger-row"
@@ -841,7 +913,7 @@ function CaseStudyClose() {
 }
 
 /* ── Root ── */
-export default function CaseStudyPage({ study }: { study: CaseStudyData }) {
+export default function CaseStudyPage({ study, screenshots = [] }: { study: CaseStudyData; screenshots?: CaseScreenshotPage[] }) {
   const progressRef = useScrollProgress();
   useScrollReveal();
 
@@ -861,7 +933,7 @@ export default function CaseStudyPage({ study }: { study: CaseStudyData }) {
         <CaseStudyHero c={study} index={index} total={total} />
         <CaseStudyBrief c={study} />
         <CaseStudyChapters c={study} />
-        <CaseStudyShowcase c={study} />
+        <CaseStudyShowcase c={study} screenshots={screenshots} />
         <CaseStudyScoreboard c={study} />
         <CaseStudyQuote c={study} />
         <CaseStudyTech c={study} />

@@ -1,0 +1,190 @@
+/* Standalone, readable document chrome for the legal pages. Self-contained so
+   it renders correctly regardless of the root <body class="cf-dark">. */
+.cf-legal {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f8f4ee;
+  color: #0b0b0b;
+  font-family: var(--font-creato-display), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.cf-legal-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px clamp(20px, 5vw, 64px);
+  border-bottom: 1px solid rgba(11, 11, 11, 0.08);
+  background: rgba(248, 244, 238, 0.85);
+  backdrop-filter: blur(12px);
+}
+.cf-legal-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0b0b0b;
+  text-decoration: none;
+}
+.cf-legal-logo-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background: var(--cf-pink, #ff80ae);
+}
+.cf-legal-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  color: rgba(11, 11, 11, 0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.cf-legal-back:hover {
+  color: #0b0b0b;
+}
+
+.cf-legal-main {
+  flex: 1;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(48px, 8vw, 96px) clamp(20px, 5vw, 32px) 80px;
+}
+
+.cf-legal-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cf-pink, #ff80ae);
+}
+.cf-legal-title {
+  margin: 0 0 12px;
+  font-size: clamp(34px, 6vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+.cf-legal-updated {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(11, 11, 11, 0.5);
+}
+.cf-legal-lead {
+  margin: 24px 0 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(11, 11, 11, 0.72);
+}
+
+.cf-legal-main h2 {
+  margin: 48px 0 14px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(11, 11, 11, 0.08);
+  font-size: clamp(22px, 3vw, 28px);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+.cf-legal-main h3 {
+  margin: 28px 0 10px;
+  font-size: 17px;
+  font-weight: 700;
+}
+.cf-legal-main p,
+.cf-legal-main li {
+  font-size: 16px;
+  line-height: 1.72;
+  color: rgba(11, 11, 11, 0.78);
+}
+.cf-legal-main p {
+  margin: 0 0 16px;
+}
+.cf-legal-main ul {
+  margin: 0 0 16px;
+  padding-left: 22px;
+}
+.cf-legal-main li {
+  margin-bottom: 8px;
+}
+.cf-legal-main strong {
+  color: #0b0b0b;
+  font-weight: 700;
+}
+.cf-legal-main a {
+  color: var(--cf-primary, #8333eb);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cf-legal-main a:hover {
+  color: var(--cf-pink, #ff80ae);
+}
+
+/* Compact reference table (cookie list) */
+.cf-legal-table {
+  width: 100%;
+  margin: 8px 0 20px;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.cf-legal-table th,
+.cf-legal-table td {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(11, 11, 11, 0.1);
+}
+.cf-legal-table th {
+  font-weight: 700;
+  color: #0b0b0b;
+  background: rgba(11, 11, 11, 0.03);
+}
+.cf-legal-table td {
+  color: rgba(11, 11, 11, 0.78);
+}
+.cf-legal-table code {
+  font-family: var(--font-mona-sans), ui-monospace, monospace;
+  font-size: 13px;
+  background: rgba(11, 11, 11, 0.06);
+  padding: 1px 6px;
+  border-radius: 5px;
+}
+
+.cf-legal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px clamp(20px, 5vw, 64px);
+  border-top: 1px solid rgba(11, 11, 11, 0.08);
+}
+.cf-legal-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+.cf-legal-footer-nav a {
+  font-size: 14px;
+  color: rgba(11, 11, 11, 0.6);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.cf-legal-footer-nav a:hover {
+  color: #0b0b0b;
+}
+.cf-legal-footer-meta {
+  font-size: 13px;
+  color: rgba(11, 11, 11, 0.4);
+}

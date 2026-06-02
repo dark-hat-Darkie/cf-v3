@@ -1,38 +1,116 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
+import { smoothScrollTo } from '@/lib/smooth-scroll';
 
 const navCols = [
   {
     ttl: 'Services',
     items: [
-      { label: 'Web Development', href: '#services' },
-      { label: 'Mobile Apps', href: '#services' },
-      { label: 'UI/UX Design', href: '#services' },
-      { label: 'WordPress', href: '#services' },
-      { label: 'WebGL / 3D', href: '#services' },
+      { label: 'Web Development', href: '/services/web-development' },
+      { label: 'Mobile Apps', href: '/services/mobile-apps' },
+      { label: 'UI / UX Design', href: '/services/ui-ux-design' },
+      { label: 'Brand & Motion', href: '/services/brand-motion' },
+      { label: 'WebGL / 3D', href: '/services/webgl-3d' },
+      { label: 'E-Commerce', href: '/services/ecommerce' },
     ],
   },
   {
     ttl: 'Studio',
     items: [
-      { label: 'About', href: '#' },
+      { label: 'About', href: '#team' },
       { label: 'Process', href: '#process' },
       { label: 'Work', href: '#work' },
       { label: 'Pricing', href: '#pricing' },
-      { label: 'Blog', href: '#' },
+      { label: 'Blog', href: '/blog' },
     ],
   },
   {
     ttl: 'Connect',
     items: [
       { label: 'hello@codeflee.com', href: 'mailto:hello@codeflee.com' },
-      { label: 'WhatsApp', href: 'https://wa.me/8801700000000' },
+      { label: 'WhatsApp', href: 'https://wa.me/8801716778254' },
       { label: 'Instagram', href: '#' },
       { label: 'LinkedIn', href: '#' },
       { label: 'Dribbble', href: '#' },
     ],
   },
 ];
+
+/**
+ * The landing page runs a custom wheel-driven smooth-scroll loop (see
+ * `useSmoothScroll` in AppShell) that continuously drives `window.scrollTo`.
+ * A native in-page anchor jump is overwritten on the next animation frame, so
+ * hash links must go through `smoothScrollTo` to actually move (and stick).
+ */
+function FooterLink({
+  href,
+  className,
+  ariaLabel,
+  children,
+}: {
+  href: string;
+  className?: string;
+  ariaLabel?: string;
+  children: React.ReactNode;
+}) {
+  // In-page section anchor (e.g. "#work") → drive the site's smooth-scroll loop.
+  if (href.startsWith('#') && href.length > 1) {
+    const id = href.slice(1);
+    return (
+      <a
+        href={href}
+        className={className}
+        aria-label={ariaLabel}
+        onClick={(e) => {
+          e.preventDefault();
+          const el = document.getElementById(id);
+          if (el) smoothScrollTo(el.offsetTop - 60);
+        }}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  // Internal route (e.g. "/blog", "/services/…") → client navigation.
+  if (href.startsWith('/')) {
+    return (
+      <Link href={href} className={className} aria-label={ariaLabel}>
+        {children}
+      </Link>
+    );
+  }
+
+  // External / mailto / tel.
+  if (/^(https?:|mailto:|tel:)/.test(href)) {
+    const external = href.startsWith('http');
+    return (
+      <a
+        href={href}
+        className={className}
+        aria-label={ariaLabel}
+        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  // Placeholder ("#") — destination not wired up yet. Stay inert instead of
+  // jumping to the top of the page (which the smooth-scroll loop snaps back).
+  return (
+    <a
+      href={href}
+      className={className}
+      aria-label={ariaLabel}
+      aria-disabled="true"
+      onClick={(e) => e.preventDefault()}
+    >
+      {children}
+    </a>
+  );
+}
 
 const socials = [
   {
@@ -88,9 +166,9 @@ export default function Footer() {
           </div>
           <div className="cf-footer-socials">
             {socials.map(s => (
-              <a key={s.label} href={s.href} className="cf-footer-social-btn" aria-label={s.label}>
+              <FooterLink key={s.label} href={s.href} className="cf-footer-social-btn" ariaLabel={s.label}>
                 {s.icon}
-              </a>
+              </FooterLink>
             ))}
           </div>
           <div className="cf-footer-location">Mohammadpur · Dhaka 1207 · GMT+6</div>
@@ -102,7 +180,7 @@ export default function Footer() {
             <ul>
               {c.items.map(it => (
                 <li key={it.label}>
-                  <a href={it.href}>{it.label}</a>
+                  <FooterLink href={it.href}>{it.label}</FooterLink>
                 </li>
               ))}
             </ul>
@@ -113,9 +191,9 @@ export default function Footer() {
       <div className="cf-footer-bar">
         <div>© 2026 CodeFlee Studio · Dhaka, Bangladesh</div>
         <div className="cf-footer-bar-links">
-          <a href="#">Privacy</a>
-          <a href="#">Terms</a>
-          <a href="#">Cookies</a>
+          <FooterLink href="/privacy">Privacy</FooterLink>
+          <FooterLink href="/terms">Terms</FooterLink>
+          <FooterLink href="/cookies">Cookies</FooterLink>
         </div>
       </div>
 

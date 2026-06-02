@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { MagneticButton } from './MagneticButton';
+import { smoothScrollTo } from '@/lib/smooth-scroll';
 
 export default function BackToTop() {
   const [progress, setProgress] = useState(0);
@@ -19,7 +20,7 @@ export default function BackToTop() {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    smoothScrollTo(0);
   };
 
   const r = 20;

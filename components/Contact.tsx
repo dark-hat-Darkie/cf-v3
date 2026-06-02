@@ -1,19 +1,37 @@
 'use client';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { MagneticButton } from './MagneticButton';
+import { submitContactAction } from '@/app/actions/contact';
 
 const projectTypes = ['Web app', 'Mobile app', 'Brand & design', 'WebGL / 3D', 'E-commerce', 'Not sure yet'];
 const budgets = ['< $10K', '$10K–$25K', '$25K–$75K', '$75K+', "Let's discuss"];
 
 export default function Contact() {
   const [data, setData] = useState({ project: '', budget: '', name: '', email: '', message: '' });
+  // Honeypot — kept off-screen; bots fill it, humans don't.
+  const [company, setCompany] = useState('');
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, startTransition] = useTransition();
 
   const setField = (k: keyof typeof data) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setData(d => ({ ...d, [k]: e.target.value }));
 
   const toggle = (k: keyof typeof data, v: string) =>
     setData(d => ({ ...d, [k]: d[k] === v ? '' : v }));
+
+  const submit = () => {
+    if (pending) return;
+    setError(null);
+    startTransition(async () => {
+      const res = await submitContactAction({ ...data, company });
+      if (res.ok) {
+        setSent(true);
+      } else {
+        setError(res.error);
+      }
+    });
+  };
 
   return (
     <section id="contact" className="cf-contact">
@@ -37,9 +55,9 @@ export default function Contact() {
             <span style={{ width: 44, height: 44, borderRadius: 9999, border: '1px solid rgba(255,255,255,.15)', display: 'grid', placeItems: 'center' }}>@</span>
             hello@codeflee.com
           </a>
-          <a href="https://wa.me/8801700000000" style={{ display: 'flex', alignItems: 'center', gap: 14, color: '#fff', fontSize: 16 }}>
+          <a href="https://wa.me/8801716778254" style={{ display: 'flex', alignItems: 'center', gap: 14, color: '#fff', fontSize: 16 }}>
             <span style={{ width: 44, height: 44, borderRadius: 9999, border: '1px solid rgba(255,255,255,.15)', display: 'grid', placeItems: 'center' }}>W</span>
-            WhatsApp +880 1700 000 000
+            WhatsApp +880 1716778254
           </a>
           <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 14, color: '#fff', fontSize: 16 }}>
             <span style={{ width: 44, height: 44, borderRadius: 9999, border: '1px solid rgba(255,255,255,.15)', display: 'grid', placeItems: 'center' }}>→</span>
@@ -117,16 +135,36 @@ export default function Contact() {
                 />
               </div>
 
+              {/* Honeypot: visually hidden, off the tab order, ignored by humans. */}
+              <input
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                value={company}
+                onChange={(e) => setCompany(e.target.value)}
+                aria-hidden="true"
+                style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+              />
+
               <MagneticButton
+                type="button"
                 className="cf-btn-primary"
-                style={{ width: '100%', justifyContent: 'center', padding: '16px 24px', marginTop: 8 }}
-                onClick={() => setSent(true)}
+                style={{ width: '100%', justifyContent: 'center', padding: '16px 24px', marginTop: 8, opacity: pending ? 0.7 : 1 }}
+                onClick={submit}
+                disabled={pending}
               >
-                <span>Send brief</span>
+                <span>{pending ? 'Sending…' : 'Send brief'}</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                   <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 </svg>
               </MagneticButton>
+
+              {error && (
+                <p role="alert" style={{ fontSize: 13, color: '#ff9db8', marginTop: 14, textAlign: 'center', letterSpacing: '.02em' }}>
+                  {error}
+                </p>
+              )}
 
               <p style={{ fontSize: 12, color: 'rgba(255,255,255,.35)', marginTop: 14, textAlign: 'center', letterSpacing: '.02em' }}>
                 No commitment. We&apos;ll scope the work and send an estimate first.

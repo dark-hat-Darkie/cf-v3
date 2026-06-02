@@ -3,16 +3,16 @@ import { notFound, redirect, permanentRedirect } from "next/navigation";
 import { cacheTag, cacheLife } from "next/cache";
 import { findRedirect, getPostFull, listRelatedPosts, getAdjacentPosts, listPublishedSlugs } from "@/lib/content/queries";
 import { BlogPostView } from "@/components/blog/BlogPostView";
-import { extractToc } from "@/lib/editor/toc";
+import { extractToc, extractTocFromHtml } from "@/lib/editor/toc";
 import { blurhashToDataUrl } from "@/lib/media/blur-data-url";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/seo/schema/jsonld";
 
 function siteUrl() {
-  return (process.env.SITE_URL ?? "https://example.com").replace(/\/$/, "");
+  return (process.env.SITE_URL ?? "https://codeflee.com").replace(/\/$/, "");
 }
 
 function siteName() {
-  return process.env.SITE_NAME ?? "Codeflee";
+  return process.env.SITE_NAME ?? "CodeFlee";
 }
 
 async function loadPost(slug: string) {
@@ -134,7 +134,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     blurhashToDataUrl(author?.avatar?.blurhash),
   ]);
 
-  const toc = extractToc(p.content);
+  // Derive the TOC from the rendered HTML so its entries + anchor IDs always
+  // match the headings on the page; fall back to the ProseMirror walk for any
+  // post whose stored HTML predates heading-ID injection.
+  const tocFromHtml = extractTocFromHtml(p.contentHtml);
+  const toc = tocFromHtml.length > 0 ? tocFromHtml : extractToc(p.content);
 
   const articleSchema = articleJsonLd({
     url: p.canonical || url,

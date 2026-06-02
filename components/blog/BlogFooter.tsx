@@ -26,7 +26,7 @@ const COLS = [
     title: "Connect",
     items: [
       { label: "hello@codeflee.com", href: "mailto:hello@codeflee.com" },
-      { label: "WhatsApp", href: "https://wa.me/8801700000000" },
+      { label: "WhatsApp", href: "https://wa.me/8801716778254" },
       { label: "LinkedIn", href: "#" },
       { label: "X (Twitter)", href: "#" },
       { label: "RSS", href: "/blog/feed.xml" },

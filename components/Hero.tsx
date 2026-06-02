@@ -3,11 +3,15 @@ import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { MagneticButton } from "./MagneticButton";
 
 function HeroClock() {
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState<Date | null>(null);
   useEffect(() => {
+    setTime(new Date());
     const i = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(i);
   }, []);
+  if (!time) {
+    return <span className="cf-meta-time" suppressHydrationWarning />;
+  }
   const dhaka = new Date(
     time.getTime() + (time.getTimezoneOffset() + 360) * 60000,
   );
@@ -117,6 +121,9 @@ function HeroVisual() {
         <div className="cf-vis-orbit-tag t2">Next.js</div>
         <div className="cf-vis-orbit-tag t3">React Native</div>
         <div className="cf-vis-orbit-tag t4">Figma</div>
+        <div className="cf-vis-orbit-tag t5">Node.js</div>
+        <div className="cf-vis-orbit-tag t6">MongoDB</div>
+        <div className="cf-vis-orbit-tag t7">Nest.js</div>
 
         <div className="cf-vis-ring cf-vis-ring-1" />
         <div className="cf-vis-ring cf-vis-ring-2" />

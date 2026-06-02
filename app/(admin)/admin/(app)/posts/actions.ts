@@ -1,9 +1,9 @@
 "use server";
 
 import "server-only";
-import { revalidatePath, revalidateTag, updateTag } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { redirect } from "next/navigation";
-import { eq, sql, gt, and, ne, inArray } from "drizzle-orm";
+import { eq, sql, and, ne, inArray } from "drizzle-orm";
 import readingTime from "reading-time";
 import slugifier from "github-slugger";
 import type { JSONContent } from "@tiptap/core";
@@ -74,7 +74,7 @@ async function persistScoresForPost(postId: number): Promise<void> {
 const slugger = new slugifier();
 
 function siteOrigin() {
-  return process.env.SITE_URL ?? "https://example.com";
+  return process.env.SITE_URL ?? "https://codeflee.com";
 }
 
 function emptyDoc(): JSONContent {

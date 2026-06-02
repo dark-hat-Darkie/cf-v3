@@ -7,7 +7,7 @@ import { connection } from "next/server";
 import { getCurrentSession } from "@/lib/auth/session";
 import { getPostFullById, getAdjacentPosts, listRelatedPosts } from "@/lib/content/queries";
 import { BlogPostView } from "@/components/blog/BlogPostView";
-import { extractToc } from "@/lib/editor/toc";
+import { extractToc, extractTocFromHtml } from "@/lib/editor/toc";
 import { blurhashToDataUrl } from "@/lib/media/blur-data-url";
 import { renderPostHtml } from "@/lib/editor/render.server";
 
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 function siteName() {
-  return process.env.SITE_NAME ?? "Codeflee";
+  return process.env.SITE_NAME ?? "CodeFlee";
 }
 
 async function resolveSiteOrigin(): Promise<string> {
@@ -63,7 +63,10 @@ async function PreviewContent({ params }: { params: Promise<{ id: string }> }) {
       : Promise.resolve({ prev: null, next: null }),
   ]);
 
-  const toc = extractToc(p.content);
+  // Derive from the freshly rendered HTML so TOC anchors match the page; fall
+  // back to the ProseMirror walk if the HTML has no heading IDs.
+  const tocFromHtml = extractTocFromHtml(contentHtml);
+  const toc = tocFromHtml.length > 0 ? tocFromHtml : extractToc(p.content);
   const publishedDateLabel = p.publishedAt
     ? formatDate(p.publishedAt)
     : formatDate(p.updatedAt);

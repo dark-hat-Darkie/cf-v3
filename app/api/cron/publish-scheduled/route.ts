@@ -6,16 +6,20 @@ import { posts } from "@/db/schema";
 import { renderPostHtml } from "@/lib/editor/render.server";
 
 function siteOrigin() {
-  return process.env.SITE_URL ?? "https://example.com";
+  return process.env.SITE_URL ?? "https://codeflee.com";
 }
 
 function isAuthorized(req: NextRequest): boolean {
-  // Vercel Cron sets this header; for self-hosted, accept a shared secret.
-  if (req.headers.get("x-vercel-cron")) return true;
   const secret = process.env.CRON_SECRET;
-  if (!secret) return false;
-  const provided = req.headers.get("authorization");
-  return provided === `Bearer ${secret}`;
+  // When a secret is configured, require it. Vercel automatically sends
+  // `Authorization: Bearer $CRON_SECRET` on scheduled invocations, so this is
+  // the secure path — we do NOT trust `x-vercel-cron` alone, since external
+  // clients can forge that header.
+  if (secret) {
+    return req.headers.get("authorization") === `Bearer ${secret}`;
+  }
+  // No secret configured (local/dev only): fall back to the Vercel cron header.
+  return Boolean(req.headers.get("x-vercel-cron"));
 }
 
 export async function GET(req: NextRequest) {

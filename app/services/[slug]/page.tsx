@@ -13,10 +13,19 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return {};
+  const title = `${service.title} — CodeFlee Digital Studio`;
   return {
-    title: `${service.title} — CodeFlee Digital Studio`,
+    title,
     description: service.sub,
     icons: { icon: '/assets/logo-head.svg' },
+    alternates: { canonical: `/services/${slug}` },
+    openGraph: {
+      title,
+      description: service.sub,
+      type: 'website',
+      url: `/services/${slug}`,
+    },
+    twitter: { card: 'summary_large_image', title, description: service.sub },
   };
 }
 

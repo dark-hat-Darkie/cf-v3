@@ -24,11 +24,31 @@ const creatoDisplay = localFont({
   display: 'swap',
 });
 
+const SITE_URL = (process.env.SITE_URL ?? 'https://codeflee.com').replace(/\/$/, '');
+const SITE_NAME = process.env.SITE_NAME ?? 'CodeFlee';
+const SITE_DESCRIPTION =
+  'A senior engineering & design studio in Dhaka. From product thinking to launch-day comms — we sweat the details so your team can move.';
+const SITE_TITLE = 'CodeFlee — Digital Studio · Dhaka';
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.SITE_URL ?? 'http://localhost:4020'),
-  title: 'CodeFlee — Digital Studio · Dhaka',
-  description: 'A senior engineering & design studio in Dhaka. From product thinking to launch-day comms — we sweat the details so your team can move.',
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
   icons: { icon: '/assets/logo-head.svg' },
+  openGraph: {
+    type: 'website',
+    siteName: SITE_NAME,
+    locale: 'en_US',
+    url: '/',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export const viewport: Viewport = {

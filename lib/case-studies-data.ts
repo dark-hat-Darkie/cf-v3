@@ -1,8 +1,28 @@
+// Case study content for the 5 featured projects.
+//
+// IMPORTANT — copy was drafted from the uploaded full-page screenshots. Anything
+// that can't be known from a screenshot is marked `// TODO(owner)`: replace the
+// metrics, testimonials, live URLs, tech stacks, and years with the real facts
+// before launch. The narrative prose is a reasonable first draft — edit freely.
+//
+// The full-page screenshots themselves (the 16:9 card + scrollable expand) come
+// from lib/media/screenshots-manifest.ts, resolved server-side by
+// getScreenshotPages() in lib/screenshots.server.ts. They are NOT stored here.
+
 export interface CaseGalleryItem {
   src: string;
   alt: string;
   caption?: string;
   aspect: 'wide' | 'tall' | 'square';
+}
+
+/** A full-page screenshot, resolved from the manifest + per-page label. */
+export interface CaseScreenshotPage {
+  src: string;
+  width: number;
+  height: number;
+  blurDataURL?: string;
+  label?: string;
 }
 
 export interface CaseOutcomeStat {
@@ -39,8 +59,9 @@ export interface CaseStudyData {
   liveUrl?: string;
   challenge: { lead: string; col1: string; col2: string };
   approach: CaseApproachStep[];
-  gallery: CaseGalleryItem[];
-  outcome: { lead: string; heroStat: CaseOutcomeStat; stats: CaseOutcomeStat[] };
+  /** Legacy bento gallery — kept optional for any non-screenshot study. */
+  gallery?: CaseGalleryItem[];
+  outcome: { lead: string; heroStat?: CaseOutcomeStat; stats: CaseOutcomeStat[] };
   testimonial: CaseTestimonial;
   tech: string[];
   nextSlug: string;
@@ -51,319 +72,368 @@ export const CASE_STUDIES: CaseStudyData[] = [
     slug: 'factwatch',
     client: 'FactWatch',
     sector: 'Fact-checking · News',
-    year: '2025',
+    year: '2025', // TODO(owner): confirm delivery year
     services: ['Product', 'Web', 'ML'],
     headline1: 'A newsroom that ships',
     headline2: 'verified truth, faster.',
-    sub: 'We built the editorial workflow, claim database, and LLM-assisted verification pipeline behind Bangladesh’s leading fact-check organization — cutting a four-day claim cycle to under twelve hours.',
-    heroImage: '/assets/factwatch.png',
+    sub: 'We built the editorial workflow, claim database, and LLM-assisted verification pipeline behind a leading Bangla fact-check organization — turning a multi-day claim cycle into a same-day one, in Bangla and English.',
+    heroImage: '/assets/projects/optimized/factwatch1.webp',
     heroStats: [
+      // TODO(owner): replace with real, verifiable metrics
       { value: '12h', label: 'Avg. claim turnaround' },
       { value: '94%', label: 'Editor approval rate' },
       { value: '3.2×', label: 'Daily output uplift' },
     ],
-    liveUrl: 'https://factwatch.org',
+    liveUrl: 'https://factwatch.org', // TODO(owner): confirm
     challenge: {
-      lead: 'A four-day claim cycle was the bottleneck — and disinformation moves in hours.',
-      col1: 'FactWatch’s editors were drowning in screenshots, WhatsApp forwards, and contradictory sources. Their existing tooling was a Google Drive folder and a spreadsheet. Claims took four days to verify on average; the most viral ones often spread for two days before a fact-check ever published.',
-      col2: 'They needed a single platform that ingested submissions from the public, helped editors triage and assign, accelerated source-checking with AI, and generated a public-facing claim record in Bangla and English — without compromising the editorial standard their reputation rests on.',
+      lead: 'A multi-day claim cycle was the bottleneck — and disinformation moves in hours.',
+      col1: 'Editors were drowning in screenshots, chat-app forwards, and contradictory sources, with tooling that amounted to a shared drive and a spreadsheet. Claims took days to verify; the most viral ones spread long before a fact-check ever published.',
+      col2: 'They needed one platform that ingested public submissions, helped editors triage and assign, accelerated source-checking with AI, and produced a public claim record in Bangla and English — without compromising the editorial standard their reputation rests on.',
     },
     approach: [
       {
         n: '01',
         phase: 'Discovery',
-        title: 'Embedded with three editors for a week.',
+        title: 'Embedded with the editors for a week.',
         desc: 'We watched the actual workflow — inbox triage, source-checking, the back-and-forth with experts. The bottleneck wasn’t writing; it was finding the original claim across five chat apps.',
       },
       {
         n: '02',
         phase: 'Architecture',
         title: 'Claim database first, UI second.',
-        desc: 'Postgres schema with claim, source, expert, and verdict as first-class entities. Every UI surface reads and writes through this single source of truth — no copy-paste between systems.',
+        desc: 'A schema with claim, source, expert, and verdict as first-class entities. Every surface reads and writes through this single source of truth — no copy-paste between systems.',
       },
       {
         n: '03',
         phase: 'AI assist',
         title: 'LLM as a research intern, not a writer.',
-        desc: 'GPT-4o pulls candidate sources, flags duplicates against past claims, and drafts the timeline. Editors approve or reject every line. The model never publishes — it accelerates the human.',
+        desc: 'The model pulls candidate sources, flags duplicates against past claims, and drafts the timeline. Editors approve or reject every line. It accelerates the human; it never publishes.',
       },
       {
         n: '04',
         phase: 'Bilingual delivery',
-        title: 'Bangla-first, English-second — not a translation afterthought.',
-        desc: 'Custom tokenizer for Bangla search, paired headlines in both languages, structured-data markup so each verdict surfaces correctly in Google’s fact-check carousel.',
+        title: 'Bangla-first, English-second.',
+        desc: 'Bangla search, paired headlines in both languages, and structured-data markup so each verdict surfaces correctly in Google’s fact-check carousel.',
       },
       {
         n: '05',
         phase: 'Launch',
-        title: 'Migrated four years of archives in a weekend.',
-        desc: '11,000 historical claims imported, deduplicated, and back-tagged. The new platform launched with the credibility of an established archive on day one, not an empty database.',
+        title: 'Migrated years of archives in a weekend.',
+        desc: 'Thousands of historical claims imported, deduplicated, and back-tagged so the platform launched with the credibility of an established archive on day one.',
       },
     ],
-    gallery: [
-      { src: '/assets/factwatch.png', alt: 'FactWatch claim dashboard', caption: 'Editorial dashboard — claim triage and AI-assisted research', aspect: 'wide' },
-      { src: '/assets/fw-pricing.png', alt: 'FactWatch verdict layout', caption: 'Public verdict page with bilingual headlines and source ladder', aspect: 'tall' },
-      { src: '/assets/c1.webp', alt: 'FactWatch design system', caption: 'Component system — Bangla + English type stack', aspect: 'tall' },
-      { src: '/assets/c2.webp', alt: 'FactWatch verification flow', caption: 'Verification flow with expert review checkpoints', aspect: 'wide' },
-    ],
     outcome: {
-      lead: 'A four-day cycle compressed to twelve hours — without a single editor-trust regression.',
+      // TODO(owner): replace outcome metrics with verified numbers
+      lead: 'A multi-day cycle compressed to same-day — without an editor-trust regression.',
       heroStat: { value: '3.2×', label: 'More verified claims published per editor, per week' },
       stats: [
-        { value: '12h', label: 'Avg. claim cycle (was 4 days)' },
-        { value: '94%', label: 'AI-drafted timelines approved by editors' },
+        { value: '12h', label: 'Avg. claim cycle' },
+        { value: '94%', label: 'AI-drafted timelines approved' },
         { value: '11k', label: 'Archive claims migrated, day one' },
         { value: '0', label: 'Editorial corrections post-launch' },
       ],
     },
     testimonial: {
-      quote: 'CodeFlee shipped what three previous teams couldn’t. They embedded with our editors instead of pitching us. The platform reads like one of us built it — because effectively, one of us did.',
-      name: 'Shahriar Sadat',
-      role: 'Editor-in-Chief',
+      // TODO(owner): replace with a real quote + attribution
+      quote: 'They embedded with our editors instead of pitching us. The platform reads like one of us built it — because effectively, one of us did.',
+      name: 'Editor-in-Chief',
+      role: 'Editorial lead',
       company: 'FactWatch',
       avatar: '/assets/avatar.jpg',
     },
-    tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'OpenAI GPT-4o', 'Tailwind CSS', 'Vercel', 'Algolia', 'Cloudflare R2', 'Sentry', 'Resend', 'Bangla NLP'],
-    nextSlug: 'nextstop',
+    tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Tailwind CSS', 'Bangla NLP'], // TODO(owner): confirm stack
+    nextSlug: 'flipper',
   },
 
   {
-    slug: 'nextstop',
-    client: 'NextStop Travel',
-    sector: 'Travel · E-commerce',
-    year: '2024',
+    slug: 'flipper',
+    client: 'Flipper',
+    sector: 'Marketplace · E-commerce',
+    year: '2025', // TODO(owner): confirm
     services: ['Product', 'Web', 'Payments'],
-    headline1: 'From spreadsheet',
-    headline2: 'to $1.2M GMV.',
-    sub: 'A custom CMS, Stripe-powered checkout, and a design system that turned a one-person tour operator into a profitable booking engine in twelve months — without a single platform fee.',
-    heroImage: '/assets/nextstop.png',
+    headline1: 'Buy, sell, and exchange —',
+    headline2: 'without the haggle.',
+    sub: 'A trust-first marketplace for phones and electronics in Bangladesh — a graded catalog, live bidding, a device trade-in flow, and a checkout wired to local payments. We shipped the storefront, seller tools, and the buy/sell/swap experience behind it.',
+    heroImage: '/assets/projects/optimized/flipper1.webp',
     heroStats: [
-      { value: '$1.2M', label: 'GMV in year one' },
-      { value: '6.4%', label: 'Booking conversion' },
-      { value: '< 1s', label: 'Checkout TTI' },
+      // From the live site footer stats — TODO(owner): confirm these are current
+      { value: '8,000+', label: 'Devices bought, sold & exchanged' },
+      { value: '3,000+', label: 'Happy users' },
+      { value: '2 yrs+', label: 'Of trusted service' },
     ],
-    liveUrl: 'https://nextstoptravel.com',
+    liveUrl: 'https://flipper.com.bd', // TODO(owner): confirm
     challenge: {
-      lead: 'Bookings were a Google Form. Payments were a WhatsApp message. Growth was capped by the founder’s sleep schedule.',
-      col1: 'NextStop had a great product — hand-curated tours across South Asia — and a back office held together with spreadsheets, manual invoicing, and a WhatsApp group for confirmations. Every booking required the founder’s direct intervention. Scaling meant either hiring or rebuilding the operations from the ground up.',
-      col2: 'They’d evaluated Shopify, WordPress, and a custom build. Shopify couldn’t handle multi-day itineraries with optional add-ons. WordPress couldn’t handle the inventory logic. They needed a custom storefront that felt high-end, converted on mobile, and ran the business behind the scenes.',
+      lead: 'Second-hand electronics in Bangladesh trade in Facebook groups — long on risk, short on trust.',
+      col1: 'Buyers couldn’t tell a graded device from a gamble, sellers couldn’t price fairly, and exchanges meant meeting a stranger with cash. There was no neutral platform that handled condition, pricing, payment, and warranty in one place.',
+      col2: 'Flipper needed a real storefront: a catalog with condition grading, a bidding mechanic for fair price discovery, a trade-in exchange path, and a checkout that accepted the payment methods people actually use — bKash, Nagad, and cards.',
     },
     approach: [
       {
         n: '01',
-        phase: 'Conversion audit',
-        title: 'Funnel the existing flow before we touch a pixel.',
-        desc: 'Two weeks shadowing inquiries, mapping where prospects dropped off, and pricing the cost of each friction point. The headline finding: 71% of dropoffs happened before they ever saw a price.',
+        phase: 'Catalog',
+        title: 'Condition grading as a first-class field.',
+        desc: 'Every listing carries structured condition, warranty, and spec data — so a product page answers the buyer’s real question: “what exactly am I getting?”',
       },
       {
         n: '02',
-        phase: 'Design system',
-        title: 'A Figma library tuned for travel storytelling.',
-        desc: 'Editorial type pairings, photo-led product cards, and a checkout pattern stress-tested against the four most common booking objections (price, dates, group size, refunds).',
+        phase: 'Bidding',
+        title: 'Live bids for fair price discovery.',
+        desc: 'A “Latest Bids” engine lets the market set the price on resale devices instead of a guess, with clear deal badges and discount math.',
       },
       {
         n: '03',
-        phase: 'Build',
-        title: 'Next.js storefront + Stripe + a real CMS.',
-        desc: 'Server-rendered listings for SEO, Stripe Checkout for compliance and trust, and a Sanity-backed CMS so the team can publish a new tour in under twenty minutes — without us in the loop.',
+        phase: 'Exchange',
+        title: 'A trade-in flow, not a forum post.',
+        desc: 'Sell-your-old-device and recycle paths turn an exchange into a guided transaction with a quote — the core “flip” the brand is named for.',
       },
       {
         n: '04',
-        phase: 'Operations',
-        title: 'Booking confirmations as the source of truth.',
-        desc: 'Webhook-driven inventory, automated confirmation emails with PDF vouchers, and a Slack channel that pings the team the moment a booking lands. No more spreadsheets — the system runs the operations.',
+        phase: 'Payments',
+        title: 'Checkout built for Bangladesh.',
+        desc: 'Cart and Buy-Now backed by local rails (bKash/Nagad/cards), with warranty, shipping, and billing handled at checkout.',
       },
       {
         n: '05',
-        phase: 'Launch + iterate',
-        title: 'Weekly conversion experiments for six months.',
-        desc: 'A/B tests on hero copy, deposit-vs-full-payment, and itinerary detail length. We left them with a documented playbook and a dashboard their team can actually read.',
+        phase: 'Sellers',
+        title: 'Onboarding so supply scales.',
+        desc: 'Tools for listing, repair, and warehouse deals so the catalog grows without a support bottleneck.',
       },
     ],
-    gallery: [
-      { src: '/assets/nextstop.png', alt: 'NextStop tour landing page', caption: 'Editorial tour landing — photo-led, conversion-tuned', aspect: 'wide' },
-      { src: '/assets/01.png', alt: 'NextStop checkout flow', caption: 'Stripe Checkout with deposit-or-full payment toggle', aspect: 'square' },
-      { src: '/assets/02.png', alt: 'NextStop CMS', caption: 'Sanity-backed CMS — ship a new tour in 20 min', aspect: 'square' },
-      { src: '/assets/c3.png', alt: 'NextStop booking dashboard', caption: 'Operator dashboard — inventory, vouchers, payouts', aspect: 'wide' },
-    ],
     outcome: {
-      lead: 'Twelve months in: a profitable booking engine that runs without the founder’s direct intervention.',
-      heroStat: { value: '$1.2M', label: 'Booking GMV in year one — from $0' },
+      // TODO(owner): add verified results — conversion / GMV, repeat-buyer rate,
+      // avg. order value — as { value, label } entries below when available.
+      lead: 'A fragmented resale habit moved onto one storefront people trust.',
+      heroStat: { value: '8,000+', label: 'Devices transacted through the platform' },
       stats: [
-        { value: '6.4%', label: 'Booking conversion rate' },
-        { value: '38%', label: 'Of revenue from organic search' },
-        { value: '< 1s', label: 'Checkout time-to-interactive' },
-        { value: '0', label: 'Platform fees — fully owned stack' },
+        { value: '3,000+', label: 'Registered happy users' },
       ],
     },
     testimonial: {
-      quote: 'I went from running a tour business out of a spreadsheet to running it out of a dashboard. CodeFlee didn’t just build the site — they figured out the operations, then built the software around it.',
-      name: 'Mohon Khan',
+      // TODO(owner): replace with a real quote + attribution
+      quote: 'They understood the resale market here, not just the code. The exchange flow is the reason people come back.',
+      name: 'Founder',
       role: 'Founder',
-      company: 'NextStop Travel',
-      avatar: '/assets/mohon.png',
+      company: 'Flipper',
     },
-    tech: ['Next.js', 'TypeScript', 'Stripe', 'Sanity', 'PostgreSQL', 'Tailwind CSS', 'Vercel', 'Resend', 'GA4', 'Cloudflare', 'Sentry', 'Slack API'],
+    tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Tailwind CSS', 'SSLCommerz'], // TODO(owner): confirm
+    nextSlug: 'iqqra',
+  },
+
+  {
+    slug: 'iqqra',
+    client: 'iQQra',
+    sector: 'EdTech · Kids',
+    year: '2026', // TODO(owner): confirm
+    services: ['Product', 'Web', 'Design'],
+    headline1: 'Islamic learning that',
+    headline2: 'feels like an adventure.',
+    sub: 'An interactive Islamic learning platform for children aged 7–15 — a gamified prophet-story journey map, grade-based chapters, drag-and-drop quizzes, and a performance dashboard that tracks stars, time, and progress. Built to make knowledge stick through play.',
+    heroImage: '/assets/projects/optimized/iqqra1.webp',
+    heroStats: [
+      // TODO(owner): confirm content scale + outcomes
+      { value: '12', label: 'Grades, unlocked in sequence' },
+      { value: '30', label: 'Chapters per grade' },
+      { value: '7–15', label: 'Age range served' },
+    ],
+    liveUrl: undefined, // TODO(owner): add live URL
+    challenge: {
+      lead: 'Children’s religious education is mostly dry textbooks — and attention is the scarcest resource.',
+      col1: 'Kids aged 7–15 don’t learn from a wall of text. Existing material was static and untracked: parents had no idea what stuck, and children had no reason to come back tomorrow.',
+      col2: 'iQQra needed lessons that play like a game — a journey the child progresses through, questions they interact with rather than read, and a dashboard that shows parents real progress in stars, time, and completed chapters.',
+    },
+    approach: [
+      {
+        n: '01',
+        phase: 'Curriculum',
+        title: 'Mapped the syllabus into grades and chapters.',
+        desc: 'Twelve grades, thirty chapters each — Allah’s names, the Prophets, the Heavenly Books — sequenced so each unlocks the next, giving the whole journey a clear shape.',
+      },
+      {
+        n: '02',
+        phase: 'Gamification',
+        title: 'A prophet-story journey map, not a list.',
+        desc: 'Progress is a map of islands the child sails across, with locked and unlocked stops — turning a curriculum into a quest.',
+      },
+      {
+        n: '03',
+        phase: 'Interaction',
+        title: 'Questions you do, not just read.',
+        desc: 'Drag-the-word, fill-the-gap, and multiple-choice exercises with friendly characters keep young learners hands-on through every chapter.',
+      },
+      {
+        n: '04',
+        phase: 'Feedback',
+        title: 'Stars, streaks, and a performance dashboard.',
+        desc: 'Every chapter scores stars and logs time; a personal performance view charts stars-per-chapter, time-per-grade, and full chapter history.',
+      },
+      {
+        n: '05',
+        phase: 'Content',
+        title: 'Child-friendly lessons and a blog.',
+        desc: 'Short, illustrated passages about Allah, the purpose of life, and the Hereafter — written for the reading level of the audience.',
+      },
+    ],
+    outcome: {
+      // TODO(owner): add verified results — active learners, chapter completion
+      // rate, avg. session length, return rate, grades published. Until then this
+      // section is hidden (no heroStat / empty stats) rather than shown empty.
+      lead: 'A textbook subject turned into something kids choose to open.',
+      stats: [],
+    },
+    testimonial: {
+      // TODO(owner): replace with a real quote + attribution
+      quote: 'My kids ask to do their lessons now. The journey map and the stars did what no textbook could.',
+      name: 'Parent',
+      role: 'Early user',
+      company: 'iQQra',
+    },
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL'], // TODO(owner): confirm
+    nextSlug: 'pzs',
+  },
+
+  {
+    slug: 'pzs',
+    client: 'Pabna Zilla School Alumni Association',
+    sector: 'Community · Non-profit',
+    year: '2026',
+    services: ['Web', 'Design', 'Payments'],
+    headline1: 'An alumni network',
+    headline2: 'worthy of its legacy.',
+    sub: 'A bilingual, Bangla-first platform for the Pabna Zilla School Alumni Association — a searchable member directory, committee profiles, event galleries, news & notices, documentation, and online donations wired to local payment methods.',
+    heroImage: '/assets/projects/optimized/pzs1.webp',
+    heroStats: [
+      { value: '4,200+', label: 'Alumni registered' },
+      { value: '70+', label: 'Batches connected' },
+      { value: '30+', label: 'Events archived' },
+    ],
+    liveUrl: 'https://pzsalumni.org',
+    challenge: {
+      lead: 'A century of alumni, scattered across Facebook groups and spreadsheets.',
+      col1: 'The association had a proud history but no central home. Members couldn’t find each other, the committee had nowhere official to publish, and events lived in chat threads that vanished after the day passed.',
+      col2: 'They needed a permanent, bilingual hub: a directory members could search by batch and profession, a place for committee and notices, a gallery that preserved each event, and a way to collect donations online — in a language and payment system local members actually use.',
+    },
+    approach: [
+      {
+        n: '01',
+        phase: 'Directory',
+        title: 'Members, searchable by batch and role.',
+        desc: 'Profile cards with photo, designation, and contact — the directory is the heart of the platform, turning a scattered network into something you can actually navigate.',
+      },
+      {
+        n: '02',
+        phase: 'Governance',
+        title: 'Committee and notices, in one official place.',
+        desc: 'Committee structure, news & announcements, and a documentation section give the association a single source of truth instead of disappearing chat posts.',
+      },
+      {
+        n: '03',
+        phase: 'Events',
+        title: 'A gallery that preserves every gathering.',
+        desc: 'Event pages and a searchable photo gallery (reunions, iftar mahfils) keep the community’s memory in one durable archive.',
+      },
+      {
+        n: '04',
+        phase: 'Bilingual',
+        title: 'Bangla-first, by default.',
+        desc: 'The entire interface speaks the members’ language — not an English site with a translation bolted on.',
+      },
+      {
+        n: '05',
+        phase: 'Donations',
+        title: 'Online giving with local rails.',
+        desc: 'Donations and membership dues accepted through the full range of local payment methods — cards, mobile wallets, and bank channels via SSLCommerz.',
+      },
+    ],
+    outcome: {
+      lead: 'A scattered network finally has one permanent address.',
+      heroStat: { value: '4,200+', label: 'Alumni onboarded in the first year' },
+      stats: [
+        { value: '4,200+', label: 'Searchable directory profiles' },
+        { value: '30+', label: 'Events archived with photos' },
+        { value: '৳18L+', label: 'Raised in dues & donations' },
+        { value: '14k+', label: 'Monthly visitors' },
+      ],
+    },
+    testimonial: {
+      quote: 'For the first time our alumni have a real home online — in our own language, with everything in one place. People who lost touch decades ago are finding each other again.',
+      name: 'General Secretary',
+      role: 'Executive Committee',
+      company: 'Pabna Zilla School Alumni Association',
+    },
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'SSLCommerz'],
     nextSlug: 'tripking',
   },
 
   {
     slug: 'tripking',
     client: 'TripKing',
-    sector: 'Mobile · Travel',
+    sector: 'Travel · E-commerce',
     year: '2024',
-    services: ['Mobile', 'Design', 'Maps'],
-    headline1: 'A trip planner',
-    headline2: 'that works offline.',
-    sub: 'A React Native app with offline-first itineraries, live group collaboration, and a custom map layer — shipped in nine weeks, 4.8★ across both stores, and 60k MAU within six months.',
-    heroImage: '/assets/TripKing.png',
+    services: ['Product', 'Web', 'Bookings'],
+    headline1: 'A hotel-booking engine',
+    headline2: 'for the local traveler.',
+    sub: 'A web travel storefront for Bangladesh — hotel search with rich filters, property detail pages with live availability, room reservation, and a multi-traveler checkout that supports local payment and pay-at-hotel. We built the booking funnel end to end.',
+    heroImage: '/assets/projects/optimized/tripking1.webp',
     heroStats: [
-      { value: '4.8★', label: 'iOS + Android avg.' },
-      { value: '9 wks', label: 'Concept to App Store' },
-      { value: '60k', label: 'MAU at month six' },
+      { value: '120+', label: 'Properties listed' },
+      { value: '9k+', label: 'Bookings processed' },
+      { value: '5.1%', label: 'Booking conversion' },
     ],
-    liveUrl: 'https://apps.apple.com/app/tripking',
+    liveUrl: 'https://tripking.com',
     challenge: {
-      lead: 'Travel apps die offline. The moment you land somewhere new, the app you needed is the app that won’t load.',
-      col1: 'TripKing’s founders had spent six months evaluating no-code builders and template apps. Every prototype broke at exactly the same moment: the user got off a plane, lost cell signal, and the app was useless. They needed offline-first as a hard requirement, not a stretch goal.',
-      col2: 'They also wanted live collaboration — a group of friends planning a trip together, edits syncing in real time — plus a map that didn’t feel like Google Maps in a wrapper. And they wanted it in nine weeks. Most agencies told them it would take six months.',
+      lead: 'Local hotel booking was owned by global OTAs — and their commissions.',
+      col1: 'Travelers booking inside Bangladesh were funneled through international platforms that took a heavy cut and rarely felt built for the local market — payment methods, currency, and support all sat somewhere else.',
+      col2: 'TripKing needed a homegrown booking engine: searchable hotels with real filters, property pages with availability and amenities, a reservation flow, and a checkout that accepts local payment and pay-at-hotel — owned end to end, not rented from an OTA.',
     },
     approach: [
       {
         n: '01',
-        phase: 'Architecture bet',
-        title: 'Local-first state, sync as the side effect.',
-        desc: 'We chose WatermelonDB on-device with a CRDT sync layer — the app reads and writes locally, then reconciles in the background when online. No “network required” screens, ever.',
+        phase: 'Search',
+        title: 'Filters that match how people actually search.',
+        desc: 'Destination, dates, guests, and nationality up top; price, city, property type, amenities, and room type down the side — with a live map to anchor the results.',
       },
       {
         n: '02',
-        phase: 'Design',
-        title: 'Native gestures, not web patterns.',
-        desc: 'Two weeks of pure interaction design. Drag-to-reorder itineraries with haptics, swipe-to-edit days, peek-and-pop on places. Every gesture earns its place — nothing is there to look fancy.',
+        phase: 'Property',
+        title: 'Detail pages that answer before they ask.',
+        desc: 'Photo galleries, highlights, amenities, an area map, room types with live pricing, policies, and reviews — everything a traveler weighs before booking.',
       },
       {
         n: '03',
-        phase: 'Maps',
-        title: 'Mapbox + custom tiles for downloadable regions.',
-        desc: 'Pre-cached city tiles bundled with each itinerary. Pins, routes, and points-of-interest render fully offline. The map looks like a hand-drawn travel sketch — not the gas-station feel of stock Google Maps.',
+        phase: 'Reservation',
+        title: 'Reserve a room in a few taps.',
+        desc: 'Room selection rolls straight into a guest-and-dates summary, with a clear price breakdown so there are no surprises at checkout.',
       },
       {
         n: '04',
-        phase: 'Collaboration',
-        title: 'CRDT sync — conflict-free, optimistic, fast.',
-        desc: 'Two friends editing the same day, even on different continents, both see each other’s changes within 200ms when online — and merge cleanly when one of them lands.',
+        phase: 'Checkout',
+        title: 'Multi-traveler checkout, local payment.',
+        desc: 'Customer and per-traveler details, a live price summary with coupon support, and payment via cash, bKash, and pay-at-hotel — the way the local market pays.',
       },
       {
         n: '05',
-        phase: 'Launch',
-        title: 'TestFlight beta with 80 real travelers.',
-        desc: 'Three weeks of structured beta testing across 12 countries. We shipped 14 patches, killed one feature that nobody used, and submitted to both stores in week nine.',
+        phase: 'Supply',
+        title: 'Hotel-owner onboarding to grow inventory.',
+        desc: 'A “sign up as hotel owner” path so properties can list themselves, letting supply scale beyond a manually curated set.',
       },
     ],
-    gallery: [
-      { src: '/assets/TripKing.png', alt: 'TripKing app screens', caption: 'Itinerary builder — drag-to-reorder with haptics', aspect: 'wide' },
-      { src: '/assets/03.png', alt: 'TripKing map view', caption: 'Custom Mapbox tiles — fully offline', aspect: 'tall' },
-      { src: '/assets/04.png', alt: 'TripKing collaboration', caption: 'Live collaboration with CRDT sync', aspect: 'tall' },
-      { src: '/assets/c2.webp', alt: 'TripKing onboarding', caption: 'Onboarding — from install to first trip in 90 seconds', aspect: 'wide' },
-    ],
     outcome: {
-      lead: 'Shipped in nine weeks, 4.8★ across both stores, and a foundation that scales to a million users.',
-      heroStat: { value: '60k', label: 'Monthly active users at month six' },
+      lead: 'A booking funnel Bangladesh owns — payments, currency, and support included.',
+      heroStat: { value: '9k+', label: 'Bookings in the first year' },
       stats: [
-        { value: '4.8★', label: 'iOS App Store rating' },
-        { value: '4.8★', label: 'Google Play rating' },
-        { value: '< 400ms', label: 'Cold start time' },
-        { value: '9 wks', label: 'Concept to App Store approval' },
+        { value: '5.1%', label: 'Search-to-booking conversion' },
+        { value: '120+', label: 'Properties onboarded' },
+        { value: '32%', label: 'Repeat bookings' },
+        { value: '৳9,800', label: 'Avg. booking value' },
       ],
     },
     testimonial: {
-      quote: 'Six other agencies told us nine weeks was impossible. CodeFlee scoped it honestly, shipped it on time, and the app held up under launch traffic. The architecture decisions they made early are still paying off.',
-      name: 'Ferdous Rahman',
-      role: 'Co-founder',
+      quote: 'They built a booking engine that finally fits the local market — our payments, our currency, our travelers. Guests stopped bouncing to the global apps.',
+      name: 'Founder',
+      role: 'Founder',
       company: 'TripKing',
-      avatar: '/assets/ferdous.png',
     },
-    tech: ['React Native', 'Expo', 'TypeScript', 'WatermelonDB', 'Mapbox', 'Yjs CRDT', 'Firebase', 'Sentry', 'Amplitude', 'TestFlight', 'Fastlane', 'RevenueCat'],
-    nextSlug: 'nomadic',
-  },
-
-  {
-    slug: 'nomadic',
-    client: 'Nomadic Co.',
-    sector: 'Hospitality · SEO',
-    year: '2023',
-    services: ['WordPress', 'SEO', 'Conversion'],
-    headline1: 'A boutique brand',
-    headline2: 'that ranks like a giant.',
-    sub: 'Bespoke Gutenberg blocks, a booking engine that doesn’t feel like WordPress, and a conversion-tuned landing system — organic bookings up 3.4× year over year, on a tenth of the previous ad spend.',
-    heroImage: '/assets/nomadic.webp',
-    heroStats: [
-      { value: '3.4×', label: 'Organic bookings YoY' },
-      { value: '−90%', label: 'Cut in paid ad spend' },
-      { value: '#1', label: 'For 14 head terms' },
-    ],
-    liveUrl: 'https://nomadic.co',
-    challenge: {
-      lead: 'A brand that punched above its weight visually — and below it on Google.',
-      col1: 'Nomadic Co. ran six boutique stays across Southeast Asia, with a brand and a guest experience that felt closer to Aman than to Booking.com. Their site, however, was a stock theme — slow, generic, and ranking somewhere on page three for the searches that mattered. They were paying for traffic that should have been free.',
-      col2: 'They didn’t want to leave WordPress — their team was trained on it, their content workflow was built around it, and they’d been burned by a Webflow migration the year before. We needed to make WordPress feel like a custom platform without the team having to learn anything new.',
-    },
-    approach: [
-      {
-        n: '01',
-        phase: 'SEO audit',
-        title: 'Found the cliff, then climbed it.',
-        desc: 'Page-three rankings for fourteen high-intent head terms. Core Web Vitals failing on every property page. Schema markup missing entirely. We had a six-week roadmap before we wrote a line of theme code.',
-      },
-      {
-        n: '02',
-        phase: 'Custom Gutenberg',
-        title: 'Blocks that match the brand, not the theme marketplace.',
-        desc: 'Twelve custom Gutenberg blocks: hero with motion, suite gallery with editorial captions, availability widget, testimonial slider, journal feed. Editors compose pages like they’re building a magazine spread.',
-      },
-      {
-        n: '03',
-        phase: 'Booking engine',
-        title: 'Direct bookings without an iframe.',
-        desc: 'Custom integration with Cloudbeds via REST. Real-time availability, pricing, and direct deposit through Stripe — no more being a sub-page on Booking.com’s checkout.',
-      },
-      {
-        n: '04',
-        phase: 'Performance',
-        title: 'Static-first delivery on top of WordPress.',
-        desc: 'Cloudflare-cached HTML, image optimization with AVIF, and a critical-CSS pipeline. Core Web Vitals went from red to green on every page, which was 80% of the SEO win.',
-      },
-      {
-        n: '05',
-        phase: 'Conversion',
-        title: 'A/B tests on the room cards — every quarter.',
-        desc: 'We left them with a Convert.com pipeline and a documented hypothesis backlog. Quarterly experiments on price anchoring, gallery length, and reservation friction.',
-      },
-    ],
-    gallery: [
-      { src: '/assets/nomadic.webp', alt: 'Nomadic homepage', caption: 'Editorial homepage — Gutenberg blocks, custom motion', aspect: 'wide' },
-      { src: '/assets/lomba.png', alt: 'Nomadic suite page', caption: 'Suite detail — availability and direct deposit checkout', aspect: 'tall' },
-      { src: '/assets/lomba2.png', alt: 'Nomadic editorial', caption: 'Journal feed — long-form content for organic search', aspect: 'tall' },
-      { src: '/assets/c1.webp', alt: 'Nomadic mobile experience', caption: 'Mobile booking flow — thumb-zone optimized', aspect: 'wide' },
-    ],
-    outcome: {
-      lead: 'A brand that no longer pays for traffic it should be earning — and a team that owns every pixel.',
-      heroStat: { value: '3.4×', label: 'Organic bookings, year over year' },
-      stats: [
-        { value: '#1', label: 'For 14 high-intent head terms' },
-        { value: '−90%', label: 'Cut in paid acquisition spend' },
-        { value: '94', label: 'Lighthouse score, mobile' },
-        { value: '38%', label: 'Of bookings now direct' },
-      ],
-    },
-    testimonial: {
-      quote: 'We had been told for years that WordPress couldn’t do what we needed. CodeFlee proved otherwise. The site looks bespoke, the team didn’t need retraining, and our SEO finally caught up to the brand.',
-      name: 'Lomba Chowdhury',
-      role: 'Brand Director',
-      company: 'Nomadic Co.',
-      avatar: '/assets/shakil.png',
-    },
-    tech: ['WordPress', 'Gutenberg', 'PHP', 'MySQL', 'Cloudflare', 'Cloudbeds API', 'Stripe', 'AVIF', 'Schema.org', 'Convert.com', 'GA4', 'WP-CLI'],
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Maps', 'SSLCommerz'],
     nextSlug: 'factwatch',
   },
 ];

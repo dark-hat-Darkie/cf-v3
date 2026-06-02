@@ -38,7 +38,7 @@ export type PostScoreInput = Pick<
 };
 
 function siteOrigin(input: PostScoreInput): string {
-  return input.siteOrigin ?? process.env.SITE_URL ?? "https://example.com";
+  return input.siteOrigin ?? process.env.SITE_URL ?? "https://codeflee.com";
 }
 
 export function computePostScores(input: PostScoreInput): {

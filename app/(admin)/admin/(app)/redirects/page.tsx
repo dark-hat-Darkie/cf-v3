@@ -12,7 +12,7 @@ export default async function RedirectsPage() {
         <div className="adm-topbar-title">Redirects</div>
       </header>
       <div className="adm-content">
-        <p className="adm-page-sub">301/302 redirects. When a published post's slug changes, a 301 is created automatically.</p>
+        <p className="adm-page-sub">301/302 redirects. When a published post&apos;s slug changes, a 301 is created automatically.</p>
 
         <div className="adm-card" style={{ marginBottom: 22 }}>
           <h3>Add a redirect</h3>

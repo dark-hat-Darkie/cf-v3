@@ -1,50 +1,9 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { FEATURED_PROJECTS } from '@/lib/featured-work';
 
-interface Project {
-  tag: string;
-  title: string;
-  desc: string;
-  img: string;
-  meta: [string, string][];
-  slug?: string;
-}
-
-const projects: Project[] = [
-  {
-    tag: 'Fact-check platform',
-    title: 'FactWatch — AI-assisted newsroom dashboard.',
-    desc: "Built the editorial workflow, claim database, and LLM-powered verification pipeline for Bangladesh's leading fact-check organization.",
-    img: '/assets/factwatch.png',
-    meta: [['Client', 'FactWatch'], ['Role', 'Design · Web · ML'], ['Year', '2025']],
-    slug: 'factwatch',
-  },
-  {
-    tag: 'Travel booking',
-    title: 'NextStop — end-to-end tour booking engine.',
-    desc: 'Custom CMS, Stripe payments, and a design system that took the brand from spreadsheet to $1.2M GMV in year one.',
-    img: '/assets/nextstop.png',
-    meta: [['Client', 'NextStop Travel'], ['Role', 'Product · Web'], ['Year', '2024']],
-    slug: 'nextstop',
-  },
-  {
-    tag: 'Mobile · React Native',
-    title: 'TripKing — cross-platform planner, shipped in 9 weeks.',
-    desc: 'A React Native app with offline-first itineraries, live collaboration, and a custom map layer. 4.8★ on both stores.',
-    img: '/assets/TripKing.png',
-    meta: [['Client', 'TripKing'], ['Role', 'Mobile · Design'], ['Year', '2024']],
-    slug: 'tripking',
-  },
-  {
-    tag: 'WordPress',
-    title: 'Nomadic — bespoke Gutenberg for a boutique agency.',
-    desc: 'Custom blocks, a booking engine, and a conversion-tuned landing system. Organic bookings up 3.4× YoY.',
-    img: '/assets/nomadic.webp',
-    meta: [['Client', 'Nomadic Co.'], ['Role', 'WordPress · SEO'], ['Year', '2023']],
-    slug: 'nomadic',
-  },
-];
+const projects = FEATURED_PROJECTS;
 
 export default function Work() {
   const [active, setActive] = useState(0);
@@ -102,64 +61,49 @@ export default function Work() {
                 </div>
               ))}
             </div>
-            {p.slug ? (
-              <Link href={`/case-studies/${p.slug}`} className="cf-work-link" data-cursor="Open case">
-                Read the case study
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </Link>
-            ) : (
-              <span className="cf-work-link" style={{ opacity: 0.55, cursor: 'default', pointerEvents: 'none' }}>
-                Case study coming
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-                  <path d="M12 7v5l3 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </span>
-            )}
+            <Link href={`/case-studies/${p.slug}`} className="cf-work-link" data-cursor="Open case">
+              Read the case study
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </Link>
           </div>
         </div>
 
         <div className="cf-work-right">
-          {projects.map((pr, i) => {
-            const inner = (
-              <>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={pr.img} alt={pr.tag} />
-                <div className="cf-work-card-info">
-                  <div className="cf-work-card-tag">{pr.tag}</div>
-                  <div className="cf-work-card-cta">
-                    {pr.slug ? 'View case' : 'Coming soon'}
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
-                      {pr.slug ? (
-                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-                      ) : (
-                        <>
-                          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2.2" />
-                          <path d="M12 7v5l3 2" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-                        </>
-                      )}
-                    </svg>
-                  </div>
+          {projects.map((pr, i) => (
+            <Link
+              key={pr.slug}
+              href={`/case-studies/${pr.slug}`}
+              className="cf-work-card is-16x9"
+              data-cursor="View case"
+            >
+              <div
+                className="cf-card-lqip"
+                aria-hidden="true"
+                style={pr.card.blurDataURL ? { backgroundImage: `url(${pr.card.blurDataURL})` } : undefined}
+              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={pr.card.src}
+                alt={pr.title}
+                width={pr.card.width}
+                height={pr.card.height}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                onLoad={(e) => e.currentTarget.parentElement?.classList.add('is-loaded')}
+              />
+              <div className="cf-work-card-info">
+                <div className="cf-work-card-tag">{pr.tag}</div>
+                <div className="cf-work-card-cta">
+                  View case
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+                  </svg>
                 </div>
-              </>
-            );
-            return pr.slug ? (
-              <Link
-                key={i}
-                href={`/case-studies/${pr.slug}`}
-                className="cf-work-card"
-                data-cursor="View case"
-              >
-                {inner}
-              </Link>
-            ) : (
-              <div key={i} className="cf-work-card" data-cursor="Soon">
-                {inner}
               </div>
-            );
-          })}
+            </Link>
+          ))}
         </div>
       </div>
     </section>

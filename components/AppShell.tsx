@@ -17,15 +17,32 @@ import type { ReactNode } from 'react';
 import Footer from './Footer';
 import BackToTop from './BackToTop';
 import FloatingCTA from './FloatingCTA';
+import { SMOOTH_SCROLL_EVENT } from '@/lib/smooth-scroll';
 
 function useSmoothScroll(enabled: boolean) {
   useEffect(() => {
-    if (!enabled) return;
     const isTouch =
       window.matchMedia?.('(hover: none), (pointer: coarse)').matches ?? false;
-    if (isTouch) return;
+    const useCustom = enabled && !isTouch;
+
     let target = window.scrollY, current = window.scrollY;
     let raf: number;
+
+    const clamp = (y: number) =>
+      Math.max(0, Math.min(document.body.scrollHeight - window.innerHeight, y));
+
+    // Programmatic scroll requests (nav links, back-to-top, etc.). When the
+    // custom loop is active we steer it via `target`; otherwise scroll natively.
+    const onScrollTo = (e: Event) => {
+      const y = (e as CustomEvent<number>).detail;
+      if (useCustom) target = clamp(y);
+      else window.scrollTo({ top: y, behavior: 'smooth' });
+    };
+    window.addEventListener(SMOOTH_SCROLL_EVENT, onScrollTo);
+
+    if (!useCustom) {
+      return () => window.removeEventListener(SMOOTH_SCROLL_EVENT, onScrollTo);
+    }
 
     const ease = 0.08;
     const onWheel = (e: WheelEvent) => {
@@ -33,7 +50,7 @@ function useSmoothScroll(enabled: boolean) {
       if ((e.target as Element).closest('input, textarea, select')) return;
       e.preventDefault();
       target += e.deltaY;
-      target = Math.max(0, Math.min(document.body.scrollHeight - window.innerHeight, target));
+      target = clamp(target);
     };
     const loop = () => {
       current += (target - current) * ease;
@@ -44,7 +61,11 @@ function useSmoothScroll(enabled: boolean) {
     target = window.scrollY; current = window.scrollY;
     window.addEventListener('wheel', onWheel, { passive: false });
     raf = requestAnimationFrame(loop);
-    return () => { cancelAnimationFrame(raf); window.removeEventListener('wheel', onWheel); };
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener(SMOOTH_SCROLL_EVENT, onScrollTo);
+    };
   }, [enabled]);
 }
 

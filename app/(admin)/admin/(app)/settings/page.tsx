@@ -15,11 +15,11 @@ export default function SettingsPage() {
           <div className="adm-stack">
             <div>
               <div className="adm-tiny adm-muted">SITE_URL</div>
-              <div className="adm-mono">{process.env.SITE_URL ?? "(not set — using https://example.com)"}</div>
+              <div className="adm-mono">{process.env.SITE_URL ?? "(not set — using https://codeflee.com)"}</div>
             </div>
             <div>
               <div className="adm-tiny adm-muted">SITE_NAME</div>
-              <div className="adm-mono">{process.env.SITE_NAME ?? "(not set — using Codeflee)"}</div>
+              <div className="adm-mono">{process.env.SITE_NAME ?? "(not set — using CodeFlee)"}</div>
             </div>
             <div>
               <div className="adm-tiny adm-muted">Blob storage</div>

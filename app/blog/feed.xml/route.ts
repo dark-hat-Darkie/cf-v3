@@ -1,10 +1,10 @@
 import { listPublishedPosts } from "@/lib/content/queries";
 
 function siteUrl() {
-  return (process.env.SITE_URL ?? "https://example.com").replace(/\/$/, "");
+  return (process.env.SITE_URL ?? "https://codeflee.com").replace(/\/$/, "");
 }
 function siteName() {
-  return process.env.SITE_NAME ?? "Codeflee";
+  return process.env.SITE_NAME ?? "CodeFlee";
 }
 
 function escape(s: string) {
