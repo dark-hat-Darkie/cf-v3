@@ -2,7 +2,7 @@ import type { JSONContent } from "@tiptap/core";
 
 /**
  * Extract plain text from a ProseMirror doc with paragraph boundaries.
- * Pure — safe to import from client or server.
+ * Pure: safe to import from client or server.
  */
 export function extractPlainText(doc: JSONContent | null | undefined): string {
   if (!doc) return "";

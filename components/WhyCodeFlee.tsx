@@ -11,7 +11,7 @@ const STATS = [
 const ROWS: [string, string][] = [
   ['Tailored, from scratch solutions', 'Pre-made themes & templates'],
   ['Senior engineers only (6+ yrs)', 'Juniors on your account'],
-  ['True agile — weekly shipped demos', 'So-called "agile" with no demos'],
+  ['True agile: weekly shipped demos', 'So-called "agile" with no demos'],
   ['Fixed-scope, transparent pricing', 'Hidden costs on change requests'],
   ['Dedicated project lead, always on', 'Account manager churn every 6 mo.'],
 ];
@@ -41,7 +41,7 @@ export default function WhyCodeFlee() {
           ))}
         </dl>
         <p className="cf-why-note">
-          Five years in. Every number is verifiable — ask for references and we&apos;ll hand them over.
+          Five years in. Every number is verifiable. Ask for references and we&apos;ll hand them over.
         </p>
 
         <div className="cf-compare" role="table" aria-label="CodeFlee compared with a typical studio" data-rise="">

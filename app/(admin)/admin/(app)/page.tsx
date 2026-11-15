@@ -72,7 +72,7 @@ export default async function DashboardPage() {
                   <Icon.Doc width={22} height={22} />
                 </div>
               </div>
-              No posts yet — hit <strong>New post</strong> to start writing.
+              No posts yet. Hit <strong>New post</strong> to start writing.
             </div>
           ) : (
             <div style={{ margin: "0 -22px -22px", borderTop: "1px solid var(--adm-border)" }}>

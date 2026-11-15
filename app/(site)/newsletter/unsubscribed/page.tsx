@@ -4,7 +4,7 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Unsubscribed — CodeFlee",
+  title: "Unsubscribed | CodeFlee",
   robots: { index: false, follow: false },
 };
 
@@ -15,7 +15,7 @@ const COPY: Record<string, { heading: string; body: string }> = {
   },
   already: {
     heading: "You're already unsubscribed.",
-    body: "No further action needed — we removed you from the list earlier.",
+    body: "No further action needed. We removed you from the list earlier.",
   },
   notfound: {
     heading: "We couldn't find that subscription.",

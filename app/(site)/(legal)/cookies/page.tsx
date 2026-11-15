@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy — CodeFlee',
+  title: 'Cookie Policy | CodeFlee',
   description:
-    'Which cookies the CodeFlee website uses. In short: only one essential cookie for the admin dashboard — no analytics or tracking.',
+    'Which cookies the CodeFlee website uses. In short: only one essential cookie for the admin dashboard, no analytics or tracking.',
   alternates: { canonical: '/cookies' },
   openGraph: {
-    title: 'Cookie Policy — CodeFlee',
+    title: 'Cookie Policy | CodeFlee',
     description:
-      'Which cookies the CodeFlee website uses — only one essential cookie, no analytics or tracking.',
+      'Which cookies the CodeFlee website uses: only one essential cookie, no analytics or tracking.',
     type: 'website',
     url: '/cookies',
   },
@@ -25,7 +25,7 @@ export default function CookiePolicyPage() {
       <p className="cf-legal-updated">Last updated: June 1, 2026</p>
       <p className="cf-legal-lead">
         We keep cookies to an absolute minimum. As a regular visitor browsing the public site, you
-        are not given any analytics, advertising, or tracking cookies — we use a single essential
+        are not given any analytics, advertising, or tracking cookies. We use a single essential
         cookie only for the password-protected admin dashboard.
       </p>
 
@@ -76,7 +76,7 @@ export default function CookiePolicyPage() {
       <p>
         You can control or delete cookies through your browser settings, and set your browser to
         block them. Because the only cookie we use is the essential admin sign-in cookie, blocking
-        cookies won&rsquo;t affect your experience as a regular visitor — it would only prevent an
+        cookies won&rsquo;t affect your experience as a regular visitor. It would only prevent an
         administrator from logging in.
       </p>
 

@@ -7,7 +7,7 @@ export default function Pillars() {
       <div className="cf-container">
         <span className="cf-eyebrow cf-numbered">The studio</span>
         <p className="cf-h2 cf-pillars-statement">
-          One senior team for strategy, design and engineering —{' '}
+          One senior team for strategy, design and engineering,{' '}
           <span className="cf-dim">so nothing gets lost between the idea and the launch.</span>
         </p>
         <div className="cf-pillars">

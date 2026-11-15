@@ -7,8 +7,8 @@ import HomeFaq from '@/components/HomeFaq';
 import { projectForService } from '@/lib/contact-options';
 import { site } from '@/lib/site';
 
-const TITLE = `Start a project — ${site.name}`;
-const DESCRIPTION = `Tell us what you're building. We reply ${site.replyTime} with next steps and a rough estimate — no commitment.`;
+const TITLE = `Start a project | ${site.name}`;
+const DESCRIPTION = `Tell us what you're building. We reply ${site.replyTime} with next steps and a rough estimate. No commitment.`;
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -41,7 +41,7 @@ const PROOF = [
 
 const STEPS = [
   { n: '01', when: 'Today', title: 'You send a brief', text: 'A few lines is enough. Links, references and rough timelines all help.' },
-  { n: '02', when: `Within 24 hours`, title: 'We reply with a plan', text: 'Questions, a suggested approach and a rough estimate — written by the people who would build it.' },
+  { n: '02', when: `Within 24 hours`, title: 'We reply with a plan', text: 'Questions, a suggested approach and a rough estimate, written by the people who would build it.' },
   { n: '03', when: 'This week', title: 'A 30-minute call', text: 'We pressure-test the idea together and agree on what is in and out of scope.' },
   { n: '04', when: 'Within days', title: 'A fixed proposal', text: 'Scope, price and timeline in writing. No obligation at any point.' },
 ];

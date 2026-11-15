@@ -27,7 +27,7 @@ const DEFAULT_TO = "shakil.cse19@gmail.com";
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 1000 * 60 * 60;
 
-const FALLBACK_ERROR = `Something went wrong sending your message. Please email ${site.email} or message us on WhatsApp — we'd hate to miss it.`;
+const FALLBACK_ERROR = `Something went wrong sending your message. Please email ${site.email} or message us on WhatsApp. We'd hate to miss it.`;
 
 const ESCAPE: Record<string, string> = {
   "&": "&amp;",
@@ -65,9 +65,9 @@ function buildEmail(data: ContactInput) {
   const rows: Array<[string, string]> = [
     ["Name", name],
     ["Email", email],
-    ["Project", project || "—"],
-    ["Budget", budget || "—"],
-    ["Sent from", source || "—"],
+    ["Project", project || "-"],
+    ["Budget", budget || "-"],
+    ["Sent from", source || "-"],
   ];
 
   const html = `
@@ -93,7 +93,7 @@ function buildEmail(data: ContactInput) {
     </div>`;
 
   const text = [
-    `New project brief — ${site.name} contact form`,
+    `New project brief | ${site.name} contact form`,
     "",
     ...rows.map(([k, v]) => `${k}: ${v}`),
     "",
@@ -101,7 +101,7 @@ function buildEmail(data: ContactInput) {
     message,
   ].join("\n");
 
-  return { subject: `New project brief — ${name}`, html, text };
+  return { subject: `New project brief | ${name}`, html, text };
 }
 
 /**
@@ -111,7 +111,7 @@ function buildEmail(data: ContactInput) {
  * so a failed or unconfigured email never loses a lead. The visitor only sees
  * an error when the brief could be neither saved nor emailed.
  *
- * The `company` field is a honeypot — real users never see it, so any value
+ * The `company` field is a honeypot: real users never see it, so any value
  * means a bot. We pretend success to avoid giving scrapers a signal.
  */
 export async function submitContactAction(formData: FormData): Promise<ContactState> {

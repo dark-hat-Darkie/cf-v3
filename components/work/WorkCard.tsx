@@ -26,7 +26,7 @@ export default function WorkCard({ project: p, feature = false, eager = false, c
         <span className="cf-work-tile-img">
           <BrowserFrame
             src={p.card.src}
-            alt={`${client} — website screenshot`}
+            alt={`${client}, website screenshot`}
             blurDataURL={p.card.blurDataURL}
             sizes="(max-width: 860px) 100vw, 420px"
             eager={eager}
@@ -52,7 +52,7 @@ export default function WorkCard({ project: p, feature = false, eager = false, c
       <span className="cf-work-card-stage">
         <BrowserFrame
           src={p.card.src}
-          alt={`${client} — website screenshot`}
+          alt={`${client}, website screenshot`}
           url={displayUrl(getCaseStudy(p.slug)?.liveUrl, `${p.slug}.com`)}
           blurDataURL={p.card.blurDataURL}
           sizes={feature ? '(max-width: 900px) 100vw, 720px' : '(max-width: 900px) 100vw, 560px'}

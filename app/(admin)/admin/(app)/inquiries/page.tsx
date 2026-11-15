@@ -66,7 +66,7 @@ export default async function InquiriesPage() {
                     </td>
                     <td style={{ maxWidth: 440, whiteSpace: "pre-wrap" }}>{i.message}</td>
                     <td>
-                      <div>{i.project || "—"}</div>
+                      <div>{i.project || "-"}</div>
                       <div className="adm-dim">{i.budget || "No budget given"}</div>
                       {i.source ? <div className="adm-dim adm-mono">{i.source}</div> : null}
                     </td>

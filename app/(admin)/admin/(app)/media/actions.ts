@@ -79,7 +79,7 @@ export async function updateAltAction(input: unknown) {
 
 export async function deleteMediaAction(id: number) {
   await requireUser();
-  // NOTE: we do not delete from Vercel Blob here to keep this fast — orphans can be reaped later.
+  // NOTE: we do not delete from Vercel Blob here to keep this fast. Orphans can be reaped later.
   await db.delete(media).where(eq(media.id, id));
   return { ok: true };
 }

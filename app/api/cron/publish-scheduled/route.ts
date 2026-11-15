@@ -13,7 +13,7 @@ function isAuthorized(req: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
   // When a secret is configured, require it. Vercel automatically sends
   // `Authorization: Bearer $CRON_SECRET` on scheduled invocations, so this is
-  // the secure path — we do NOT trust `x-vercel-cron` alone, since external
+  // the secure path: we do NOT trust `x-vercel-cron` alone, since external
   // clients can forge that header.
   if (secret) {
     return req.headers.get("authorization") === `Bearer ${secret}`;

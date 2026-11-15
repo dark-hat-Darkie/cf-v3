@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import dns from "node:dns";
 import type { Config } from "drizzle-kit";
 
-// Minimal .env loader — drizzle-kit doesn't read .env.local on its own.
+// Minimal .env loader: drizzle-kit doesn't read .env.local on its own.
 function loadEnv(file: string) {
   const p = resolve(process.cwd(), file);
   if (!existsSync(p)) return;
@@ -27,7 +27,7 @@ loadEnv(".env.local");
 
 // WSL2 has no public IPv6 connectivity. Force any DNS lookup in this process
 // to return only IPv4 addresses. This catches `dns.lookup`-based clients (ws,
-// pg, http) — drizzle-kit's neon-websocket driver is one of them.
+// pg, http). Drizzle-kit's neon-websocket driver is one of them.
 if (process.env.WSL_DISTRO_NAME || process.env.WSL_INTEROP || process.env.FORCE_IPV4 === "1") {
   dns.setDefaultResultOrder("ipv4first");
   const originalLookup = dns.lookup.bind(dns) as unknown as (

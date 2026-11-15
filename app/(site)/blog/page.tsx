@@ -60,7 +60,7 @@ export async function generateMetadata({
     const match = tags.find((t) => t.slug === tag);
     const tagName = match?.name ?? tag;
     const title = `${tagName} · Blog | CodeFlee`;
-    const description = `Posts tagged ${tagName} — engineering, design, and craft from the ${siteName()} team.`;
+    const description = `Posts tagged ${tagName}: engineering, design, and craft from the ${siteName()} team.`;
     const canonical = `${base}?tag=${encodeURIComponent(tag)}`;
     return {
       title,
@@ -124,7 +124,7 @@ export default async function BlogIndex({
 
   const blogSchema = blogIndexJsonLd({
     url: `${siteUrl()}/blog`,
-    name: matchedTag ? `${matchedTag.name} · Blog — ${siteName()}` : `Blog — ${siteName()}`,
+    name: matchedTag ? `${matchedTag.name} · Blog | ${siteName()}` : `Blog | ${siteName()}`,
     description: matchedTag
       ? `Posts tagged ${matchedTag.name} from the ${siteName()} team.`
       : "Engineering, design, and craft from the studio.",
@@ -157,7 +157,7 @@ export default async function BlogIndex({
           <p className="cf-blog-hero-sub">
             {matchedTag
               ? `Every published post tagged “${matchedTag.name}.”`
-              : "Field notes on shipping software well — content strategy, design systems, performance, and what we learned the hard way."}
+              : "Field notes on shipping software well: content strategy, design systems, performance, and what we learned the hard way."}
           </p>
           <div className="cf-blog-hero-actions">
             <Link href={contactHref({ from: "blog-index" })} className="cf-btn cf-btn--primary">

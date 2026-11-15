@@ -22,7 +22,7 @@ export function ShareButtons({ url, title, variant = "inline" }: Props) {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1800);
     } catch {
-      /* clipboard blocked — silent */
+      /* clipboard blocked: silent */
     }
   };
 
@@ -30,7 +30,7 @@ export function ShareButtons({ url, title, variant = "inline" }: Props) {
     try {
       await navigator.share({ title, url });
     } catch {
-      /* user cancelled — silent */
+      /* user cancelled: silent */
     }
   };
 

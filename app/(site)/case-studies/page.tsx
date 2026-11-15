@@ -3,7 +3,7 @@ import WorkGrid from '@/components/work/WorkGrid';
 import ContactCta from '@/components/site/ContactCta';
 import { site } from '@/lib/site';
 
-const TITLE = `Work — ${site.name}`;
+const TITLE = `Work | ${site.name}`;
 const DESCRIPTION = 'Case studies from the studio: what we were asked to build, the decisions behind it, and how it shipped.';
 
 export const metadata: Metadata = {

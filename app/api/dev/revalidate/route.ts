@@ -5,7 +5,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
  * Dev-only cache-busting endpoint.
  *
  * Hit this from seed scripts (or curl) after writing data directly to the
- * database — those writes bypass the admin actions that normally call
+ * database. Those writes bypass the admin actions that normally call
  * updateTag / revalidatePath. Production publish/unpublish/delete go through
  * `publishAction` etc., which already invalidate correctly.
  *

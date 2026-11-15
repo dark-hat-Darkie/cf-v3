@@ -19,7 +19,7 @@ export async function GET() {
   <channel>
     <title>${escape(siteName())}</title>
     <link>${base}/blog</link>
-    <description>${escape(siteName())} — articles and field notes.</description>
+    <description>${escape(siteName())}: articles and field notes.</description>
     <language>en-us</language>
     <atom:link href="${base}/blog/feed.xml" rel="self" type="application/rss+xml" />
     ${items

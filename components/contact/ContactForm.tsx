@@ -44,7 +44,7 @@ export default function ContactForm({ defaultProject = '', source }: Props) {
     return (
       <div className="cf-form-success" role="status">
         <span className="cf-form-success-icon"><CheckIcon size={22} /></span>
-        <h3 className="cf-h3">Thanks — we got it.</h3>
+        <h3 className="cf-h3">Thanks, we got it.</h3>
         <p>
           We&apos;ll reply {site.replyTime} with next steps and a rough estimate. If it&apos;s urgent,
           message us on{' '}
@@ -151,7 +151,7 @@ export default function ContactForm({ defaultProject = '', source }: Props) {
         {!pending && <ArrowIcon />}
       </button>
       <p className="cf-form-note">
-        No commitment. We reply {site.replyTime}. Your details are only used to answer this message —{' '}
+        No commitment. We reply {site.replyTime}. Your details are only used to answer this message. See our{' '}
         <a className="cf-link" href="/privacy">privacy policy</a>.
       </p>
     </form>

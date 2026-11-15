@@ -5,7 +5,7 @@ import { z } from "zod";
  * for strict Zod validation. The editor (TipTap with our shared schema)
  * already produces valid docs, and the server-side renderer (`@tiptap/html`)
  * validates against the same schema before generating HTML. So here we only
- * sanity-check the outer shape and bound the size — full structural
+ * sanity-check the outer shape and bound the size. Full structural
  * validation happens at render time.
  */
 const MAX_DOC_BYTES = 2 * 1024 * 1024; // 2 MB

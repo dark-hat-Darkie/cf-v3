@@ -395,7 +395,7 @@ export async function getPostFull(slug: string) {
   if (row.post.status !== "published") return null;
   if (row.post.publishedAt && row.post.publishedAt.getTime() > Date.now()) return null;
 
-  // Avatar media (optional second join — keep separate to avoid duplicate media alias).
+  // Avatar media (optional second join: keep separate to avoid duplicate media alias).
   let avatar: { url: string; alt: string; width: number | null; height: number | null; blurhash: string | null } | null = null;
   if (row.author?.avatarMediaId) {
     const avatarRows = await db
@@ -444,7 +444,7 @@ export async function getPostFull(slug: string) {
 
 /**
  * Like getPostFull but loads by id and does not filter on publish status.
- * Intended for admin-only preview rendering — callers must enforce auth.
+ * Intended for admin-only preview rendering. Callers must enforce auth.
  */
 export async function getPostFullById(id: number) {
   if (!hasDatabase()) return null;

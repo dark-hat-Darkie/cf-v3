@@ -171,7 +171,7 @@ export function titleHasBracket(title: string): boolean {
 }
 
 /** Pixel-width estimator for SERP title truncation. Calibrated against
- * Google's Arial/Roboto-like font at 20px. Rough — within ~5% of real. */
+ * Google's Arial/Roboto-like font at 20px. Rough: within ~5% of real. */
 export function approximateTitlePixelWidth(title: string, fontSize = 20): number {
   // Width per character estimate based on character class. Avg ~0.55em.
   let px = 0;

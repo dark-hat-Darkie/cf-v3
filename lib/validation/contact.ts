@@ -2,7 +2,7 @@ import { z } from "zod";
 
 /**
  * Public contact form. Kept deliberately permissive on the optional choices
- * (project / budget) — they come from a fixed UI list, so we only bound their
+ * (project / budget). They come from a fixed UI list, so we only bound their
  * length rather than enumerate them, which would break the form silently if
  * the marketing copy ever changes.
  */
@@ -12,7 +12,7 @@ export const contactSchema = z.object({
   message: z
     .string()
     .trim()
-    .min(10, "Tell us a little more — a sentence or two is plenty")
+    .min(10, "Tell us a little more: a sentence or two is plenty")
     .max(5000, "Please keep it under 5,000 characters"),
   project: z.string().trim().max(80).optional().default(""),
   budget: z.string().trim().max(80).optional().default(""),

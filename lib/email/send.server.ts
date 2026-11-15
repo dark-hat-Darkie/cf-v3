@@ -1,7 +1,7 @@
 import "server-only";
 
 /**
- * Minimal Resend transport over their REST API — no SDK dependency.
+ * Minimal Resend transport over their REST API: no SDK dependency.
  * Configure with env vars:
  *   RESEND_API_KEY      (required to actually send)
  *   CONTACT_FROM_EMAIL  (optional; defaults to Resend's shared onboarding sender)

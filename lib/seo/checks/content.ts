@@ -8,8 +8,8 @@ export function checkWordCount(input: AnalysisInput): CheckResult {
   const min = input.isCornerstone ? 900 : 600;
   if (input.wordCount === 0) return r("word-count", "bad", 0, "Post has no content yet.");
   if (input.wordCount < 300) return r("word-count", "bad", 10, `Only ${input.wordCount} words. Aim for ${min}+.`);
-  if (input.wordCount < min) return r("word-count", "warn", 50, `${input.wordCount} words — recommended at least ${min}.`);
-  return r("word-count", "good", 100, `${input.wordCount} words — meets the recommended length.`);
+  if (input.wordCount < min) return r("word-count", "warn", 50, `${input.wordCount} words: recommended at least ${min}.`);
+  return r("word-count", "good", 100, `${input.wordCount} words: meets the recommended length.`);
 }
 
 export function checkSingleH1(input: AnalysisInput): CheckResult {
@@ -34,7 +34,7 @@ export function checkHeadingHierarchy(input: AnalysisInput): CheckResult {
 
 export function checkSubheadingPresence(input: AnalysisInput): CheckResult {
   const subs = input.structure.headings.filter((h) => h.level >= 2);
-  if (subs.length >= 2) return r("subheading-presence", "good", 100, `${subs.length} subheadings — good structure.`);
+  if (subs.length >= 2) return r("subheading-presence", "good", 100, `${subs.length} subheadings: good structure.`);
   if (subs.length === 1) return r("subheading-presence", "warn", 60, "Only one subheading.");
   if (input.wordCount > 300) return r("subheading-presence", "bad", 20, "No subheadings.", "Break content into H2/H3 sections so readers can scan.");
   return r("subheading-presence", "neutral", 0, "Post is too short to require subheadings.");

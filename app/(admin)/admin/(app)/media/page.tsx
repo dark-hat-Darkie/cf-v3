@@ -17,7 +17,7 @@ export default async function MediaPage() {
       <div className="adm-content">
         {items.length === 0 ? (
           <div className="adm-card adm-table-empty">
-            No media yet. Upload from the post editor — use the image button or drag &amp; drop.
+            No media yet. Upload from the post editor: use the image button or drag &amp; drop.
           </div>
         ) : (
           <div className="adm-media-grid">

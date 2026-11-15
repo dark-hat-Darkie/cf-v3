@@ -24,15 +24,15 @@ const DIFFERENCE: [string, string][] = [
   ['Fixed-price scope, paid in milestones', 'Hourly billing surprises'],
   ['Senior engineers from kick-off to launch', 'Junior teams behind the proposal'],
   ['Bi-weekly demos and a Slack you actually want', 'Mid-project radio silence'],
-  ['You own the code, repos, infra — day one', 'Locked codebase or vendor lock-in'],
+  ['You own the code, repos and infra from day one', 'Locked codebase or vendor lock-in'],
   ['30 days of bug fixes baked in', '"Done" means deployed and ghosted'],
-  ['One full-stack team — design through deploy', 'Sub-agencies stitched together'],
+  ['One full-stack team, design through deploy', 'Sub-agencies stitched together'],
 ];
 
 const PROMISES = [
   { title: 'Free discovery call', desc: 'A 30-min strategy call before you commit a dollar.' },
   { title: 'Fixed-price scope', desc: 'No hourly billing surprises. You see the number up front.' },
-  { title: 'You own the code', desc: 'Source, repos, infrastructure — yours from day one.' },
+  { title: 'You own the code', desc: 'Source, repos, infrastructure: yours from day one.' },
   { title: '30-day post-launch', desc: 'Bug fixes and minor iterations included after we ship.' },
 ];
 
@@ -40,7 +40,7 @@ function faqs(s: ServiceData) {
   return [
     {
       q: 'How fast can you actually start?',
-      a: 'Most projects kick off within 1–2 weeks of the discovery call. We accept a maximum of 2 new engagements per quarter so the team you meet is the team that ships your work — no bait-and-switch.',
+      a: 'Most projects kick off within 1–2 weeks of the discovery call. We accept a maximum of 2 new engagements per quarter so the team you meet is the team that ships your work. No bait-and-switch.',
     },
     {
       q: 'How is payment structured?',
@@ -48,7 +48,7 @@ function faqs(s: ServiceData) {
     },
     {
       q: 'What if scope changes mid-project?',
-      a: 'It will. We re-scope in writing the moment something material shifts — you decide whether to extend the timeline, raise the budget, or trim. No silent meter running. No surprise invoices.',
+      a: 'It will. We re-scope in writing the moment something material shifts. You decide whether to extend the timeline, raise the budget, or trim. No silent meter running. No surprise invoices.',
     },
     {
       q: 'Do you sign NDAs and work in our repo?',
@@ -56,7 +56,7 @@ function faqs(s: ServiceData) {
     },
     {
       q: 'What happens after the project ships?',
-      a: 'You get 30 days of included bug fixes and minor iterations. After that, we offer a flat-rate maintenance retainer or you can take it fully in-house — your code, your call. No vendor lock-in.',
+      a: 'You get 30 days of included bug fixes and minor iterations. After that, we offer a flat-rate maintenance retainer or you can take it fully in-house. Your code, your call. No vendor lock-in.',
     },
     {
       q: 'Can you work with our existing team?',
@@ -142,7 +142,7 @@ export default function ServicePage({ service: s }: { service: ServiceData }) {
               <Link href={`/case-studies/${project.slug}`} className="cf-sv-visual-shot" data-cursor="View case study">
                 <BrowserFrame
                   src={project.card.src}
-                  alt={`${project.meta[0][1]} — website screenshot`}
+                  alt={`${project.meta[0][1]}, website screenshot`}
                   url={displayUrl(getCaseStudy(project.slug)?.liveUrl, `${project.slug}.com`)}
                   blurDataURL={project.card.blurDataURL}
                   sizes="(max-width: 900px) 100vw, 720px"
@@ -201,7 +201,7 @@ export default function ServicePage({ service: s }: { service: ServiceData }) {
               <h2 className="cf-h2">Every deliverable. <span className="cf-dim">No ambiguity.</span></h2>
             </div>
             <p className="cf-lead">
-              {s.deliverables.length} things you own at the end of the engagement — written into the proposal before work starts.
+              {s.deliverables.length} things you own at the end of the engagement, written into the proposal before work starts.
             </p>
           </div>
           <ol className="cf-sv-deliver">
@@ -282,7 +282,7 @@ export default function ServicePage({ service: s }: { service: ServiceData }) {
               <span className="cf-eyebrow">The engagement</span>
               <h2 className="cf-h2">Most agencies do this. <span className="cf-dim">We do the opposite.</span></h2>
             </div>
-            <p className="cf-lead">Fixed scope, fixed price, senior people — and four promises that make this a safe yes.</p>
+            <p className="cf-lead">Fixed scope, fixed price, senior people, and four promises that make this a safe yes.</p>
           </div>
 
           <div className="cf-sv-engage">
@@ -380,7 +380,7 @@ export default function ServicePage({ service: s }: { service: ServiceData }) {
         service={s.slug}
         from="service-cta"
         heading={<>Ready to build something <span className="cf-dim">worth using?</span></>}
-        text={`Tell us about your project. We reply ${site.replyTime} with an honest assessment and a rough scope — no sales pressure.`}
+        text={`Tell us about your project. We reply ${site.replyTime} with an honest assessment and a rough scope. No sales pressure.`}
       />
     </>
   );

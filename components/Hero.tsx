@@ -26,7 +26,7 @@ export default function Hero() {
         <div className="cf-hero-meta">
           <span>(00)</span>
           <span>Design &amp; engineering studio</span>
-          <span>Dhaka — worldwide</span>
+          <span>Dhaka, worldwide</span>
           <span><i aria-hidden="true" />2 spots open · Q3 2026</span>
         </div>
 

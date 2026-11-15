@@ -15,7 +15,7 @@ export default async function SeoAuditPage() {
         <div className="adm-topbar-title">SEO audit</div>
       </header>
       <div className="adm-content">
-        <p className="adm-page-sub">All posts sorted by lowest SEO score — fix the bottom of this list first.</p>
+        <p className="adm-page-sub">All posts sorted by lowest SEO score. Fix the bottom of this list first.</p>
         <div className="adm-card" style={{ padding: 0, overflow: "hidden" }}>
           {sorted.length === 0 ? (
             <div className="adm-table-empty">No posts yet.</div>
@@ -40,7 +40,7 @@ export default async function SeoAuditPage() {
                       </Link>
                     </td>
                     <td><StatusBadge status={p.status} /></td>
-                    <td className="adm-dim">{p.focusKeyword || <span className="adm-muted">—</span>}</td>
+                    <td className="adm-dim">{p.focusKeyword || <span className="adm-muted">-</span>}</td>
                     <td><ScoreMeter score={p.seoScore} size={36} /></td>
                     <td><ScoreMeter score={p.readabilityScore} size={36} /></td>
                     <td className="adm-mono adm-dim">{p.wordCount.toLocaleString()}</td>

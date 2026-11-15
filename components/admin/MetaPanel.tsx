@@ -94,7 +94,7 @@ export function MetaPanel({
           <button
             type="button"
             className="adm-btn adm-btn-sm"
-            title="Smart slug — strips stop words and ensures the focus keyphrase is present"
+            title="Smart slug: strips stop words and ensures the focus keyphrase is present"
             onClick={() => onChange({ slug: smartSlug(title, meta.focusKeyword) })}
           >
             Smart
@@ -151,7 +151,7 @@ export function MetaPanel({
       <div className="adm-field">
         <label className="adm-label">
           Excerpt
-          <span className="adm-label-hint">cards & RSS — falls back to meta description</span>
+          <span className="adm-label-hint">cards & RSS: falls back to meta description</span>
         </label>
         <textarea
           className="adm-textarea"

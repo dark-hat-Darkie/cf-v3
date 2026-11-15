@@ -35,7 +35,7 @@ export default function SiteHeader() {
   return (
     <header className={`cf-header${open ? ' is-open' : ''}`}>
       <div className="cf-header-inner">
-        <Link href="/" className="cf-header-logo" aria-label={`${site.name} — home`} onClick={close}>
+        <Link href="/" className="cf-header-logo" aria-label={`${site.name}, home`} onClick={close}>
           <Image src="/assets/logo.svg" alt={site.name} width={157} height={26} preload />
         </Link>
 
@@ -70,13 +70,14 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      <div id="cf-mobile-menu" className="cf-drawer cf-sf-plum" hidden={!open}>
+      <div id="cf-mobile-menu" className="cf-drawer cf-sf-plum" inert={!open}>
         <nav className="cf-drawer-nav" aria-label="Mobile">
-          {site.nav.map((item) => (
+          {site.nav.map((item, i) => (
             <Link
               key={item.href}
               href={item.href}
               className="cf-drawer-link"
+              style={{ '--i': i } as React.CSSProperties}
               aria-current={isActive(pathname, item.href) ? 'page' : undefined}
               onClick={close}
             >

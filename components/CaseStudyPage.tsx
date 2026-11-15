@@ -16,7 +16,7 @@ import { ArrowIcon, CheckIcon } from './site/icons';
 function isReal(s: CaseOutcomeStat | undefined): s is CaseOutcomeStat {
   if (!s) return false;
   const v = s.value.trim();
-  return v !== '' && v !== '—' && !s.label.trim().toUpperCase().startsWith('TODO');
+  return v !== '' && v !== '-' && !s.label.trim().toUpperCase().startsWith('TODO');
 }
 
 /** Case-study service labels → the service page that covers them. */
@@ -85,15 +85,15 @@ export default function CaseStudyPage({ study: c, screenshots = [] }: { study: C
           <dl className="cf-sv-spec">
             <div><dt>Client</dt><dd>{c.client.length > 16 ? c.client.split(' ').slice(0, 2).join(' ') : c.client}</dd></div>
             <div><dt>Services</dt><dd>{c.services.join(' · ')}</dd></div>
-            <div><dt>Duration</dt><dd>{d?.duration ?? '—'}</dd></div>
-            <div><dt>Team</dt><dd>{d?.team ?? '—'}</dd></div>
+            <div><dt>Duration</dt><dd>{d?.duration ?? '-'}</dd></div>
+            <div><dt>Team</dt><dd>{d?.team ?? '-'}</dd></div>
             <div><dt>Year</dt><dd>{c.year}</dd></div>
           </dl>
 
           <div className="cf-cs-cover">
             <BrowserFrame
               src={c.heroImage}
-              alt={`${c.client} — homepage`}
+              alt={`${c.client}, homepage`}
               url={displayUrl(c.liveUrl, `${c.slug}.com`)}
               sizes="(max-width: 1280px) 100vw, 1240px"
               preload
@@ -270,7 +270,7 @@ export default function CaseStudyPage({ study: c, screenshots = [] }: { study: C
                 <h2 className="cf-h2">See the <span className="cf-dim">whole thing.</span></h2>
               </div>
               <p className="cf-lead">
-                Each screen is the full page, top to bottom — open any one to scroll the entire design.
+                Each screen is the full page, top to bottom. Open any one to scroll the entire design.
               </p>
             </div>
             <ShowcaseGallery client={c.client} screenshots={screenshots} />
@@ -418,7 +418,7 @@ export default function CaseStudyPage({ study: c, screenshots = [] }: { study: C
       <ContactCta
         from={`case-study-${c.slug}`}
         heading={<>Want results <span className="cf-dim">like these?</span></>}
-        text={`Tell us what you're building. We reply ${site.replyTime} — no commitment, no sales pitch.`}
+        text={`Tell us what you're building. We reply ${site.replyTime}. No commitment, no sales pitch.`}
       />
     </>
   );

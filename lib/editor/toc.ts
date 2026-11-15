@@ -46,7 +46,7 @@ function flattenText(node: JSONContent): string {
  * This is the authoritative source: the anchor IDs come from the same HTML the
  * page actually renders (injected by `postProcessHtml`), so TOC links always
  * resolve. It also tolerates ProseMirror docs whose heading nodes are missing
- * `attrs.level` — those render correct <h2>/<h3> via TipTap but are invisible to
+ * `attrs.level`. Those render correct <h2>/<h3> via TipTap but are invisible to
  * the JSON walk in `extractToc`. Prefer this over `extractToc` for stored posts.
  */
 export function extractTocFromHtml(html: string | null | undefined): TocHeading[] {

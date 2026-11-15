@@ -5,7 +5,7 @@ import { join } from 'node:path';
 // Default social-share card, inherited by every route that doesn't set its
 // own openGraph/twitter image (homepage, services, blog index, …). Blog posts
 // and case studies override this with their own featured/hero image.
-export const alt = 'CodeFlee — Digital Studio · Dhaka';
+export const alt = 'CodeFlee | Digital Studio · Dhaka';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 

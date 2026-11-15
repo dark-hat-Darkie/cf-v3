@@ -31,7 +31,7 @@ async function loadScoreInputs(p: typeof posts.$inferSelect): Promise<PostScoreI
   const featured = p.featuredImageId ? mediaById.get(p.featuredImageId) : null;
   const og = p.ogImageId ? mediaById.get(p.ogImageId) : null;
 
-  // Cannibalization — same query the editor uses live.
+  // Cannibalization: same query the editor uses live.
   const cannibalization = p.focusKeyword
     ? await findDuplicateKeyword(p.focusKeyword, p.id)
     : [];
@@ -49,7 +49,7 @@ async function loadScoreInputs(p: typeof posts.$inferSelect): Promise<PostScoreI
 }
 
 // Tiny helper so the Promise.all can sit in one place and we don't import
-// drizzle's inArray solely for this — and a single-element id stays simple.
+// drizzle's inArray solely for this, and a single-element id stays simple.
 function inArrayOrId(ids: number[]) {
   if (ids.length === 1) return eq(media.id, ids[0]);
   return inArray(media.id, ids);
@@ -133,7 +133,7 @@ export async function saveDraftAction(input: unknown): Promise<SaveDraftResult> 
 
     // neon-http doesn't support multi-statement transactions reliably; we run
     // these sequentially. Worst case (network drops between statements) leaves
-    // a saved post without a matching revision row — recoverable on next save.
+    // a saved post without a matching revision row, recoverable on next save.
     await db
       .update(posts)
       .set({

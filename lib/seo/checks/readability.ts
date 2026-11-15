@@ -21,9 +21,9 @@ export function fleschReadingEase(text: string): number {
 export function checkFlesch(input: AnalysisInput): CheckResult {
   if (input.wordCount < 50) return r("flesch", "neutral", 0, "Not enough content to score yet.");
   const score = fleschReadingEase(input.plainText);
-  if (score >= 60) return r("flesch", "good", 100, `Flesch ${score} — easy to read.`);
-  if (score >= 50) return r("flesch", "warn", 60, `Flesch ${score} — fairly difficult.`, "Use shorter sentences and simpler words.");
-  return r("flesch", "bad", 30, `Flesch ${score} — difficult to read.`, "Shorten sentences and replace long or technical words with everyday ones.");
+  if (score >= 60) return r("flesch", "good", 100, `Flesch ${score}: easy to read.`);
+  if (score >= 50) return r("flesch", "warn", 60, `Flesch ${score}: fairly difficult.`, "Use shorter sentences and simpler words.");
+  return r("flesch", "bad", 30, `Flesch ${score}: difficult to read.`, "Shorten sentences and replace long or technical words with everyday ones.");
 }
 
 export function checkSentenceLength(input: AnalysisInput): CheckResult {
@@ -31,9 +31,9 @@ export function checkSentenceLength(input: AnalysisInput): CheckResult {
   if (sents.length === 0) return r("sentence-length", "neutral", 0, "No sentences yet.");
   const longCount = sents.filter((s) => tokenizeWords(s).length > 20).length;
   const ratio = longCount / sents.length;
-  if (ratio < 0.25) return r("sentence-length", "good", 100, `${Math.round(ratio * 100)}% of sentences are long — good pacing.`);
+  if (ratio < 0.25) return r("sentence-length", "good", 100, `${Math.round(ratio * 100)}% of sentences are long: good pacing.`);
   if (ratio < 0.35) return r("sentence-length", "warn", 60, `${Math.round(ratio * 100)}% of sentences exceed 20 words.`, "Aim for under 25% long sentences.");
-  return r("sentence-length", "bad", 30, `${Math.round(ratio * 100)}% of sentences are long — break them up.`);
+  return r("sentence-length", "bad", 30, `${Math.round(ratio * 100)}% of sentences are long. Break them up.`);
 }
 
 export function checkParagraphLength(input: AnalysisInput): CheckResult {
@@ -43,13 +43,13 @@ export function checkParagraphLength(input: AnalysisInput): CheckResult {
   const ratio = longCount / paras.length;
   if (ratio === 0) return r("paragraph-length", "good", 100, "All paragraphs are well-sized.");
   if (ratio < 0.25) return r("paragraph-length", "warn", 60, `${longCount} paragraph${longCount === 1 ? "" : "s"} over 150 words.`);
-  return r("paragraph-length", "bad", 30, `${Math.round(ratio * 100)}% of paragraphs are too long.`, "Split long paragraphs — aim for 3–4 sentences each.");
+  return r("paragraph-length", "bad", 30, `${Math.round(ratio * 100)}% of paragraphs are too long.`, "Split long paragraphs. Aim for 3–4 sentences each.");
 }
 
 export function checkSubheadingDistribution(input: AnalysisInput): CheckResult {
   if (input.wordCount < 300) return r("subhead-dist", "neutral", 0, "Post is too short for this check.");
   const headingPositions: number[] = [];
-  // Estimate by mapping headings to plaintext position via order — approximate but useful
+  // Estimate by mapping headings to plaintext position via order: approximate but useful
   let cursor = 0;
   for (const h of input.structure.headings) {
     const idx = input.plainText.toLowerCase().indexOf(h.text.toLowerCase(), cursor);
@@ -80,9 +80,9 @@ export function checkPassiveVoice(input: AnalysisInput): CheckResult {
   if (sents.length < 4) return r("passive", "neutral", 0, "Not enough sentences to score passive voice.");
   const passive = sents.filter(isSentencePassive).length;
   const ratio = passive / sents.length;
-  if (ratio < 0.1) return r("passive", "good", 100, `${Math.round(ratio * 100)}% passive — strong active voice.`);
-  if (ratio < 0.2) return r("passive", "warn", 60, `${Math.round(ratio * 100)}% passive — try to reduce below 10%.`);
-  return r("passive", "bad", 30, `${Math.round(ratio * 100)}% passive — rewrite passive sentences in active voice.`);
+  if (ratio < 0.1) return r("passive", "good", 100, `${Math.round(ratio * 100)}% passive: strong active voice.`);
+  if (ratio < 0.2) return r("passive", "warn", 60, `${Math.round(ratio * 100)}% passive: try to reduce below 10%.`);
+  return r("passive", "bad", 30, `${Math.round(ratio * 100)}% passive: rewrite passive sentences in active voice.`);
 }
 
 export function checkTransitionWords(input: AnalysisInput): CheckResult {
@@ -91,7 +91,7 @@ export function checkTransitionWords(input: AnalysisInput): CheckResult {
   const withT = sents.filter(sentenceHasTransition).length;
   const ratio = withT / sents.length;
   if (ratio >= 0.3) return r("transition", "good", 100, `${Math.round(ratio * 100)}% of sentences use a transition word.`);
-  if (ratio >= 0.2) return r("transition", "warn", 60, `${Math.round(ratio * 100)}% transitions — aim for 30%.`);
+  if (ratio >= 0.2) return r("transition", "warn", 60, `${Math.round(ratio * 100)}% transitions: aim for 30%.`);
   return r("transition", "bad", 30, `Only ${Math.round(ratio * 100)}% of sentences use transitions.`, "Connectors like “however”, “for example”, “in addition” improve flow.");
 }
 

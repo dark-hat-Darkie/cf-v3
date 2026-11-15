@@ -46,7 +46,7 @@ async function main() {
     .limit(1);
 
   if (!target) {
-    console.log("No published post without a hero image — nothing to do.");
+    console.log("No published post without a hero image: nothing to do.");
     process.exit(0);
   }
 
@@ -56,7 +56,7 @@ async function main() {
     .values({
       blobUrl: "/assets/c1.webp",
       pathname: "local/c1.webp",
-      alt: "Architectural diagram — engineering playbook",
+      alt: "Architectural diagram, engineering playbook",
       width: 1600,
       height: 900,
       mime: "image/webp",

@@ -397,7 +397,7 @@ export function PostEditor({ post, siteOrigin }: { post: EditorPost; siteOrigin:
   const handleFix = (intent: string) => {
     if (!editor) return;
     if (intent === "fix-external-rel") {
-      // ProseMirror traversal — set rel on every link mark
+      // ProseMirror traversal: set rel on every link mark
       const { state, view } = editor;
       const tr = state.tr;
       state.doc.descendants((node, pos) => {

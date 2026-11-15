@@ -30,9 +30,9 @@ const whatsappNumber = '8801716778254';
 export const site = {
   name: process.env.SITE_NAME ?? 'CodeFlee',
   url: siteUrl(process.env.SITE_URL),
-  title: 'CodeFlee — Digital Studio · Dhaka',
+  title: 'CodeFlee | Digital Studio · Dhaka',
   description:
-    'A senior engineering & design studio in Dhaka. From product thinking to launch-day comms — we sweat the details so your team can move.',
+    'A senior engineering & design studio in Dhaka. From product thinking to launch-day comms, we sweat the details so your team can move.',
   tagline: 'A senior engineering studio in Dhaka, shipping work for founders who sweat the details.',
 
   email: 'hello@codeflee.com',

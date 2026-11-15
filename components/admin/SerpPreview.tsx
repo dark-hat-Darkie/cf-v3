@@ -11,7 +11,7 @@ export function SerpPreview({
 }) {
   const url = `${siteOrigin.replace(/\/$/, "")}/blog/${slug || "your-slug"}`;
   const cleanUrl = url.replace(/^https?:\/\//, "");
-  const displayTitle = title || "Untitled — set an SEO title";
+  const displayTitle = title || "Untitled: set an SEO title";
   const displayDesc = description || "Set a meta description to control how this listing reads in Google.";
 
   return (

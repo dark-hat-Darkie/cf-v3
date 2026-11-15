@@ -38,7 +38,7 @@ async function loadRelated(id: number) {
 
 // Pre-render every published slug at build time. New posts published after
 // deploy still render on-demand and are cached for 24h via cacheLife above.
-// cacheComponents requires a non-empty array — when the DB has no posts yet
+// cacheComponents requires a non-empty array. When the DB has no posts yet
 // (or DATABASE_URL isn't wired during build), return a sentinel that the page
 // will resolve as 404 at request time.
 export async function generateStaticParams() {

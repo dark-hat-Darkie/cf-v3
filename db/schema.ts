@@ -236,7 +236,7 @@ export const inquiries = pgTable(
     /** Where on the site the form was submitted from (e.g. "service-hero"). */
     source: varchar("source", { length: 200 }).notNull().default(""),
     status: inquiryStatusEnum("status").notNull().default("new"),
-    /** False when the notification email could not be sent — the brief is still saved. */
+    /** False when the notification email could not be sent. The brief is still saved. */
     emailSent: boolean("email_sent").notNull().default(false),
     ipHash: varchar("ip_hash", { length: 64 }).notNull().default(""),
     userAgent: text("user_agent").notNull().default(""),

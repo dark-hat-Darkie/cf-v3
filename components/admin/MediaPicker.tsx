@@ -90,7 +90,7 @@ export function MediaPicker({
             <span className="adm-spinner" /> Loading…
           </div>
         ) : items.length === 0 ? (
-          <div className="adm-table-empty">No media yet — upload above.</div>
+          <div className="adm-table-empty">No media yet. Upload above.</div>
         ) : (
           <div className="adm-media-grid">
             {items.map((m) => (

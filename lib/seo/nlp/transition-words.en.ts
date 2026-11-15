@@ -1,4 +1,4 @@
-// Yoast's transition word list (English) — used by readability:transition-words check.
+// Yoast's transition word list (English), used by readability:transition-words check.
 // Multi-word phrases are checked first; single tokens fall back to set lookup.
 export const TRANSITION_PHRASES_EN: string[] = [
   "above all","accordingly","additionally","after all","after that","afterwards","all in all","all of a sudden",

@@ -1,4 +1,4 @@
-/* ============ CodeFlee — shared site chrome ============
+/* ============ CodeFlee: shared site chrome ============
    One header, one footer and one phone contact bar for every public page. */
 
 html.cf-no-scroll { overflow: hidden; }
@@ -6,11 +6,17 @@ html.cf-no-scroll { overflow: hidden; }
 /* ---- Header: a flat white bar with a hairline ---- */
 .cf-header {
   position: sticky; top: 0; z-index: 300;
-  background: color-mix(in srgb, var(--cf-paper) 92%, transparent);
-  -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
   border-bottom: 1px solid var(--cf-line);
 }
-.cf-header.is-open { background: var(--cf-paper); }
+/* The blur lives on a layer behind the bar. Putting backdrop-filter on the
+   header itself would make it the containing block for the fixed drawer,
+   which then collapses to the header's height. */
+.cf-header::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: color-mix(in srgb, var(--cf-paper) 92%, transparent);
+  -webkit-backdrop-filter: saturate(180%) blur(14px); backdrop-filter: saturate(180%) blur(14px);
+}
+.cf-header.is-open::before { background: var(--cf-paper); }
 .cf-header-inner {
   max-width: calc(var(--cf-maxw) + var(--cf-gutter) * 2); height: var(--cf-header-h);
   margin-inline: auto; padding-inline: var(--cf-gutter);
@@ -44,11 +50,37 @@ html.cf-no-scroll { overflow: hidden; }
 /* ---- Mobile drawer ---- */
 .cf-drawer {
   position: fixed; inset: var(--cf-header-h) 0 0 0; z-index: 299;
+  overscroll-behavior: contain;
   display: flex; flex-direction: column; justify-content: space-between; gap: 32px;
   padding: 28px var(--cf-gutter) max(28px, env(safe-area-inset-bottom));
   overflow-y: auto;
 }
-.cf-drawer[hidden] { display: none; }
+/* Closed: wiped up and out of reach. Open: the panel wipes down from the
+   header, then the links rise in one after another. */
+.cf-drawer {
+  visibility: hidden; clip-path: inset(0 0 100% 0);
+  transition: clip-path .38s var(--cf-ease), visibility 0s .38s;
+}
+.cf-header.is-open .cf-drawer {
+  visibility: visible; clip-path: inset(0);
+  transition: clip-path .5s var(--cf-ease), visibility 0s;
+}
+.cf-drawer-link, .cf-drawer-foot {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .2s, transform 0s .38s;
+}
+.cf-header.is-open .cf-drawer-link, .cf-header.is-open .cf-drawer-foot {
+  opacity: 1; transform: none;
+  transition: opacity .45s var(--cf-ease), transform .55s var(--cf-ease);
+  transition-delay: calc(.12s + var(--i, 0) * .05s);
+}
+.cf-header.is-open .cf-drawer-foot { transition-delay: .42s; }
+@media (prefers-reduced-motion: reduce) {
+  .cf-drawer, .cf-drawer-link, .cf-drawer-foot,
+  .cf-header.is-open .cf-drawer, .cf-header.is-open .cf-drawer-link, .cf-header.is-open .cf-drawer-foot {
+    transition: none; transform: none;
+  }
+}
 .cf-drawer-nav { display: flex; flex-direction: column; }
 .cf-drawer-link {
   padding: 18px 0; border-bottom: 1px solid var(--sf-border);

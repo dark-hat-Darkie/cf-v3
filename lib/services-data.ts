@@ -45,7 +45,7 @@ export const SERVICES: ServiceData[] = [
     chip: 'Flagship service',
     headline1: 'Code that ships.',
     headline2: 'Products that scale.',
-    sub: 'Next.js, TypeScript, edge-first stacks. We build for 10 million users from day one — not just the demo.',
+    sub: 'Next.js, TypeScript, edge-first stacks. We build for 10 million users from day one, not just the demo.',
     img: '/assets/web-dev.png',
     stats: [
       { value: '95+', label: 'Lighthouse score' },
@@ -54,12 +54,12 @@ export const SERVICES: ServiceData[] = [
     ],
     opening: {
       bold: 'Most agencies build for the pitch.',
-      rest: ' We build for the next 10 million users — and the engineers who have to maintain it at 3 a.m.',
+      rest: ' We build for the next 10 million users, and the engineers who have to maintain it at 3 a.m.',
     },
     bodyCol1:
       'A codebase is a long-term commitment. We treat it that way. Every architectural decision is documented, every edge case is typed, every performance regression is caught before it reaches production. You inherit code you can actually understand.',
     bodyCol2:
-      'We work in your repo, your stack, your timezone. Bi-weekly demos, async stand-ups, and a Slack channel you will actually want to check. No hand-holding required — just the output you booked us for.',
+      'We work in your repo, your stack, your timezone. Bi-weekly demos, async stand-ups, and a Slack channel you will actually want to check. No hand-holding required, just the output you booked us for.',
     insight:
       '"The best code is the code your team can still read 18 months later."',
     insightSource: 'CodeFlee engineering principle',
@@ -79,7 +79,7 @@ export const SERVICES: ServiceData[] = [
       {
         n: '03',
         title: 'Sprint Development',
-        desc: 'Two-week sprints with a working demo at the end of each. You see progress constantly — not a big reveal after months of radio silence.',
+        desc: 'Two-week sprints with a working demo at the end of each. You see progress constantly, not a big reveal after months of radio silence.',
         duration: '3–8 wks',
       },
       {
@@ -91,7 +91,7 @@ export const SERVICES: ServiceData[] = [
       {
         n: '05',
         title: 'Launch & Handoff',
-        desc: 'Production deploy, CI/CD walkthrough, and a live documentation session with your team. You own the code — and you know how to work with it.',
+        desc: 'Production deploy, CI/CD walkthrough, and a live documentation session with your team. You own the code, and you know how to work with it.',
         duration: '1 wk',
       },
     ],
@@ -139,7 +139,7 @@ export const SERVICES: ServiceData[] = [
       {
         n: '01',
         title: 'Product Definition',
-        desc: 'Jobs-to-be-done mapping, user flow diagrams, and technical architecture. We align on what success looks like — in measurable terms — before anything is designed.',
+        desc: 'Jobs-to-be-done mapping, user flow diagrams, and technical architecture. We align on what success looks like, in measurable terms, before anything is designed.',
         duration: '1–2 wks',
       },
       {
@@ -151,7 +151,7 @@ export const SERVICES: ServiceData[] = [
       {
         n: '03',
         title: 'MVP Development',
-        desc: 'React Native or native Swift/Kotlin — chosen by what your app actually needs. Two-week sprints, demo calls every Friday, working builds available daily via Expo Go or TestFlight.',
+        desc: 'React Native or native Swift/Kotlin, chosen by what your app actually needs. Two-week sprints, demo calls every Friday, working builds available daily via Expo Go or TestFlight.',
         duration: '4–8 wks',
       },
       {
@@ -197,7 +197,7 @@ export const SERVICES: ServiceData[] = [
     ],
     opening: {
       bold: 'Users don\'t read. They scan, tap, and leave.',
-      rest: ' We design for the way people actually behave — not the way we wish they would.',
+      rest: ' We design for the way people actually behave, not the way we wish they would.',
     },
     bodyCol1:
       'Every interface we design starts with a question: what is the user trying to accomplish, and what is stopping them? We run real user interviews, analyze behavioral data, and audit your current state before proposing anything new. Guesswork is expensive.',
@@ -268,12 +268,12 @@ export const SERVICES: ServiceData[] = [
     ],
     opening: {
       bold: 'A logo is not a brand.',
-      rest: ' The 12,000 micro-decisions that follow — how you write an error message, how your button animates, how your CEO signs their emails — that is the brand.',
+      rest: ' The 12,000 micro-decisions that follow: how you write an error message, how your button animates, how your CEO signs their emails. That is the brand.',
     },
     bodyCol1:
       'We do not make things that look good. We build visual systems that communicate, scale, and survive the transition from seed round to Series B. Brand is strategy made visible. Every asset we deliver has a reason to exist beyond looking nice.',
     bodyCol2:
-      'Motion is the new differentiator. In a world of static screenshots and Figma exports, the way your product moves tells users whether to trust it. We design motion principles that translate from microinteractions to full-page transitions — consistent, purposeful, never gratuitous.',
+      'Motion is the new differentiator. In a world of static screenshots and Figma exports, the way your product moves tells users whether to trust it. We design motion principles that translate from microinteractions to full-page transitions: consistent, purposeful, never gratuitous.',
     insight:
       '"People don\'t remember what you said. They remember how you made them feel. Motion is the feeling."',
     insightSource: 'CodeFlee brand strategy session',
@@ -293,7 +293,7 @@ export const SERVICES: ServiceData[] = [
       {
         n: '03',
         title: 'Identity Design',
-        desc: 'Logo system, color palette, typography stack, iconography, and secondary graphic elements — all designed as an interconnected system.',
+        desc: 'Logo system, color palette, typography stack, iconography, and secondary graphic elements: all designed as an interconnected system.',
         duration: '2–4 wks',
       },
       {
@@ -305,7 +305,7 @@ export const SERVICES: ServiceData[] = [
       {
         n: '05',
         title: 'Motion Principles',
-        desc: 'A keyframe animation system: 5–7 core patterns covering entrances, exits, state changes, and loading states — all mapped to your brand personality.',
+        desc: 'A keyframe animation system: 5–7 core patterns covering entrances, exits, state changes, and loading states, all mapped to your brand personality.',
         duration: '1–2 wks',
       },
     ],
@@ -330,7 +330,7 @@ export const SERVICES: ServiceData[] = [
     chip: 'Experimental',
     headline1: '3D experiences',
     headline2: 'that earn the scroll.',
-    sub: 'Interactive Three.js scenes and product visualizations that turn passive viewers into engaged users — without killing their battery.',
+    sub: 'Interactive Three.js scenes and product visualizations that turn passive viewers into engaged users, without killing their battery.',
     img: '/assets/tech.png',
     stats: [
       { value: '60fps', label: 'Performance target' },
@@ -342,9 +342,9 @@ export const SERVICES: ServiceData[] = [
       rest: ' Until it isn\'t. The studios and products that stand out in 2025 are the ones that treat the browser as a canvas, not a document.',
     },
     bodyCol1:
-      'We build Three.js experiences that run at 60fps on a MacBook Air and degrade gracefully on a three-year-old Android. Performance is not an afterthought — it is a design constraint. Every scene starts with a draw call budget and a texture compression target.',
+      'We build Three.js experiences that run at 60fps on a MacBook Air and degrade gracefully on a three-year-old Android. Performance is not an afterthought. It is a design constraint. Every scene starts with a draw call budget and a texture compression target.',
     bodyCol2:
-      'WebGL is not just for portfolios. Product visualizations, immersive onboarding, data storytelling, interactive configurators — these are conversion tools. We help you figure out whether 3D will move your metric, and only then do we write the first shader.',
+      'WebGL is not just for portfolios. Product visualizations, immersive onboarding, data storytelling, interactive configurators. These are conversion tools. We help you figure out whether 3D will move your metric, and only then do we write the first shader.',
     insight:
       '"The best WebGL experience is the one the user doesn\'t know is WebGL. They just know they couldn\'t stop scrolling."',
     insightSource: 'CodeFlee creative review',
@@ -386,7 +386,7 @@ export const SERVICES: ServiceData[] = [
       { title: 'Custom shaders', desc: 'GLSL vertex and fragment shaders for custom visual effects, documented and transferable.' },
       { title: 'Scroll interaction', desc: 'Lenis smooth scroll with GSAP ScrollTrigger or custom RAF-based scroll linking.' },
       { title: 'Performance report', desc: 'FPS and memory profiling across mobile, tablet, and desktop with optimization log.' },
-      { title: 'Graceful fallback', desc: 'Static image fallback for devices that cannot run WebGL — zero broken experiences.' },
+      { title: 'Graceful fallback', desc: 'Static image fallback for devices that cannot run WebGL: zero broken experiences.' },
       { title: 'Source code', desc: 'Fully documented Three.js code with setup guide and extension notes.' },
       { title: 'CMS integration', desc: 'Optional: CMS-controlled scene parameters so your team can iterate without code.' },
     ],
@@ -401,7 +401,7 @@ export const SERVICES: ServiceData[] = [
     chip: 'Revenue-focused',
     headline1: 'Online stores that',
     headline2: 'convert, not just display.',
-    sub: 'Shopify Plus, custom headless storefronts, and Stripe checkout flows — engineered around your revenue metrics, not platform limitations.',
+    sub: 'Shopify Plus, custom headless storefronts, and Stripe checkout flows, engineered around your revenue metrics, not platform limitations.',
     img: '/assets/solutions.png',
     stats: [
       { value: '3.2×', label: 'Avg. conversion lift' },
@@ -413,7 +413,7 @@ export const SERVICES: ServiceData[] = [
       rest: ' The average cart abandonment rate is 70.19%. Every second of load time, every extra form field, every moment of doubt costs you real money.',
     },
     bodyCol1:
-      'We start every e-commerce engagement with a conversion audit. Where are users dropping off? What is your checkout completion rate? What does your mobile experience actually feel like at 3G? The answers determine the scope — not a pre-packaged Shopify theme.',
+      'We start every e-commerce engagement with a conversion audit. Where are users dropping off? What is your checkout completion rate? What does your mobile experience actually feel like at 3G? The answers determine the scope, not a pre-packaged Shopify theme.',
     bodyCol2:
       'Headless is not always the answer. Sometimes a well-optimized Shopify Plus theme with a custom checkout extension outperforms a custom storefront at a third of the cost. We give you the honest recommendation, then build the best version of it.',
     insight:
