@@ -54,7 +54,7 @@ export function PostHero({ src, alt, width, height, blurDataURL, caption }: Prop
         alt={alt}
         width={width}
         height={height}
-        priority
+        preload
         sizes="(max-width: 1100px) 100vw, 1100px"
         {...(blurDataURL ? { placeholder: "blur" as const, blurDataURL } : {})}
       />

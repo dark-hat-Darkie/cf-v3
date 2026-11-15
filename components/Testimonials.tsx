@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const items = [
   {
     quote: (
@@ -25,32 +27,56 @@ const items = [
   },
 ];
 
-export default function Testimonials() {
+function Stars() {
   return (
-    <section className="cf-sec cf-sec-ink">
-      <div className="cf-wrap">
-        <div className="cf-section-head">
-          <div className="left">
-            <div className="cf-eyebrow">In their words</div>
-            <h2 className="cf-h2">Clients talk. <em className="grad">We listen.</em></h2>
+    <span className="cf-stars" role="img" aria-label="Rated 5 out of 5">
+      {'★★★★★'}
+    </span>
+  );
+}
+
+export default function Testimonials() {
+  const [lead, ...rest] = items;
+  return (
+    <section className="cf-section cf-sf-paper" id="testimonials">
+      <div className="cf-container">
+        <div className="cf-head">
+          <div>
+            <span className="cf-eyebrow">In their words</span>
+            <h2 className="cf-h2">Clients talk. <span className="cf-dim">We listen.</span></h2>
+          </div>
+          <div className="cf-head-aside">
+            <p className="cf-rating">
+              <strong>4.9</strong>
+              <span><Stars /><br />42 verified reviews on Clutch</span>
+            </p>
           </div>
         </div>
-        <div className="cf-testimonials">
-          {items.map((it, i) => (
-            <div key={i} className="cf-testimonial" data-hover="">
-              <div className="cf-testimonial-mark">&ldquo;</div>
-              <div className="cf-testimonial-quote">{it.quote}</div>
-              <div className="cf-testimonial-author">
-                <div className="cf-testimonial-avatar">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={it.img} alt="" />
-                </div>
-                <div>
-                  <div className="cf-testimonial-name">{it.name}</div>
-                  <div className="cf-testimonial-role">{it.role}</div>
-                </div>
-              </div>
-            </div>
+
+        <div className="cf-tgrid">
+          <figure className="cf-tcard cf-tcard--lead cf-sf-plum" data-rise="">
+            <Stars />
+            <blockquote>{lead.quote}</blockquote>
+            <figcaption>
+              <span className="cf-quote-avatar"><Image src={lead.img} alt="" width={56} height={56} /></span>
+              <span>
+                <span className="cf-quote-name">{lead.name}</span>
+                <span className="cf-quote-role">{lead.role}</span>
+              </span>
+            </figcaption>
+          </figure>
+          {rest.map((it) => (
+            <figure key={it.name} className="cf-tcard" data-rise="">
+              <Stars />
+              <blockquote>{it.quote}</blockquote>
+              <figcaption>
+                <span className="cf-quote-avatar"><Image src={it.img} alt="" width={48} height={48} /></span>
+                <span>
+                  <span className="cf-quote-name">{it.name}</span>
+                  <span className="cf-quote-role">{it.role}</span>
+                </span>
+              </figcaption>
+            </figure>
           ))}
         </div>
       </div>

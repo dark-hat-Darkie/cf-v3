@@ -1,0 +1,130 @@
+/* ============ CodeFlee — design tokens ============
+   "Precision" direction: white canvas, black type, hairline grid, and a
+   single purple accent. Token names are historical:
+   - cream / paper  : white canvases;  mist = the light-grey alternate band
+   - plum           : black (dark bands and footer)
+   - primary purple : the accent on white — links, numbers, hover and focus
+   - pink           : the logo's second colour — the accent on black bands,
+                      small markers, and the end of the brand gradient.
+                      Never used as text on white (too little contrast).
+   - gradient       : purple → pink, for the one highlighted phrase per page
+   Every brand colour literal lives in this file and nowhere else. */
+
+:root {
+  /* Canvas */
+  --cf-cream: #FFFFFF;
+  --cf-cream-deep: #EDEDEB;
+  --cf-paper: #FFFFFF;
+  --cf-mist: #F5F5F3;
+  --cf-lavender: #F1F1EF;
+
+  /* Plum darks */
+  --cf-plum-950: #0A0A0A;
+  --cf-plum-900: #0A0A0A;
+  --cf-plum-800: #1A1A1A;
+  --cf-plum-700: #2A2A2A;
+
+  /* Text */
+  --cf-ink: #0A0A0A;
+  --cf-text: #1F1F1F;
+  --cf-text-muted: #5C5C5C;
+
+  /* Action */
+  --cf-primary: #8333EB;
+  --cf-primary-600: #6B25C5;
+  --cf-primary-700: #5719A6;
+  --cf-primary-300: #C4A1FF;
+
+  /* Spark + status */
+  --cf-pink: #FF80AE;
+  --cf-success: #22C55E;
+  --cf-error: #B91C1C;
+
+  /* The one gradient */
+  --cf-gradient: linear-gradient(100deg, var(--cf-primary) 0%, var(--cf-primary) 35%, var(--cf-pink) 100%);
+
+  /* Tints */
+  --cf-primary-tint: color-mix(in srgb, var(--cf-primary) 8%, transparent);
+  --cf-primary-tint-strong: color-mix(in srgb, var(--cf-primary) 16%, transparent);
+  --cf-line: color-mix(in srgb, var(--cf-ink) 12%, transparent);
+  --cf-line-strong: color-mix(in srgb, var(--cf-ink) 30%, transparent);
+  --cf-line-on-dark: rgba(255, 255, 255, 0.16);
+
+  /* Type scale */
+  --cf-font-body: var(--font-mona-sans), system-ui, sans-serif;
+  --cf-font-display: var(--font-creato-display), var(--font-mona-sans), system-ui, sans-serif;
+  --cf-text-xs: 12px;
+  --cf-text-sm: 14px;
+  --cf-text-md: 16px;
+  --cf-text-lg: 18px;
+  --cf-text-body: 17px;
+  --cf-h3: clamp(21px, 1.8vw, 26px);
+  --cf-h2: clamp(32px, 3.8vw, 56px);
+  --cf-h1: clamp(44px, 6vw, 84px);
+
+  /* Space */
+  --cf-gutter: clamp(20px, 4vw, 48px);
+  --cf-section-y: clamp(88px, 11vw, 152px);
+  --cf-section-y-tight: clamp(56px, 7vw, 96px);
+  --cf-maxw: 1240px;
+  --cf-header-h: 72px;
+
+  /* Shape + motion */
+  --cf-radius-sm: 4px;
+  --cf-radius-md: 6px;
+  --cf-radius-lg: 8px;
+  --cf-radius-pill: 6px;
+  --cf-ease: cubic-bezier(.2, .9, .2, 1);
+  --cf-ease-out: cubic-bezier(.16, 1, .3, 1);
+  --cf-dur: .25s;
+  --cf-shadow-sm: none;
+  --cf-shadow-md: 0 14px 34px rgba(10, 10, 10, .08);
+  --cf-shadow-lg: 0 28px 70px rgba(10, 10, 10, .12);
+
+  --cf-grain-opacity: 0.04;
+}
+
+/* ---- Surface contexts --------------------------------------------------
+   A section picks a surface; everything inside reads the --sf-* variables,
+   so the same button, card, eyebrow or input is correct on any background. */
+:root,
+.cf-sf-cream {
+  --sf-bg: var(--cf-cream);
+  --sf-fg: var(--cf-ink);
+  --sf-body: var(--cf-text);
+  --sf-muted: var(--cf-text-muted);
+  --sf-border: var(--cf-line);
+  --sf-border-strong: var(--cf-line-strong);
+  --sf-accent: var(--cf-primary);
+  --sf-card: var(--cf-paper);
+  --sf-field: var(--cf-paper);
+}
+.cf-sf-paper {
+  --sf-bg: var(--cf-mist);
+  --sf-fg: var(--cf-ink);
+  --sf-body: var(--cf-text);
+  --sf-muted: var(--cf-text-muted);
+  --sf-border: var(--cf-line);
+  --sf-border-strong: var(--cf-line-strong);
+  --sf-accent: var(--cf-primary);
+  --sf-card: var(--cf-paper);
+  --sf-field: var(--cf-paper);
+}
+.cf-sf-plum,
+.cf-sf-plum-deep {
+  --sf-bg: var(--cf-plum-900);
+  --sf-fg: #fff;
+  --sf-body: rgba(255, 255, 255, .82);
+  --sf-muted: rgba(255, 255, 255, .64);
+  --sf-border: var(--cf-line-on-dark);
+  --sf-border-strong: rgba(255, 255, 255, .24);
+  --sf-accent: var(--cf-pink);
+  --sf-card: rgba(255, 255, 255, .05);
+  --sf-field: rgba(255, 255, 255, .06);
+}
+.cf-sf-plum-deep { --sf-bg: var(--cf-plum-950); }
+
+.cf-sf-cream, .cf-sf-paper, .cf-sf-plum, .cf-sf-plum-deep {
+  background: var(--sf-bg);
+  color: var(--sf-body);
+}

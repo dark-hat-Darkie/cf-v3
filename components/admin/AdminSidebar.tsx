@@ -14,6 +14,7 @@ const NAV: { group?: string; items: NavItem[] }[] = [
       { href: "/admin/posts", label: "Posts", icon: "Posts" },
       { href: "/admin/media", label: "Media", icon: "Media" },
       { href: "/admin/seo-audit", label: "SEO audit", icon: "Audit" },
+      { href: "/admin/inquiries", label: "Inquiries", icon: "Doc" },
     ],
   },
   {

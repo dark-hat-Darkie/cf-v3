@@ -8,8 +8,6 @@ import { AuthorBio } from "@/components/blog/AuthorBio";
 import { RelatedPosts } from "@/components/blog/RelatedPosts";
 import { PostNavigation } from "@/components/blog/PostNavigation";
 import { CodeCopyEnhancer } from "@/components/blog/CodeCopyEnhancer";
-import { BlogHeader } from "@/components/blog/BlogHeader";
-import { BlogFooter } from "@/components/blog/BlogFooter";
 import { NewsletterSignup } from "@/components/blog/NewsletterSignup";
 import { EndOfPostCTA } from "@/components/blog/EndOfPostCTA";
 import type { TocHeading } from "@/lib/editor/toc";
@@ -67,13 +65,7 @@ export function BlogPostView(props: BlogPostViewProps) {
   return (
     <div className="cf-blog-shell cf-blog-shell-with-header">
       <ReadingProgressBar />
-      <BlogHeader />
       <div className="cf-blog-container">
-        <nav className="cf-blog-nav">
-          <Link href="/blog" className="cf-blog-back">← All posts</Link>
-          <Link href="/" className="cf-blog-back">{siteName}</Link>
-        </nav>
-
         <header className="cf-post-hero">
           <div className="cf-post-breadcrumb">
             <Link href="/">Home</Link> · <Link href="/blog">Blog</Link>
@@ -163,11 +155,7 @@ export function BlogPostView(props: BlogPostViewProps) {
 
         <NewsletterSignup variant="wide" />
 
-        <footer className="cf-post-footer">
-          <Link href="/blog" className="cf-blog-back">← More from the blog</Link>
-        </footer>
       </div>
-      <BlogFooter />
 
       {jsonLd ? (
         <>

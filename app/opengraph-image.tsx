@@ -11,9 +11,9 @@ export const contentType = 'image/png';
 
 export default async function Image() {
   const fontsDir = join(process.cwd(), 'app', 'fonts');
-  const [regular, extrabold] = await Promise.all([
+  const [regular, medium] = await Promise.all([
     readFile(join(fontsDir, 'CreatoDisplay-Regular.otf')),
-    readFile(join(fontsDir, 'CreatoDisplay-ExtraBold.otf')),
+    readFile(join(fontsDir, 'CreatoDisplay-Medium.otf')),
   ]);
 
   return new ImageResponse(
@@ -25,9 +25,9 @@ export default async function Image() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: '#0B0B0B',
+          background: '#24133F',
           backgroundImage:
-            'radial-gradient(900px 520px at 82% -10%, rgba(255,128,174,0.22), rgba(11,11,11,0))',
+            'radial-gradient(900px 520px at 82% -10%, rgba(131,51,235,0.55), rgba(36,19,63,0))',
           padding: '76px 84px',
           fontFamily: 'Creato Display',
           color: '#F8F4EE',
@@ -43,7 +43,7 @@ export default async function Image() {
               marginRight: 18,
             }}
           />
-          <div style={{ display: 'flex', fontSize: 34, fontWeight: 800, letterSpacing: -0.5 }}>
+          <div style={{ display: 'flex', fontSize: 34, fontWeight: 500, letterSpacing: -0.5 }}>
             CodeFlee
           </div>
           <div style={{ display: 'flex', fontSize: 26, color: 'rgba(248,244,238,0.5)', marginLeft: 16 }}>
@@ -55,7 +55,7 @@ export default async function Image() {
           style={{
             display: 'flex',
             fontSize: 78,
-            fontWeight: 800,
+            fontWeight: 500,
             lineHeight: 1.04,
             letterSpacing: -2.5,
             maxWidth: 980,
@@ -68,7 +68,7 @@ export default async function Image() {
           <div style={{ display: 'flex', fontSize: 27, color: 'rgba(248,244,238,0.62)' }}>
             Dhaka · Senior engineering &amp; design
           </div>
-          <div style={{ display: 'flex', fontSize: 27, fontWeight: 800, color: '#FF80AE' }}>
+          <div style={{ display: 'flex', fontSize: 27, fontWeight: 500, color: '#C4A1FF' }}>
             codeflee.com
           </div>
         </div>
@@ -78,7 +78,7 @@ export default async function Image() {
       ...size,
       fonts: [
         { name: 'Creato Display', data: regular, weight: 400, style: 'normal' },
-        { name: 'Creato Display', data: extrabold, weight: 800, style: 'normal' },
+        { name: 'Creato Display', data: medium, weight: 500, style: 'normal' },
       ],
     },
   );

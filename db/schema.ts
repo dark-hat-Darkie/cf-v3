@@ -221,6 +221,33 @@ export const newsletterSubscribers = pgTable(
   ],
 );
 
+export const inquiryStatusEnum = pgEnum("inquiry_status", ["new", "replied", "archived"]);
+
+/** Project briefs submitted through the public contact form. */
+export const inquiries = pgTable(
+  "inquiries",
+  {
+    id: serial("id").primaryKey(),
+    name: varchar("name", { length: 120 }).notNull(),
+    email: varchar("email", { length: 255 }).notNull(),
+    message: text("message").notNull(),
+    project: varchar("project", { length: 80 }).notNull().default(""),
+    budget: varchar("budget", { length: 80 }).notNull().default(""),
+    /** Where on the site the form was submitted from (e.g. "service-hero"). */
+    source: varchar("source", { length: 200 }).notNull().default(""),
+    status: inquiryStatusEnum("status").notNull().default("new"),
+    /** False when the notification email could not be sent — the brief is still saved. */
+    emailSent: boolean("email_sent").notNull().default(false),
+    ipHash: varchar("ip_hash", { length: 64 }).notNull().default(""),
+    userAgent: text("user_agent").notNull().default(""),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("inquiries_status_idx").on(t.status, t.createdAt),
+    index("inquiries_ip_idx").on(t.ipHash, t.createdAt),
+  ],
+);
+
 export const seoSettings = pgTable("seo_settings", {
   id: serial("id").primaryKey(),
   siteName: text("site_name").notNull().default(""),
@@ -273,3 +300,5 @@ export type Redirect = typeof redirects.$inferSelect;
 export type PostRevision = typeof postRevisions.$inferSelect;
 export type NewsletterSubscriber = typeof newsletterSubscribers.$inferSelect;
 export type NewNewsletterSubscriber = typeof newsletterSubscribers.$inferInsert;
+export type Inquiry = typeof inquiries.$inferSelect;
+export type NewInquiry = typeof inquiries.$inferInsert;
