@@ -6,11 +6,30 @@
 
 const env = (v: string | undefined) => (v && v.trim() !== '' ? v.trim() : null);
 
+const DEFAULT_SITE_URL = 'https://codeflee.com';
+
+/**
+ * SITE_URL comes from hosting env and is easy to get subtly wrong (empty,
+ * wrapped in quotes, or a bare domain with no scheme). Any of those makes
+ * `new URL()` throw at build time, so coerce it into a valid origin here.
+ */
+function siteUrl(raw: string | undefined): string {
+  const value = (raw ?? '').trim().replace(/^['"]|['"]$/g, '').trim();
+  if (!value) return DEFAULT_SITE_URL;
+  const withScheme = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+  try {
+    return new URL(withScheme).origin;
+  } catch {
+    console.warn(`[site] SITE_URL is not a valid URL; falling back to ${DEFAULT_SITE_URL}`);
+    return DEFAULT_SITE_URL;
+  }
+}
+
 const whatsappNumber = '8801716778254';
 
 export const site = {
   name: process.env.SITE_NAME ?? 'CodeFlee',
-  url: (process.env.SITE_URL ?? 'https://codeflee.com').replace(/\/$/, ''),
+  url: siteUrl(process.env.SITE_URL),
   title: 'CodeFlee — Digital Studio · Dhaka',
   description:
     'A senior engineering & design studio in Dhaka. From product thinking to launch-day comms — we sweat the details so your team can move.',
