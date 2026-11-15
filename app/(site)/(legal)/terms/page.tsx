@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service — CodeFlee',
+  title: 'Terms of Service | CodeFlee',
   description:
     'The terms that govern your use of the CodeFlee website and its content.',
   alternates: { canonical: '/terms' },
   openGraph: {
-    title: 'Terms of Service — CodeFlee',
+    title: 'Terms of Service | CodeFlee',
     description: 'The terms that govern your use of the CodeFlee website and its content.',
     type: 'website',
     url: '/terms',
@@ -55,8 +55,8 @@ export default function TermsOfServicePage() {
 
       <h2>3. Intellectual property</h2>
       <p>
-        Unless stated otherwise, the Site and its content — including text, design, graphics, code,
-        and the CodeFlee name and logo — are owned by CodeFlee or our licensors and are protected by
+        Unless stated otherwise, the Site and its content (including text, design, graphics, code,
+        and the CodeFlee name and logo) are owned by CodeFlee or our licensors and are protected by
         intellectual property laws. You may view and share the content for personal,
         non-commercial use, but you may not reuse it commercially without our written permission.
       </p>
@@ -77,7 +77,7 @@ export default function TermsOfServicePage() {
       <p>
         The Site describes services we offer, but nothing on it is a binding offer, quote, or
         contract. Any engagement is governed by a separate written agreement or statement of work
-        signed by both parties — which will control in the event of any conflict with these terms.
+        signed by both parties, which will control in the event of any conflict with these terms.
       </p>
 
       <h2>6. Third-party links and services</h2>

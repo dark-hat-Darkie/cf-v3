@@ -15,7 +15,7 @@ const MAX_DIMENSION = 2400;
 export async function processImage(input: ArrayBuffer, mime: string): Promise<ProcessedImage> {
   const buf = Buffer.from(input);
 
-  // SVG: skip processing — store as-is
+  // SVG: skip processing, store as-is
   if (mime === "image/svg+xml") {
     return {
       buffer: buf,

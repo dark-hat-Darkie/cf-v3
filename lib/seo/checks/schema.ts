@@ -15,8 +15,8 @@ export function checkOgImage(input: AnalysisInput): CheckResult {
   if (!img.alt) return r("og-image", "warn", 50, "OG image has no alt text.");
   const w = img.width ?? 0;
   const h = img.height ?? 0;
-  if (w < 1200 || h < 630) return r("og-image", "warn", 60, `OG image is ${w}×${h} — below 1200×630.`);
-  return r("og-image", "good", 100, `OG image is ${w}×${h} — perfect.`);
+  if (w < 1200 || h < 630) return r("og-image", "warn", 60, `OG image is ${w}×${h}: below 1200×630.`);
+  return r("og-image", "good", 100, `OG image is ${w}×${h}: perfect.`);
 }
 
 export function checkTwitterCard(input: AnalysisInput): CheckResult {

@@ -10,7 +10,7 @@ import type { CaseScreenshotPage } from '@/lib/case-studies-data';
  * counter tracks the page currently in view.
  *
  * Distinct from the case study bento `Lightbox` (which fits a single image to
- * the viewport) — this one is built for tall, full-page captures.
+ * the viewport). This one is built for tall, full-page captures.
  */
 export default function FullPageLightbox({
   pages,
@@ -81,7 +81,7 @@ export default function FullPageLightbox({
       className="cf-fp"
       role="dialog"
       aria-modal="true"
-      aria-label={`${title} — full design preview`}
+      aria-label={`${title}, full design preview`}
       onClick={onClose}
     >
       <div className="cf-fp-veil" aria-hidden="true" />
@@ -124,7 +124,7 @@ export default function FullPageLightbox({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={p.src}
-              alt={`${title} — ${p.label ?? `page ${i + 1}`}`}
+              alt={`${title}, ${p.label ?? `page ${i + 1}`}`}
               width={p.width}
               height={p.height}
               loading={i === 0 ? 'eager' : 'lazy'}

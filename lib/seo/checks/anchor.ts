@@ -36,7 +36,7 @@ export function checkLinkUrlVariety(input: AnalysisInput): CheckResult {
   if (!dominant) return r("link-variety", "neutral", 0, "Couldn't parse link hosts.");
   const ratio = dominant[1] / links.length;
   if (ratio > 0.5 && links.length >= 4)
-    return r("link-variety", "warn", 50, `${Math.round(ratio * 100)}% of external links go to one domain (${dominant[0]}).`, "Diversify outbound citations — over-linking to one source looks promotional.");
+    return r("link-variety", "warn", 50, `${Math.round(ratio * 100)}% of external links go to one domain (${dominant[0]}).`, "Diversify outbound citations. Over-linking to one source looks promotional.");
   return r("link-variety", "good", 100, `Links span ${hostCounts.size} distinct host${hostCounts.size === 1 ? "" : "s"}.`);
 }
 

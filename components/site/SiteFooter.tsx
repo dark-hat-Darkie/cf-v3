@@ -25,7 +25,7 @@ export default function SiteFooter() {
       <div className="cf-container">
         <div className="cf-site-footer-grid">
           <div className="cf-site-footer-brand">
-            <Link href="/" aria-label={`${site.name} — home`}>
+            <Link href="/" aria-label={`${site.name}, home`}>
               <Image src="/assets/logo-white.svg" alt={site.name} width={145} height={24} />
             </Link>
             <p>{site.tagline}</p>

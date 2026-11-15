@@ -4,7 +4,7 @@ import SiteFooter from '@/components/site/SiteFooter';
 import { Suspense } from 'react';
 import { site } from '@/lib/site';
 
-export const metadata = { title: `Page not found — ${site.name}` };
+export const metadata = { title: `Page not found | ${site.name}` };
 
 export default function NotFound() {
   return (

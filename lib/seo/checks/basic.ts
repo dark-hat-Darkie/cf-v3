@@ -13,16 +13,16 @@ export function checkFocusKeywordSet(input: AnalysisInput): CheckResult {
 }
 
 export function checkKeywordInTitle(input: AnalysisInput): CheckResult {
-  if (!input.focusKeyword) return r("kw-in-title", "neutral", 0, "Skipped — no focus keyphrase.");
+  if (!input.focusKeyword) return r("kw-in-title", "neutral", 0, "Skipped: no focus keyphrase.");
   const title = input.metaTitle || input.title;
   const has = countKeyphraseStem(title, input.focusKeyword) > 0;
   return has
     ? r("kw-in-title", "good", 100, "Focus keyphrase appears in the SEO title.")
-    : r("kw-in-title", "bad", 0, "Focus keyphrase is not in the SEO title.", "Add the focus keyphrase to the SEO title — ideally near the start.");
+    : r("kw-in-title", "bad", 0, "Focus keyphrase is not in the SEO title.", "Add the focus keyphrase to the SEO title, ideally near the start.");
 }
 
 export function checkKeywordEarlyInTitle(input: AnalysisInput): CheckResult {
-  if (!input.focusKeyword) return r("kw-early-title", "neutral", 0, "Skipped — no focus keyphrase.");
+  if (!input.focusKeyword) return r("kw-early-title", "neutral", 0, "Skipped: no focus keyphrase.");
   const title = input.metaTitle || input.title;
   const ranges = findKeyphraseRanges(title, input.focusKeyword);
   if (ranges.length === 0) return r("kw-early-title", "bad", 0, "Focus keyphrase missing from title.");
@@ -33,7 +33,7 @@ export function checkKeywordEarlyInTitle(input: AnalysisInput): CheckResult {
 }
 
 export function checkKeywordInMeta(input: AnalysisInput): CheckResult {
-  if (!input.focusKeyword) return r("kw-in-meta", "neutral", 0, "Skipped — no focus keyphrase.");
+  if (!input.focusKeyword) return r("kw-in-meta", "neutral", 0, "Skipped: no focus keyphrase.");
   const has = countKeyphraseStem(input.metaDescription, input.focusKeyword) > 0;
   return has
     ? r("kw-in-meta", "good", 100, "Keyphrase appears in the meta description.")
@@ -41,7 +41,7 @@ export function checkKeywordInMeta(input: AnalysisInput): CheckResult {
 }
 
 export function checkKeywordInSlug(input: AnalysisInput): CheckResult {
-  if (!input.focusKeyword) return r("kw-in-slug", "neutral", 0, "Skipped — no focus keyphrase.");
+  if (!input.focusKeyword) return r("kw-in-slug", "neutral", 0, "Skipped: no focus keyphrase.");
   const slugTokens = input.slug.split("-").filter(Boolean).join(" ");
   const has = countKeyphraseStem(slugTokens, input.focusKeyword) > 0;
   return has
@@ -50,7 +50,7 @@ export function checkKeywordInSlug(input: AnalysisInput): CheckResult {
 }
 
 export function checkKeywordInFirstParagraph(input: AnalysisInput): CheckResult {
-  if (!input.focusKeyword) return r("kw-first-p", "neutral", 0, "Skipped — no focus keyphrase.");
+  if (!input.focusKeyword) return r("kw-first-p", "neutral", 0, "Skipped: no focus keyphrase.");
   const has = countKeyphraseStem(input.structure.firstParagraphText, input.focusKeyword) > 0;
   return has
     ? r("kw-first-p", "good", 100, "Keyphrase appears in the first paragraph.")
@@ -58,7 +58,7 @@ export function checkKeywordInFirstParagraph(input: AnalysisInput): CheckResult 
 }
 
 export function checkKeywordInSubheading(input: AnalysisInput): CheckResult {
-  if (!input.focusKeyword) return r("kw-in-h2", "neutral", 0, "Skipped — no focus keyphrase.");
+  if (!input.focusKeyword) return r("kw-in-h2", "neutral", 0, "Skipped: no focus keyphrase.");
   const subs = input.structure.headings.filter((h) => h.level >= 2);
   if (subs.length === 0)
     return r("kw-in-h2", "warn", 0, "No subheadings to check.", "Add H2/H3 subheadings to break up the content.");
@@ -69,21 +69,21 @@ export function checkKeywordInSubheading(input: AnalysisInput): CheckResult {
 }
 
 export function checkKeywordDensity(input: AnalysisInput): CheckResult {
-  if (!input.focusKeyword) return r("kw-density", "neutral", 0, "Skipped — no focus keyphrase.");
+  if (!input.focusKeyword) return r("kw-density", "neutral", 0, "Skipped: no focus keyphrase.");
   if (input.wordCount < 50) return r("kw-density", "neutral", 0, "Too little content to measure density.");
   const occ = countKeyphraseStem(input.plainText, input.focusKeyword);
   const density = (occ / input.wordCount) * 100;
   if (density === 0)
     return r("kw-density", "bad", 0, "Keyphrase never appears in the body.", "Use the keyphrase a few times naturally throughout the post.");
   if (density < 0.5)
-    return r("kw-density", "warn", 40, `Density ${density.toFixed(2)}% — under the recommended 0.5–2.5%.`);
+    return r("kw-density", "warn", 40, `Density ${density.toFixed(2)}%: under the recommended 0.5–2.5%.`);
   if (density > 2.5)
-    return r("kw-density", "warn", 50, `Density ${density.toFixed(2)}% — above 2.5%. Risk of keyword stuffing.`);
-  return r("kw-density", "good", 100, `Density ${density.toFixed(2)}% — within the recommended range.`);
+    return r("kw-density", "warn", 50, `Density ${density.toFixed(2)}%: above 2.5%. Risk of keyword stuffing.`);
+  return r("kw-density", "good", 100, `Density ${density.toFixed(2)}%: within the recommended range.`);
 }
 
 export function checkKeywordInAlt(input: AnalysisInput): CheckResult {
-  if (!input.focusKeyword) return r("kw-in-alt", "neutral", 0, "Skipped — no focus keyphrase.");
+  if (!input.focusKeyword) return r("kw-in-alt", "neutral", 0, "Skipped: no focus keyphrase.");
   if (input.structure.images.length === 0) return r("kw-in-alt", "neutral", 0, "No images in post.");
   const has = input.structure.images.some((img) => countKeyphraseStem(img.alt, input.focusKeyword) > 0);
   return has
@@ -92,7 +92,7 @@ export function checkKeywordInAlt(input: AnalysisInput): CheckResult {
 }
 
 export function checkKeyphraseDistribution(input: AnalysisInput): CheckResult {
-  if (!input.focusKeyword) return r("kw-distribution", "neutral", 0, "Skipped — no focus keyphrase.");
+  if (!input.focusKeyword) return r("kw-distribution", "neutral", 0, "Skipped: no focus keyphrase.");
   if (input.wordCount < 300) return r("kw-distribution", "neutral", 0, "Post is too short to evaluate distribution.");
   const len = input.plainText.length;
   const thirds = [input.plainText.slice(0, len / 3), input.plainText.slice(len / 3, (2 * len) / 3), input.plainText.slice((2 * len) / 3)];
@@ -104,7 +104,7 @@ export function checkKeyphraseDistribution(input: AnalysisInput): CheckResult {
 }
 
 export function checkCannibalization(input: AnalysisInput): CheckResult {
-  if (!input.focusKeyword) return r("kw-cannibal", "neutral", 0, "Skipped — no focus keyphrase.");
+  if (!input.focusKeyword) return r("kw-cannibal", "neutral", 0, "Skipped: no focus keyphrase.");
   if (input.cannibalization.length === 0) return r("kw-cannibal", "good", 100, "Keyphrase is unique among published posts.");
   const titles = input.cannibalization.slice(0, 2).map((c) => `“${c.title || c.slug}”`).join(", ");
   return r(

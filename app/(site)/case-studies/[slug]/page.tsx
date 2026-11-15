@@ -16,11 +16,11 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const study = getCaseStudy(slug);
   if (!study) return {};
   return {
-    title: `${study.client} — Case study · CodeFlee Digital Studio`,
+    title: `${study.client} | Case study · CodeFlee Digital Studio`,
     description: study.sub,
     alternates: { canonical: `/case-studies/${slug}` },
     openGraph: {
-      title: `${study.client} — Case study`,
+      title: `${study.client} | Case study`,
       description: study.sub,
       images: [{ url: study.heroImage }],
       type: 'article',
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${study.client} — Case study`,
+      title: `${study.client} | Case study`,
       description: study.sub,
       images: [study.heroImage],
     },
@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: Params }) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CreativeWork',
-    name: `${study.client} — case study`,
+    name: `${study.client}, case study`,
     headline: `${study.headline1} ${study.headline2}`,
     description: study.sub,
     url: `${site.url}/case-studies/${study.slug}`,

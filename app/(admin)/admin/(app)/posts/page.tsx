@@ -21,7 +21,7 @@ export default async function PostsPage() {
         <div className="adm-card" style={{ padding: 0, overflow: "hidden" }}>
           {items.length === 0 ? (
             <div className="adm-table-empty">
-              No posts yet — start your first one.
+              No posts yet. Start your first one.
             </div>
           ) : (
             <table className="adm-table">
@@ -46,7 +46,7 @@ export default async function PostsPage() {
                       <div className="adm-muted adm-tiny adm-mono adm-truncate" style={{ maxWidth: 320 }}>/{p.slug}</div>
                     </td>
                     <td><StatusBadge status={p.status} /></td>
-                    <td className="adm-dim">{p.focusKeyword || <span className="adm-muted">—</span>}</td>
+                    <td className="adm-dim">{p.focusKeyword || <span className="adm-muted">-</span>}</td>
                     <td><ScoreMeter score={p.seoScore} size={36} /></td>
                     <td><ScoreMeter score={p.readabilityScore} size={36} /></td>
                     <td className="adm-mono adm-dim">{p.wordCount.toLocaleString()}</td>

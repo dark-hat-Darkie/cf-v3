@@ -8,7 +8,7 @@ type Props = {
 
 export function EndOfPostCTA({
   title = "Want this kind of work on your team?",
-  description = "We partner with a small number of product teams each quarter — engineering, design, and content under one roof.",
+  description = "We partner with a small number of product teams each quarter: engineering, design, and content under one roof.",
 }: Props) {
   return (
     <aside className="cf-eop-cta" aria-label="Work with the studio">

@@ -1,10 +1,10 @@
-/* ============ CodeFlee — design tokens ============
+/* ============ CodeFlee: design tokens ============
    "Precision" direction: white canvas, black type, hairline grid, and a
    single purple accent. Token names are historical:
    - cream / paper  : white canvases;  mist = the light-grey alternate band
    - plum           : black (dark bands and footer)
-   - primary purple : the accent on white — links, numbers, hover and focus
-   - pink           : the logo's second colour — the accent on black bands,
+   - primary purple : the accent on white: links, numbers, hover and focus
+   - pink           : the logo's second colour: the accent on black bands,
                       small markers, and the end of the brand gradient.
                       Never used as text on white (too little contrast).
    - gradient       : purple → pink, for the one highlighted phrase per page

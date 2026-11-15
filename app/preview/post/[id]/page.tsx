@@ -12,7 +12,7 @@ import { blurhashToDataUrl } from "@/lib/media/blur-data-url";
 import { renderPostHtml } from "@/lib/editor/render.server";
 
 export const metadata: Metadata = {
-  title: "Preview — CodeFlee Admin",
+  title: "Preview | CodeFlee Admin",
   robots: { index: false, follow: false, noarchive: true },
 };
 

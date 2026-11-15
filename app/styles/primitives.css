@@ -1,4 +1,4 @@
-/* ============ CodeFlee — primitives ============
+/* ============ CodeFlee: primitives ============
    The shared building blocks of the "quiet editorial" system.
    Everything reads the surface context (--sf-*) from tokens.css, so the
    same component is correct on cream, paper or plum without overrides. */

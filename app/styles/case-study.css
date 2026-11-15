@@ -1,4 +1,4 @@
-/* ============ CodeFlee — case study pages ============
+/* ============ CodeFlee: case study pages ============
    Shares the hero, spec row, sub-nav, numbered grid and process rows with
    service pages (see service.css). */
 
@@ -206,7 +206,7 @@
 }
 .cf-fp-page {
   position: relative;
-  flex: 0 0 auto;            /* never let flexbox squish the tall pages — keep natural height so the container scrolls */
+  flex: 0 0 auto;            /* never let flexbox squish the tall pages: keep natural height so the container scrolls */
   width: min(100%, 1040px);
   margin: 18px 0;
   border-radius: 10px;

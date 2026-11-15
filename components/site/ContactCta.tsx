@@ -17,7 +17,7 @@ type Props = {
 export default function ContactCta({
   eyebrow = "Let's build",
   heading = <>Have a project <span className="cf-dim">in mind?</span></>,
-  text = `Tell us what you're building. We reply ${site.replyTime} with next steps and a rough estimate — no commitment.`,
+  text = `Tell us what you're building. We reply ${site.replyTime} with next steps and a rough estimate. No commitment.`,
   service,
   from,
   label = site.cta.primary.label,

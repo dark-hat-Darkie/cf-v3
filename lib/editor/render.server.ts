@@ -50,7 +50,7 @@ export function postProcessHtml(html: string, siteOrigin: string): string {
     return `<a${next}>`;
   });
 
-  // Heading IDs (H2 + H3) — slugify text content via github-slugger for dedupe.
+  // Heading IDs (H2 + H3): slugify text content via github-slugger for dedupe.
   const slugger = new GithubSlugger();
   out = out.replace(/<(h[23])\b([^>]*)>([\s\S]*?)<\/\1>/g, (_m, tag, attrs, inner) => {
     if (/\sid=/.test(attrs)) return `<${tag}${attrs}>${inner}</${tag}>`;
@@ -81,7 +81,7 @@ export function postProcessHtml(html: string, siteOrigin: string): string {
 
 function wrapBareImagesInFigures(html: string): string {
   return html.replace(/<img\b([^>]*)>/g, (match, attrs, offset: number) => {
-    // Skip if already inside a <figure> — look at preceding 240 chars.
+    // Skip if already inside a <figure>. Look at preceding 240 chars.
     const before = html.slice(Math.max(0, offset - 240), offset);
     const lastOpen = before.lastIndexOf("<figure");
     const lastClose = before.lastIndexOf("</figure>");

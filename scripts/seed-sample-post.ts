@@ -114,7 +114,7 @@ const doc: JSONContent = {
   content: [
     paragraph([
       text(
-        "Shipping a product is the easy part — keeping it sharp over many years is what separates a studio from a software factory. This is the working playbook we use on every long-running client engagement, distilled from the ten or so projects we've shipped this year alone.",
+        "Shipping a product is the easy part, keeping it sharp over many years is what separates a studio from a software factory. This is the working playbook we use on every long-running client engagement, distilled from the ten or so projects we've shipped this year alone.",
       ),
     ]),
 
@@ -143,13 +143,13 @@ const doc: JSONContent = {
     paragraph([
       text("If two of these are true, refactor. If none of them are, "),
       text("stop and run a discovery", [{ type: "italic" }]),
-      text(" — you're not ready to make architectural decisions yet."),
+      text(". You're not ready to make architectural decisions yet."),
     ]),
 
     heading(2, "The four-phase playbook"),
     paragraph([
       text(
-        "We split every long-running engagement into four phases. Each phase has an explicit exit criterion — moving to the next phase before hitting the criterion is the single largest predictor of timeline slip in our data.",
+        "We split every long-running engagement into four phases. Each phase has an explicit exit criterion. Moving to the next phase before hitting the criterion is the single largest predictor of timeline slip in our data.",
       ),
     ]),
 
@@ -189,7 +189,7 @@ const doc: JSONContent = {
       text("We use a "),
       text("five-question framework", [{ type: "highlight" }]),
       text(
-        " to drive every discovery call. The questions are deliberately blunt because nuance comes later — the goal is to surface the implicit assumptions before they become contractual.",
+        " to drive every discovery call. The questions are deliberately blunt because nuance comes later. The goal is to surface the implicit assumptions before they become contractual.",
       ),
     ]),
 
@@ -241,7 +241,7 @@ console.log(await probe("https://api.example.com/v1/things"));`,
 
     paragraph([
       text(
-        "The numbers go into the memo. The code goes in the bin. Resist the urge to clean it up — it has served its purpose.",
+        "The numbers go into the memo. The code goes in the bin. Resist the urge to clean it up. It has served its purpose.",
       ),
     ]),
 
@@ -261,7 +261,7 @@ console.log(await probe("https://api.example.com/v1/things"));`,
 
     paragraph([
       text(
-        "Three of these are leading indicators of health. The fourth — backlog age — is a lagging indicator of team morale, and it's the one we miss most often when things start to slip.",
+        "Three of these are leading indicators of health. The fourth, backlog age, is a lagging indicator of team morale, and it's the one we miss most often when things start to slip.",
       ),
     ]),
 
@@ -306,7 +306,7 @@ async function main() {
   const SluggerCtor = (await import("github-slugger")).default;
   const slugger = new SluggerCtor();
 
-  // Inlined copy of postProcessHtml from lib/editor/render.server.ts — the
+  // Inlined copy of postProcessHtml from lib/editor/render.server.ts, the
   // real module uses `import "server-only"`, which is unresolvable outside
   // the Next runtime. Keep in sync with that file.
   function postProcessHtml(html: string, siteOrigin: string): string {
@@ -376,7 +376,7 @@ async function main() {
   const [author] = await db.select().from(users).orderBy(desc(users.id)).limit(1);
   if (!author) {
     throw new Error(
-      "No users in DB — sign in to the admin once before running this seed.",
+      "No users in DB. Sign in to the admin once before running this seed.",
     );
   }
 
@@ -419,7 +419,7 @@ async function main() {
       slug,
       title,
       excerpt:
-        "How we split every long-running engagement into four phases — discovery, spike, build, harden — and the exit criteria that keep the timeline honest.",
+        "How we split every long-running engagement into four phases: discovery, spike, build, harden, and the exit criteria that keep the timeline honest.",
       content: doc,
       contentHtml,
       plainText: plain,
@@ -430,7 +430,7 @@ async function main() {
       secondaryKeywords: ["software architecture", "team process", "spike", "refactor"],
       metaTitle: title,
       metaDescription:
-        "A working playbook for long-running engineering engagements — four phases, explicit exit criteria, and the operational discipline that keeps a codebase healthy.",
+        "A working playbook for long-running engineering engagements: four phases, explicit exit criteria, and the operational discipline that keeps a codebase healthy.",
       ogTitle: title,
       ogDescription:
         "The four-phase playbook we use on every long-running client engagement, distilled from a decade of studio work.",

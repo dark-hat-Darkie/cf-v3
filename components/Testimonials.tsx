@@ -19,7 +19,7 @@ const items = [
   },
   {
     quote: (
-      <>&ldquo;Design system delivered in week two. Store went live in week eight — <em>$180K revenue in the first month.</em> We&apos;re already planning phase two.&rdquo;</>
+      <>&ldquo;Design system delivered in week two. Store went live in week eight: <em>$180K revenue in the first month.</em> We&apos;re already planning phase two.&rdquo;</>
     ),
     name: 'Amir Hussain',
     role: 'Founder · Nomadic Store',

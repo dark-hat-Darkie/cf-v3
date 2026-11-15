@@ -26,7 +26,7 @@ export default function ShowcaseGallery({ client, screenshots }: { client: strin
               <span className="cf-media cf-media--pan">
                 <Image
                   src={s.src}
-                  alt={`${client} — ${label}`}
+                  alt={`${client}, ${label}`}
                   fill
                   sizes="(max-width: 860px) 100vw, 620px"
                   placeholder={s.blurDataURL ? 'blur' : 'empty'}

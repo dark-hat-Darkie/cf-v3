@@ -15,7 +15,7 @@ export function NewsletterSignup({
   variant = "wide",
   eyebrow = "Studio dispatch",
   title = "Engineering writeups, every other Friday.",
-  description = "Short essays on shipping software well — architecture, design systems, performance. No spam, easy unsubscribe.",
+  description = "Short essays on shipping software well: architecture, design systems, performance. No spam, easy unsubscribe.",
   source = "blog",
 }: Props) {
   const [email, setEmail] = useState("");
@@ -34,7 +34,7 @@ export function NewsletterSignup({
           res.status === "already"
             ? `${res.email} is already on the list. Welcome back.`
             : res.status === "resubscribed"
-              ? `Welcome back — ${res.email} is subscribed again.`
+              ? `Welcome back. ${res.email} is subscribed again.`
               : `You're on the list. We'll be in touch at ${res.email}.`;
         setState({ status: "ok", message });
         setEmail("");

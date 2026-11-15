@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return {};
-  const title = `${service.title} — CodeFlee Digital Studio`;
+  const title = `${service.title} | CodeFlee Digital Studio`;
   return {
     title,
     description: service.sub,

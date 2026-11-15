@@ -1,4 +1,4 @@
-/* ============ CodeFlee — service detail pages ============ */
+/* ============ CodeFlee: service detail pages ============ */
 
 .cf-crumb {
   display: inline-flex; align-items: center; gap: 8px; margin-bottom: 36px;
@@ -80,7 +80,6 @@
 .cf-sv-pull { margin-top: 18px; padding: 28px 30px; border: 1px solid var(--sf-fg); border-radius: var(--cf-radius-lg); box-shadow: 8px 8px 0 var(--cf-pink); background: var(--cf-paper); }
 .cf-sv-pull blockquote { font-family: var(--cf-font-display); font-weight: 500; font-size: clamp(21px, 2vw, 27px); line-height: 1.25; letter-spacing: -0.02em; color: var(--sf-fg); }
 .cf-sv-pull figcaption { margin-top: 16px; font-size: 14px; color: var(--sf-muted); }
-.cf-sv-pull figcaption::before { content: '— '; }
 @media (max-width: 900px) { .cf-sv-overview { grid-template-columns: 1fr; } .cf-sv-overview-lead { position: static; } .cf-sv-overview-body { padding-top: 0; } }
 
 /* ---- Deliverables ---- */

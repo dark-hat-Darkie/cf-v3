@@ -10,17 +10,17 @@ export function checkTitleLength(input: AnalysisInput): CheckResult {
   const len = title.length;
   if (len === 0) return r("title-length", "bad", 0, "SEO title is empty.", "A descriptive title is the single most important on-page SEO signal.");
   if (len < 30) return r("title-length", "warn", 30, `Title is short (${len} chars).`, "Aim for 50–60 chars to better fill the SERP listing.");
-  if (len <= 60) return r("title-length", "good", 100, `Title length is ${len} — looks great.`);
+  if (len <= 60) return r("title-length", "good", 100, `Title length is ${len}: looks great.`);
   if (len <= 70) return r("title-length", "warn", 60, `Title is long (${len} chars). Google may truncate above ~60.`);
   return r("title-length", "bad", 20, `Title is too long (${len} chars). Google will truncate.`);
 }
 
 export function checkMetaDescLength(input: AnalysisInput): CheckResult {
   const len = input.metaDescription.length;
-  if (len === 0) return r("meta-length", "bad", 0, "Meta description is empty.", "Write a compelling description (120–158 chars) — it influences click-through rate.");
+  if (len === 0) return r("meta-length", "bad", 0, "Meta description is empty.", "Write a compelling description (120–158 chars). It influences click-through rate.");
   if (len < 120) return r("meta-length", "warn", 50, `Meta description is short (${len} chars).`, "Use closer to 150 chars to use the available space.");
-  if (len <= 158) return r("meta-length", "good", 100, `Meta description length is ${len} — looks great.`);
-  if (len <= 175) return r("meta-length", "warn", 60, `Meta description is long (${len} chars) — may truncate.`);
+  if (len <= 158) return r("meta-length", "good", 100, `Meta description length is ${len}: looks great.`);
+  if (len <= 175) return r("meta-length", "warn", 60, `Meta description is long (${len} chars), may truncate.`);
   return r("meta-length", "bad", 20, `Meta description is too long (${len} chars).`);
 }
 
@@ -28,7 +28,7 @@ export function checkSlugLength(input: AnalysisInput): CheckResult {
   const len = input.slug.length;
   if (len < 3) return r("slug-length", "bad", 0, "Slug is too short.");
   if (len > 75) return r("slug-length", "warn", 40, `Slug is long (${len} chars). Aim for under 75.`);
-  return r("slug-length", "good", 100, `Slug length is ${len} — good.`);
+  return r("slug-length", "good", 100, `Slug length is ${len}: good.`);
 }
 
 export function checkSlugFormat(input: AnalysisInput): CheckResult {
@@ -47,9 +47,9 @@ export function checkSlugStopWords(input: AnalysisInput): CheckResult {
 }
 
 export function checkMetaTitleVsTitle(input: AnalysisInput): CheckResult {
-  if (!input.title) return r("meta-title-fallback", "neutral", 0, "Skipped — no post title.");
+  if (!input.title) return r("meta-title-fallback", "neutral", 0, "Skipped: no post title.");
   if (input.metaTitle) return r("meta-title-fallback", "good", 100, "SEO title is explicitly set.");
-  return r("meta-title-fallback", "warn", 50, "No SEO title set — falling back to the post title.", "Write a separate SEO title that's optimized for SERPs even if your post title is decorative.");
+  return r("meta-title-fallback", "warn", 50, "No SEO title set, falling back to the post title.", "Write a separate SEO title that's optimized for SERPs even if your post title is decorative.");
 }
 
 export function metaChecks(input: AnalysisInput): CheckResult[] {

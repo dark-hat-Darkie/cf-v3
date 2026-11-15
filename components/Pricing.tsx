@@ -53,7 +53,7 @@ export default function Pricing() {
           ))}
         </div>
         <p className="cf-tiers-note">
-          Every project is unique — these are starting points. Send a short brief and we&apos;ll scope yours.
+          Every project is unique. These are starting points. Send a short brief and we&apos;ll scope yours.
         </p>
       </div>
     </section>

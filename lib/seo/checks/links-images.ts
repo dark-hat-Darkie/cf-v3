@@ -28,7 +28,7 @@ export function checkExternalRel(input: AnalysisInput): CheckResult {
     "warn",
     40,
     `${missing} external link${missing === 1 ? "" : "s"} missing rel='noopener noreferrer'.`,
-    "External links should open safely — we'll add this automatically at publish time.",
+    "External links should open safely. We'll add this automatically at publish time.",
     { kind: "client", label: "Fix all external links", intent: "fix-external-rel" },
   );
 }
@@ -37,7 +37,7 @@ export function checkLinkDensity(input: AnalysisInput): CheckResult {
   if (input.wordCount === 0) return r("link-density", "neutral", 0, "No content.");
   const total = input.structure.links.length;
   const per1000 = (total / input.wordCount) * 1000;
-  if (per1000 > 50) return r("link-density", "warn", 30, `${total} links — ${per1000.toFixed(0)} per 1000 words. Too many.`);
+  if (per1000 > 50) return r("link-density", "warn", 30, `${total} links: ${per1000.toFixed(0)} per 1000 words. Too many.`);
   return r("link-density", "good", 100, `${total} link${total === 1 ? "" : "s"} (${per1000.toFixed(1)} / 1000 words).`);
 }
 
@@ -72,8 +72,8 @@ export function checkFeaturedImageDims(input: AnalysisInput): CheckResult {
   const w = input.featuredImage.width ?? 0;
   const h = input.featuredImage.height ?? 0;
   if (w < 1200 || h < 630)
-    return r("img-featured-dims", "warn", 50, `Featured image is ${w}×${h} — under 1200×630.`, "Open Graph and Twitter prefer 1200×630 or larger.");
-  return r("img-featured-dims", "good", 100, `Featured image is ${w}×${h} — meets 1200×630.`);
+    return r("img-featured-dims", "warn", 50, `Featured image is ${w}×${h}: under 1200×630.`, "Open Graph and Twitter prefer 1200×630 or larger.");
+  return r("img-featured-dims", "good", 100, `Featured image is ${w}×${h}: meets 1200×630.`);
 }
 
 export function linksImagesChecks(input: AnalysisInput): CheckResult[] {

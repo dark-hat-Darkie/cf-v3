@@ -4,7 +4,7 @@ import * as schema from "./schema";
 
 neonConfig.fetchConnectionCache = true;
 
-// WSL2 IPv6 workaround — applied at module load time so build-time prerenders
+// WSL2 IPv6 workaround: applied at module load time so build-time prerenders
 // also get IPv4. See instrumentation.ts for the runtime equivalent.
 if (
   typeof process !== "undefined" &&

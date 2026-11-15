@@ -24,8 +24,8 @@ function isScreenshotSlug(slug: string): slug is ScreenshotSlug {
  * dimensions + a pre-baked blur placeholder + a human label. Returns [] when the
  * slug has no screenshots (the case study then falls back to its bento gallery).
  *
- * Fully synchronous — the blur data URLs are baked at build time by
- * scripts/optimize-screenshots.ts — so it's safe to call during a Cache
+ * Fully synchronous. The blur data URLs are baked at build time by
+ * scripts/optimize-screenshots.ts, so it's safe to call during a Cache
  * Components render without `<Suspense>`.
  */
 export function getScreenshotPages(slug: string): CaseScreenshotPage[] {

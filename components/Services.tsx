@@ -15,7 +15,7 @@ export default function Services() {
           </div>
           <div className="cf-head-aside">
             <p className="cf-lead">
-              From brand to backend — we run the full stack of a digital studio so you never have to stitch agencies together.
+              From brand to backend: we run the full stack of a digital studio so you never have to stitch agencies together.
             </p>
             <Link href="/services" className="cf-link">
               All services <ArrowIcon size={13} className="" />

@@ -88,7 +88,7 @@ export function tokenizeWithStems(text: string): TokenSpan[] {
  * Count keyphrase occurrences using stem-aware whole-phrase matching.
  * "content marketing strategy" matches "content marketing strategies".
  * Allows up to 1 inserted token between phrase words (so "content marketing"
- * matches "content-driven marketing" loosely — Yoast's "keyphrase variation").
+ * matches "content-driven marketing" loosely, Yoast's "keyphrase variation").
  */
 export function countKeyphraseStem(
   text: string,
@@ -128,7 +128,7 @@ export function countKeyphraseStem(
   return count;
 }
 
-/** Find all matches in text — returns char-offset ranges. Useful for decorations. */
+/** Find all matches in text. Returns char-offset ranges. Useful for decorations. */
 export function findKeyphraseRanges(text: string, phrase: string): Array<{ start: number; end: number }> {
   const phraseStems = stemPhrase(phrase);
   if (phraseStems.length === 0) return [];

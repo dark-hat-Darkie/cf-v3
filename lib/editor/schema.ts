@@ -1,5 +1,5 @@
 /**
- * Shared TipTap schema — used by both the client editor and the server-side
+ * Shared TipTap schema, used by both the client editor and the server-side
  * generateHTML() renderer. Extensions configured here MUST be safe to import
  * from a server bundle (no DOM access at module top level).
  */

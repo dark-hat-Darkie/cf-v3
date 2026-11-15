@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import { site } from '@/lib/site';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — CodeFlee',
+  title: 'Privacy Policy | CodeFlee',
   description:
     'How CodeFlee collects, uses, and protects the personal information you share with us through our website, contact form, and newsletter.',
   alternates: { canonical: '/privacy' },
   openGraph: {
-    title: 'Privacy Policy — CodeFlee',
+    title: 'Privacy Policy | CodeFlee',
     description:
       'How CodeFlee collects, uses, and protects the personal information you share with us.',
     type: 'website',
@@ -54,8 +54,8 @@ export default function PrivacyPolicyPage() {
       <ul>
         <li>
           <strong>Technical &amp; usage data.</strong> Like most websites, our hosting provider
-          records standard server logs — for example IP address, browser type, referring page, and
-          the pages you visit — to keep the site secure and reliable.
+          records standard server logs (for example IP address, browser type, referring page, and
+          the pages you visit) to keep the site secure and reliable.
         </li>
         <li>
           <strong>Cookies.</strong> We use a single essential cookie for the administrator
@@ -84,14 +84,14 @@ export default function PrivacyPolicyPage() {
       </p>
       <ul>
         <li>
-          <strong>Vercel</strong> — website hosting, content delivery, and server logs.
+          <strong>Vercel</strong>: website hosting, content delivery, and server logs.
         </li>
         <li>
-          <strong>Neon</strong> — managed PostgreSQL database where newsletter subscriptions and
+          <strong>Neon</strong>: managed PostgreSQL database where newsletter subscriptions and
           content are stored.
         </li>
         <li>
-          <strong>Vercel Blob</strong> — storage for media assets used on the site.
+          <strong>Vercel Blob</strong>: storage for media assets used on the site.
         </li>
       </ul>
       <p>
@@ -108,7 +108,7 @@ export default function PrivacyPolicyPage() {
 
       <h2>6. Data retention</h2>
       <p>
-        We keep personal information only as long as necessary for the purposes above — for example,
+        We keep personal information only as long as necessary for the purposes above, for example,
         we retain enquiry correspondence for as long as needed to serve you and for our records, and
         newsletter data until you unsubscribe. We delete or anonymise data when it is no longer
         needed.
@@ -116,8 +116,8 @@ export default function PrivacyPolicyPage() {
 
       <h2>7. Security</h2>
       <p>
-        We use reasonable technical and organisational measures — including encryption in transit
-        (HTTPS) and access controls — to protect your information. No method of transmission or
+        We use reasonable technical and organisational measures, including encryption in transit
+        (HTTPS) and access controls, to protect your information. No method of transmission or
         storage is completely secure, so we cannot guarantee absolute security.
       </p>
 

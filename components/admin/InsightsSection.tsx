@@ -112,7 +112,7 @@ function Row({ label, value, hint, tone }: { label: string; value: string; hint?
 }
 
 function gradeHint(g: number) {
-  if (g < 7) return "Easy — wide audience";
+  if (g < 7) return "Easy: wide audience";
   if (g < 10) return "Plain English";
   if (g < 13) return "High school";
   if (g < 16) return "College";

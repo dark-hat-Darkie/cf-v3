@@ -12,7 +12,7 @@ export default function Contact() {
           <h2 className="cf-h2">Tell us about your <span className="cf-dim">project.</span></h2>
           <p className="cf-lead">
             Send a short brief and we&apos;ll reply {site.replyTime} with next steps and a rough estimate.
-            Or skip the form and reach us directly — whichever is easier.
+            Or skip the form and reach us directly, whichever is easier.
           </p>
           <ContactChannels />
         </div>

@@ -1,5 +1,5 @@
 /**
- * DEMO CONTENT — placeholder copy written for the design, not verified facts.
+ * DEMO CONTENT: placeholder copy written for the design, not verified facts.
  *
  * Everything in this file is safe to edit or delete. Replace it with real
  * material before launch; search the codebase for `demo-content` to see where
@@ -13,7 +13,7 @@ export const DEMO_CLIENTS = ['FactWatch', 'Flipper', 'iQQra', 'TripKing', 'NextS
 export const DEMO_PILLARS = [
   {
     title: 'Strategy',
-    text: 'We start with the business problem, not the feature list — so what we ship moves a number you care about.',
+    text: 'We start with the business problem, not the feature list, so what we ship moves a number you care about.',
     items: ['Product discovery', 'Technical architecture', 'Roadmaps & scoping'],
   },
   {
@@ -49,11 +49,11 @@ export const DEMO_FAQ = [
   },
   {
     q: 'Who will actually work on my project?',
-    a: 'Senior engineers and designers only. The people in the kickoff call are the people in your Slack channel — no hand-off to a junior team.',
+    a: 'Senior engineers and designers only. The people in the kickoff call are the people in your Slack channel. No hand-off to a junior team.',
   },
   {
     q: 'Do we own the code and designs?',
-    a: 'Yes — source code, repositories, design files and infrastructure are yours from day one. We work in your accounts whenever you prefer.',
+    a: 'Yes. Source code, repositories, design files and infrastructure are yours from day one. We work in your accounts whenever you prefer.',
   },
   {
     q: 'Can you work with our in-house team?',
@@ -74,7 +74,7 @@ export const DEMO_POSTS = [
 
 /**
  * Extra case-study detail: duration, team, goals, features, before/after and
- * takeaways. DEMO — written to show the layout; replace with the real project facts.
+ * takeaways. DEMO: written to show the layout; replace with the real project facts.
  */
 export type DemoCaseDetail = {
   duration: string;

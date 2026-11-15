@@ -3,9 +3,9 @@ import ServiceRows from '@/components/services/ServiceRows';
 import ContactCta from '@/components/site/ContactCta';
 import { site } from '@/lib/site';
 
-const TITLE = `Services — ${site.name}`;
+const TITLE = `Services | ${site.name}`;
 const DESCRIPTION =
-  'From brand to backend — we run the full stack of a digital studio so you never have to stitch agencies together.';
+  'From brand to backend: we run the full stack of a digital studio so you never have to stitch agencies together.';
 
 export const metadata: Metadata = {
   title: TITLE,
