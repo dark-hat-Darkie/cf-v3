@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { subscribeNewsletterAction } from "@/app/blog/actions";
+import { subscribeNewsletterAction } from "@/app/(site)/blog/actions";
 
 type Props = {
   variant?: "wide" | "compact";

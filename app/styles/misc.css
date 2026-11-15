@@ -1,0 +1,70 @@
+/* ============ Newsletter unsubscribe page ============ */
+.cf-unsub { min-height: 62vh; display: grid; place-items: center; padding: clamp(56px, 8vw, 120px) var(--cf-gutter); background: var(--cf-cream); }
+.cf-unsub-card {
+  max-width: 560px; width: 100%; padding: clamp(28px, 4vw, 44px);
+  background: var(--cf-paper); border: 1px solid var(--cf-line); border-radius: var(--cf-radius-lg); box-shadow: var(--cf-shadow-md);
+}
+.cf-unsub-eyebrow { font-size: 13px; font-weight: 600; color: var(--cf-primary); margin-bottom: 14px; }
+.cf-unsub-h1 {
+  font-family: var(--cf-font-display); font-weight: 500; font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.08; letter-spacing: -0.03em; color: var(--cf-ink); margin: 0 0 16px;
+}
+.cf-unsub-body { font-size: 17px; line-height: 1.6; color: var(--cf-text-muted); margin: 0 0 32px; }
+.cf-unsub-actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.cf-unsub-btn {
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; border-radius: var(--cf-radius-pill);
+  background: var(--cf-primary); color: #fff; font-size: 15px; font-weight: 600; transition: background-color var(--cf-dur);
+}
+.cf-unsub-btn:hover { background: var(--cf-primary-600); }
+.cf-unsub-link { font-size: 15px; font-weight: 600; color: var(--cf-primary); text-decoration: underline; text-underline-offset: 4px; }
+
+/* ============ Admin post preview banner ============ */
+.cf-preview-banner {
+  position: sticky; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 18px;
+  background: linear-gradient(90deg, var(--cf-plum-950) 0%, var(--cf-plum-900) 100%);
+  border-bottom: 1px solid color-mix(in srgb, var(--cf-primary) 40%, transparent);
+  color: rgba(255,255,255,.92);
+  font-size: 12px; letter-spacing: .04em;
+  font-family: var(--font-mona-sans), system-ui, sans-serif;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 6px 24px rgba(0,0,0,.35);
+}
+.cf-preview-banner strong { font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: 11px; }
+.cf-preview-banner-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--cf-pink);
+  box-shadow: 0 0 12px var(--cf-pink);
+  animation: cfPulse 1.6s ease-in-out infinite;
+}
+.cf-preview-banner-sep { width: 1px; height: 14px; background: rgba(255,255,255,.18); }
+.cf-preview-banner-status {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 9999px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  border: 1px solid currentColor;
+}
+.cf-preview-banner-status-draft     { color: #FFD58A; }
+.cf-preview-banner-status-scheduled { color: var(--cf-primary-300); }
+.cf-preview-banner-status-published { color: #86EFAC; }
+.cf-preview-banner-status-archived  { color: rgba(255,255,255,.55); }
+.cf-preview-banner-meta { color: rgba(255,255,255,.55); font-size: 11.5px; }
+.cf-preview-banner-spacer { margin-left: auto; }
+.cf-preview-banner-btn {
+  padding: 6px 14px; border-radius: 9999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.16);
+  color: #fff;
+  font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  transition: background .2s, border-color .2s;
+}
+.cf-preview-banner-btn:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.32); }
+@media (max-width: 720px) {
+  .cf-preview-banner { flex-wrap: wrap; gap: 8px; padding: 10px 14px; font-size: 11px; }
+  .cf-preview-banner-meta { display: none; }
+  .cf-preview-banner-spacer { display: none; }
+}
+
+
+@keyframes cfPulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }

@@ -1,7 +1,17 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import Cursor from '@/components/Cursor';
-import './globals.css';
+import { site } from '@/lib/site';
+import './styles/tokens.css';
+import './styles/base.css';
+import './styles/primitives.css';
+import './styles/chrome.css';
+import './styles/contact.css';
+import './styles/home.css';
+import './styles/service.css';
+import './styles/case-study.css';
+import './styles/blog.css';
+import './styles/misc.css';
 
 const monaSans = localFont({
   src: './fonts/MonaSans.woff2',
@@ -24,11 +34,10 @@ const creatoDisplay = localFont({
   display: 'swap',
 });
 
-const SITE_URL = (process.env.SITE_URL ?? 'https://codeflee.com').replace(/\/$/, '');
-const SITE_NAME = process.env.SITE_NAME ?? 'CodeFlee';
-const SITE_DESCRIPTION =
-  'A senior engineering & design studio in Dhaka. From product thinking to launch-day comms — we sweat the details so your team can move.';
-const SITE_TITLE = 'CodeFlee — Digital Studio · Dhaka';
+const SITE_URL = site.url;
+const SITE_NAME = site.name;
+const SITE_DESCRIPTION = site.description;
+const SITE_TITLE = site.title;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -57,14 +66,14 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#F8F4EE' },
-    { media: '(prefers-color-scheme: dark)', color: '#0B0B0B' },
+    { media: '(prefers-color-scheme: dark)', color: '#12091F' },
   ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${monaSans.variable} ${creatoDisplay.variable}`}>
-      <body className="cf-dark" suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <Cursor />
         {children}
       </body>

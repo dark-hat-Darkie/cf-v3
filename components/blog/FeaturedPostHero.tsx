@@ -13,7 +13,7 @@ function formatDate(d: Date | null) {
 
 export function FeaturedPostHero({ post }: Props) {
   return (
-    <Link href={`/blog/${post.slug}`} className="cf-blog-feature-hero" data-cursor="Read">
+    <Link href={`/blog/${post.slug}`} className="cf-blog-feature-hero">
       <div className="cf-blog-feature-hero-img">
         {post.featuredImage ? (
           <Image
@@ -22,7 +22,7 @@ export function FeaturedPostHero({ post }: Props) {
             fill
             sizes="(max-width: 980px) 100vw, 720px"
             style={{ objectFit: "cover" }}
-            priority
+            preload
           />
         ) : null}
       </div>

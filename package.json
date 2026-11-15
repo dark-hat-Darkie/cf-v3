@@ -11,7 +11,8 @@
     "db:generate": "NODE_OPTIONS=\"--dns-result-order=ipv4first --network-family-autoselection-attempt-timeout=250\" drizzle-kit generate",
     "db:migrate": "NODE_OPTIONS=\"--dns-result-order=ipv4first --network-family-autoselection-attempt-timeout=250\" drizzle-kit migrate",
     "db:push": "NODE_OPTIONS=\"--dns-result-order=ipv4first --network-family-autoselection-attempt-timeout=250\" drizzle-kit push",
-    "db:studio": "NODE_OPTIONS=\"--dns-result-order=ipv4first --network-family-autoselection-attempt-timeout=250\" drizzle-kit studio"
+    "db:studio": "NODE_OPTIONS=\"--dns-result-order=ipv4first --network-family-autoselection-attempt-timeout=250\" drizzle-kit studio",
+    "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
@@ -54,14 +55,12 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "drizzle-kit": "^0.31.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
-    "tailwindcss": "^4",
     "typescript": "^5"
   }
 }

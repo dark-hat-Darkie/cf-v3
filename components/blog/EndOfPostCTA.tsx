@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { contactHref } from "@/lib/site";
 
 type Props = {
   title?: string;
@@ -17,14 +18,14 @@ export function EndOfPostCTA({
         <p className="cf-eop-cta-desc">{description}</p>
         <div className="cf-eop-cta-actions">
           <Link
-            href="/#contact"
+            href={contactHref({ from: "blog-post" })}
             className="cf-eop-cta-primary"
-            data-cursor="Get in touch"
+           
           >
-            Book a discovery call
+            Start a project
             <span aria-hidden>→</span>
           </Link>
-          <Link href="/#services" className="cf-eop-cta-secondary" data-cursor="Explore">
+          <Link href="/services" className="cf-eop-cta-secondary">
             See how we work
           </Link>
         </div>
@@ -32,7 +33,7 @@ export function EndOfPostCTA({
       <div className="cf-eop-cta-meta">
         <div className="cf-eop-cta-meta-row">
           <span className="cf-eop-cta-meta-dot" />
-          <span>Available · May 2026</span>
+          <span>Open for new projects</span>
         </div>
         <div className="cf-eop-cta-meta-row">
           <strong>Dhaka · Remote globally</strong>
